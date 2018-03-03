@@ -1,0 +1,27 @@
+{
+        bd: db,
+        metodo: 'create',
+        funcion: 'table',
+        tabla: 'hq_usuarios',
+        nueva_tabla: {
+          nombre: "usuarios",
+          fields: {
+              ID: "SERIAL PRIMARY KEY",
+              nombre: "TEXT NOT NULL",
+              usuario: "TEXT NOT NULL",
+              edad: "INT NOT NULL"
+          }
+        },
+        data: {
+            file_name: "charlie",
+            folder_name: "Hans"
+        },
+        valor_singular: 1,
+        sql: '',
+        cantidad: 5,
+        fecha_inicio: '10/14/2018',
+        fecha_final: '11/30/2018',
+        patron_de_orden: 'ASC',
+        record_id: 1
+
+    }

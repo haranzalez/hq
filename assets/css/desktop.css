@@ -1,0 +1,278 @@
+
+
+/*LOGIN*/
+
+.ctn-login{
+	width: 350px;
+    margin: auto !important;
+    margin-top: -41px !important;
+    padding: 20px;
+    border-radius: 5px;
+   
+}
+
+.login-bg{
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	right: 0;
+	background-color: rgba(255, 255, 255, .7);
+
+}
+.login-form .ctn-col-10{
+	margin-bottom:20px !important;
+}
+
+
+
+body{
+	/*background-image: url('/estaticos/img/hqbg.jpg');*/
+}
+/*MESSAGE BOXES*/
+.message-box{
+	width:400px;
+}
+
+.menu{
+  width: 250px !important;
+}
+
+/*===================================================================================================================================================*/
+.header-mobile{
+  padding: 10px;
+  box-shadow: 0px 0px 4px #888;
+  background-color: white;
+}
+  
+
+
+.content{
+  background-color:green;
+  height:100%;
+}
+
+.user-menu-list{
+  list-style:none;
+  padding:0px;
+  padding-left:0px
+}
+
+
+.sub-menu{
+  transition: .3s ease-in-out;
+    font-size: 8pt;
+    
+    background-color: #fefefe;
+    border-bottom: 1px solid #eee;
+    border-top: 1px solid #eee;
+    overflow: hidden;
+    
+}
+.sub-menu ul{
+    list-style: none;
+    padding-left: 22px;
+}
+
+.main-sub-menu{
+  font-size: 10pt;
+  list-style:none;
+  margin:0px;
+  padding:0px;
+}
+.main-sub-menu li a{
+  display: block;
+  padding: 10px 0px;
+}
+.main-sub-menu .fa{
+  color:#A0A0A0;
+  font-size: 11pt;
+}
+/*USER MODULE CTN*/
+.users-module-ctn{
+  max-width:1000px;
+  margin:auto;
+  padding:20px;
+  position: relative;
+  margin-top:50px;
+}
+.search-box-ctn .text-box{
+    padding: 5px;
+    width: 76%;
+    font-size: initial;
+    margin: auto;
+    font-size: 10pt;
+}
+
+.user-module-tool-bar{
+  border-bottom: solid 1px #ccc;
+  background-color: black;
+  padding: 15px 0px;
+  box-shadow: 0px 1px 1px #ccc;
+}
+.user-module-tool-bar .sub-menu-ctn-mobil{
+  background-color: transparent;
+  margin-left: 49px;
+}
+.sub-menu-mobil li a{
+    color:white;
+}
+.user-module-nav-btns{
+  display: block;
+  position: relative;
+  width:145px;
+}
+.user-module-nav-btns .btn{
+  border-radius: 0px;
+  border: none;
+  font-size: 10pt;
+  padding: 13px;
+  margin-right: 3px;
+  position: absolute;
+  top:-39px;
+  background-color: transparent;
+}
+.user-module-nav-btns .btn:nth-child(1){
+  border: solid 1px #000;
+  border-top: 2px solid #e1001a;
+  border-bottom: none;
+  background-color: black;
+  color:white;
+  z-index: 1;
+}
+.user-module-nav-btns .btn:nth-child(2){
+  right: 0;
+}
+
+.user-module-nav-btns .btn:focus{
+  outline:none;
+}
+
+/*FORMS*/
+.form-create-user, .form-create-rol{
+  width: 80%;
+  margin:auto;
+  margin-top: 60px;
+  margin-bottom: 60px;
+}
+.form-create-user .form-elms-ctn-acceso .ctn-col-10,
+.form-create-user .form-elms-ctn-info .ctn-col-10,
+.form-create-user .form-elms-ctn-estado .ctn-col-10{
+  width: 50%;
+  padding:10px 0px;
+}
+.form-create-user .form-elms-ctn-estado .ctn-col-10{
+   padding:10px 10px;
+}
+.form-create-user .ctn .ctn-col-10 input[type="text"],
+.form-create-user .ctn .ctn-col-10 input[type="password"]{
+  width: 90%;
+  margin:auto;
+}
+.users-main-ctn{
+    height: 537px;
+    border-top: none;
+    overflow: auto;
+    position: relative;
+    background-color: #fefefe;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+    box-shadow: 0px 3.5px 26px #999;
+}
+.user-list-result-ctn .ctn-tbl-row{
+  background-color: white;
+}
+/*SEL ROL WINDOW*/
+.mobile-window-ctn{
+  width: 1000px;
+}
+.t-result-ctn{
+  padding:60px;
+}
+.t-result-ctn .btn-basic{
+  margin-right: 3px;
+  background-color: transparent;
+  border: none;
+  border-radius: 0px !important;
+}
+.t-result-ctn .btn-basic:hover{
+  border-bottom:1px solid red;
+}
+body{
+
+background-color: #f1f1f1;
+}
+
+/*reports*/
+.report-imge{
+    width: 140px;
+}
+.reports-table-main-ctn{
+    width: 100%;
+    max-width:95%;
+    margin: auto;
+}
+.reporte-titulo-principal{
+    margin: 0px;
+    margin-top: 38px;
+}
+.reporte-encabezado{
+    position:absolute;
+    width:100%;
+    height:80px;
+    left:0;
+}
+.reporte-encabezado-bg-1{
+    background-color:black;
+}
+.reporte-encabezado-bg-2{
+    border-bottom:2px solid red;
+}
+.reporte-sub-titulo{
+   
+}
+.reporte-texto{
+    font-size: 12px;
+}
+.preview-sheet{
+    
+    position: relative;
+   background-color: white;
+    white-space: nowrap;
+    box-shadow: 0px 3px 2px #ccc;
+    margin: auto;
+    padding: 0px 39px;
+    min-height: 650px;
+    width: 85%;
+
+
+}
+.preview-sheet-copy{
+    display:none;
+    position:absolute;
+    z-index:-1;
+}
+#module-reports{
+   width:90%;
+   margin:auto;
+   margin-top:20px
+}
+
+#module-reports .fields-list-ctn{
+}
+
+#module-reports .tbl-list-ctn .table-item{
+    padding:5px;
+    display:block;
+    font-size: 12px;
+    font-weight: 600;
+}
+#module-reports .fields-list-ctn .field-item{
+    padding:3px;
+    display:block;
+    font-size: 12px;
+    color:#888;
+}
+
+
+
