@@ -20,6 +20,7 @@ module.exports = function(){
 			'<button class="btn" data-btn="usuarios">Usuarios</button>'+
 			'<button class="btn" data-btn="roles">Roles</button>'+
 		'</div>'+
+
 		//Section tools [search bar, filter]
 		'<div class="ctn user-module-tool-bar">'+
 			'<div class="ctn-col-5">'+

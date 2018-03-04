@@ -89,11 +89,12 @@ tools.reportTools()+
 '<div class="ctn" style="border-bottom: 1px solid red;">'+
  
      '<div class="ctn-col-3">'+
-     '<img style="width:150px;" class="report-imge" src="http://localhost:8000/estaticos/img/hqlogo.png">'+//LOGO
+     '<img style="width:150px;" class="report-imge" src="http://localhost:8000/estaticos/img/hqlogoReportes.png">'+//LOGO
     '</div>'+
     
     '<div class="ctn-col-7">'+
      '<h2 class="reporte-titulo-principal">Reporte</h2>'+
+     '<input name="titulo" placeholder="Titulo.." type="text" class="reports-tools-title-input">'+
     '</div>'+
     
      

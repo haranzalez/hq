@@ -11,7 +11,7 @@ module.exports = {
                 }else{
                     var sql = "SELECT table_name "+
                     "FROM information_schema.tables "+
-                    "WHERE table_schema='public' or table_schema='registros' "+
+                    "WHERE table_schema='public' "+
                     "AND table_type='BASE TABLE' AND table_name like '%"+params.keyword+"%'; ";
                 }
 		
@@ -49,7 +49,7 @@ module.exports = {
             }else{
                 var sql = "SELECT "+params.field+" FROM "+params.table+" WHERE id="+params.id;
             }
-            console.log(sql)
+          
             return params.db.any(sql);
         },
         getFieldsDataAll: function(params){

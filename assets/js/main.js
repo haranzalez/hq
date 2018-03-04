@@ -992,7 +992,7 @@ $('.reports-tools-print-btn').on('click', function(){
 
 
 $('body').on('keyup','.reports-table-tools-coments-textarea', function(){
-    var id = $(this).parent().parent().parent().parent().parent().attr('data-table');
+    var id = $(this).parent().parent().attr('data-table');
     var txt = $(this).val();
     $('.reports-table-coments').find('.the-coment[data-table="'+id+'"]').text(txt);
     
@@ -1002,9 +1002,12 @@ $('body').on('keyup','.reports-table-tools-coments-textarea', function(){
 $('body').on('keyup','.reports-table-tools-title-input', function(){
     var txt = $(this).val();
     
-    var id = $(this).parent().parent().parent().parent().parent().attr('data-table');
+    var id = $(this).parent().attr('data-table');
+    if(txt == ''){
+        txt = 'Tabla '+id;
+    }
     $('.reports-table-title[data-table="'+id+'"]').text(txt);
-    console.log(id);
+ 
     setTimeout(function(){
         //find the value equals to txt and replace it with new value
         $('.report-add-to-table-select').find('option[value="'+id+'"]').val(id).text(txt);
@@ -1036,8 +1039,11 @@ $('.reports-tools-addTbl-btn').on('click', function(){
            success: function(res){
                var html = '<div class="reports-table-pkg" data-table="'+numOfTbls+'">'+
                 '<h3 class="reports-table-title" data-table="'+numOfTbls+'">Tabla '+numOfTbls+'</h3>'+
+                '<input placeholder="Tabla '+numOfTbls+'" type="text" class="reports-table-tools-title-input">'+
                 '<div class="ctn-row overflow-auto custom-reports-ctn-row"></div>'+
-                '<div class="reports-table-coments"><p><b>Comentarios:</b><br><spam class="the-coment" data-table="'+numOfTbls+'"></spam></p></div>'+
+                '<div class="reports-table-coments"><p><b>Comentarios:</b><br><spam class="the-coment" data-table="'+numOfTbls+'"></spam></p>'+
+                 '<textarea class="reports-table-tools-coments-textarea" placeholder="Comentarios.."></textarea>'+
+                '</div>'+
                 res+
                 '</div>';
                 $('.reports-table-section-ctn').append(html);
@@ -1074,32 +1080,6 @@ $('.reports-search-tables-input').on('keyup', function(key){
     }
      
 })
-
-
-
-$('body').on('click','.reports-table-open-tools-btn', function(){
-   var status = $(this).attr('data-status');
-   if(status === "off"){
-       $(this).attr('data-status', 'on');
-       $(this).siblings().fadeIn('fast');
-   }else if(status === "on"){
-       $(this).attr('data-status', 'off');
-       $(this).siblings().fadeOut('fast');
-   }
-   
-   
-});
-
-
-
-
-
-
-
-
-
-
-
 
 
 $('.menu-btn').on('click', function(){
