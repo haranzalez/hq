@@ -33,6 +33,10 @@
     @page { size: legal;size: landscape; }
     
 }
+
+.report-tbl-heading {
+    border-bottom: 1px solid red;
+}
 .reports-selected-item-counter{
     position: absolute;
     top: 6px;
@@ -76,30 +80,28 @@
     left:39px;
     top:-145px;
 }
-.reports-tools-ctn{
-        position: absolute;
+.reports-tools-addTbl-btn{
+    position: absolute;
     width: 40px;
+    height: 40px;
+    border-radius: 50%;
     top: 83%;
     z-index: 20;
-   
-    right: 40px;
-    
-}
-.reports-open-tools-btn{
-    padding: 10px;
-    border-radius: 50%;
+   padding: 10px;
+    right: 35px;
     font-size: 16px;
-    background-color: rgba(0,0,0,.6);
+    background-color: rgba(99,0,0,.6);
     color: rgba(255,255,255,.6);
     transition: .3s ease-in-out;
     
 }
-.reports-open-tools-btn:hover{
-    background-color: rgba(0,0,0,1);
+
+.reports-tools-addTbl-btn:hover{
+    background-color: rgba(99,0,0,1);
     color: rgba(255,255,255,1);
     cursor:pointer;
 }
-.reports-open-tools-btn:focus{
+.reports-tools-addTbl-btn:focus{
     outline:none;
 }
 .reports-observasiones-ctn{

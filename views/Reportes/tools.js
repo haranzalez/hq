@@ -10,10 +10,7 @@ module.exports = {
             '<div class="ctn">'+
              
               
-                 '<div class="ctn-col-10">'+
-                    '<a href="#" class="reports-tools-addTbl-btn">Agregar Tabla</a>'+
-                 '</div>'+
-                 
+               
                  '<div class="ctn-col-10">'+
                     '<button class="export-to-excel-btn" type="button">Exportar a Excel</button>'+
                  '</div>'+
@@ -27,7 +24,7 @@ module.exports = {
     
     tblTools: function(tname){
         return '<div class="reports-table-tools-main-ctn">'+
-               
+               '<button type="button" class="reports-table-clear-btn" data-table="'+tname+'"><i class="fas fa-eraser"></i></button>'+
                 '<button type="button" class="reports-table-remove-btn" data-table="'+tname+'"><i class="fas fa-trash"></i></button>'+
                '</div>';
     }

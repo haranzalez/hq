@@ -15,7 +15,7 @@ function renderItems(listItems, type){
                     html = html+'<div class="ctn-col-10"><a class="table-item" href="#" data-btn="'+listItems[i]+'" data-selected="0">'+
              
                         sanitaizeTxt(listItems[i])+'</a><spam class="reports-selected-item-counter"></spam><div class="fields-list-main-ctn">'+
-                        '<button data-table="'+listItems[i]+'" class="reports-show-all-tbls-btn" type="button">Seleccionar todo</button>'+
+                        '<button data-table="'+listItems[i]+'" class="reports-show-all-tbls-btn" type="button">Todo</button>'+
                         '<div class="ctn fields-list-ctn" data-table="'+listItems[i]+'"></div></div></div>';
 		
                 }

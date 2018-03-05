@@ -45,7 +45,8 @@ return '<div id="module-reports" class="ctn in-the-shadows">'+
 
 '<div class="ctn-col-8 preview-ctn">'+
 '<div class="reports-tools-ctn">'+
-'<button type="button" class="reports-open-tools-btn" data-estate="off" data-btn="reports-tools"><i class="fas fa-wrench"></i></button>'+
+
+
 tools.reportTools()+
 '</div>'+
 //preview sheet to export
@@ -83,7 +84,7 @@ tools.reportTools()+
 '<div class="preview-sheet">'+
 //'<div class="reporte-encabezado reporte-encabezado-bg-2"></div>'+
 
-
+'<button type="button" class="reports-tools-addTbl-btn" title="Agregar Tabla"><i class="fas fa-plus"></i></button>'+
 
 
 '<div class="ctn" style="border-bottom: 1px solid red;">'+
