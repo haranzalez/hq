@@ -6,38 +6,45 @@ module.exports = function(user){
 return '<div id="module-reports" class="ctn in-the-shadows">'+
 
 '<div class="ctn-col-2">'+
-'<div class="ctn reports-table-list-tools-ctn">'+
+    '<div class="ctn reports-table-list-tools-ctn">'+
 
-    '<div class="ctn-col-10">'+
-        '<input type="text" placeholder="Rec ID" class="report-rec-id-input">'+
-    '</div>'+
-    
-    
-    /*'<div class="ctn-col-10">'+
-    
-        '<div class="ctn reports-date-range-ctn">'+
-            '<div class="ctn-col-5">'+
-                '<input placeholder="Fecha inicial" type="text" class="reporte-fecha" data-fecha="inicial">'+
+        '<div class="ctn-col-10">'+
+            '<input type="text" placeholder="Rec ID" class="report-rec-id-input">'+
+        '</div>'+
+        
+        
+        /*'<div class="ctn-col-10">'+
+        
+            '<div class="ctn reports-date-range-ctn">'+
+                '<div class="ctn-col-5">'+
+                    '<input placeholder="Fecha inicial" type="text" class="reporte-fecha" data-fecha="inicial">'+
+                '</div>'+
+                '<div class="ctn-col-5">'+
+                    '<input placeholder="Fecha final" type="text" class="reporte-fecha" data-fecha="final">'+
+                '</div>'+
             '</div>'+
-            '<div class="ctn-col-5">'+
-                '<input placeholder="Fecha final" type="text" class="reporte-fecha" data-fecha="final">'+
-            '</div>'+
+
+        '</div>'+*/
+        
+        '<div class="ctn-col-10">'+
+            '<select class="report-add-to-table-select" name="add_to">'+
+                '<option value="">Agregar a...</option>'+
+            '</select>'+   
+        '</div>'+
+        
+         '<div class="ctn-col-10">'+
+            '<input type="text" class="reports-search-tables-input" placeholder="Buscar tabla..">'+
         '</div>'+
 
-    '</div>'+*/
+     
+         
+         
+            
+     '</div>'+
     
-    '<div class="ctn-col-10">'+
-        '<select class="report-add-to-table-select" name="add_to">'+
-            '<option value="">Agregar a...</option>'+
-        '</select>'+   
-    '</div>'+
-    
-     '<div class="ctn-col-10">'+
-        '<input type="text" class="reports-search-tables-input" placeholder="Buscar..">'+
-    '</div>'+
-    
-'</div>'+
-'<div class="tbl-list-main-ctn"><div class="ctn tbl-list-ctn"></div></div>'+
+
+
+    '<div class="tbl-list-main-ctn"><div class="ctn tbl-list-ctn"></div></div>'+
 '</div>'+
 
 

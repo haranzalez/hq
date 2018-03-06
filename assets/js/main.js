@@ -32,7 +32,7 @@ var tableToExcel = (function () {
 
 
 
- $('.export-to-excel-btn').on('click', function(){
+ $('body').on('click','.export-to-excel-btn', function(){
      var elm  = document.querySelectorAll('.preview-sheet .reports-table-pkg');
      var numOfCols = convertToTable(elm);
      var title = $('.reporte-titulo-principal').text();
@@ -44,6 +44,14 @@ var tableToExcel = (function () {
      
 
  });
+ $('body').on('click','.reports-tools-print-btn', function(){
+    window.print();
+});
+$('body').on('click','.reports-tools-save-btn', function(){
+   
+});
+
+
 
 function convertToTable(pkg){
  
@@ -135,7 +143,17 @@ function convertToTable(pkg){
  var autoLogout = new AutoLogout();
  var users = new Users();
 
-
+function getModuleTools(module){
+   $.ajax({
+          url: 'http://localhost:8000/recursos/componentes/moduleTools/'+module+'/none',
+          type: 'get',
+          success: function(res){
+             $('body').find('.module-tools').empty().append(res);
+             
+             
+          }
+      })
+}
 
 //REPORTS TABLE LISTS RESIZING HEIGHT FUNCTION
 $(function(){
@@ -798,6 +816,11 @@ $('body').on('click','#module-reports .tbl-list-ctn .table-item', function(){
   var selected = $(this).attr('data-selected');
   //grab table name from data-btn attribute
   var table = $(this).attr('data-btn');
+  var color = '#000';
+  var setColor = $(this).attr('data-setColor');
+  if(setColor == 'true'){
+    color = $(this).attr('data-color');
+  }
  
  //detect if selected is true and set it back to default
   if(selected === "1"){
@@ -811,7 +834,7 @@ $('body').on('click','#module-reports .tbl-list-ctn .table-item', function(){
         "color": "black",
         "border-bottom": "none"
         });
-        $(this).siblings('.reports-selected-item-counter').css('color', 'red');
+       
         //remove table fields from fields list
         $('.fields-list-ctn[data-table="'+table+'"]').parent().css('max-height', '0px');
     }
@@ -823,11 +846,11 @@ $('body').on('click','#module-reports .tbl-list-ctn .table-item', function(){
     $(this).attr('data-selected', '1');
     //highligth selected table name
     $(this).css({
-        "background-color": "black",
-        "color": "white",
+        "color": 'white',
+        "background-color": 'black',
         "border-bottom": "1px solid silver"
     });
-    $(this).siblings('.reports-selected-item-counter').css('color', 'white');
+ 
     
     
     if( $('body').find('.fields-list-ctn[data-table="'+table+'"]').is(':empty') ){
@@ -856,7 +879,9 @@ $('body').on('click','#module-reports .tbl-list-ctn .table-item', function(){
 
 $('body').on('click','#module-reports .fields-list-ctn .field-item', function(){
   var rtbl = $('.report-add-to-table-select').val();
-  var recId = $('.report-rec-id-input').val();
+
+  if(rtbl != ''){
+    var recId = $('.report-rec-id-input').val();
  
   var tbl = $(this).attr('data-table');
   var fld = $(this).attr('data-field');
@@ -867,69 +892,117 @@ $('body').on('click','#module-reports .fields-list-ctn .field-item', function(){
   var field = $(this).attr('data-field');
   var counter = $('.table-item[data-btn="'+tbl+'"]').siblings('.reports-selected-item-counter').text();
  //detect if selected is true and set it back to default of false
-  if(selected === "1"){
-    $(this).attr('data-selected', '0');
-    $(this).css({
-        "color": "#888"
-    });
-    
-    if(counter == 1 || counter == 0){
-        counter = '';
-    }else{
-        counter--;
-    }
-
-    //remove table fields from fields list
-    $('body').find('.preview-sheet div.ctn-vertical[data-field="'+field+'"]').remove();
-    //if selected is false, grab fields from database
-  }else if(selected === "0"){
-    $(this).attr('data-selected', '1');
-    //highligth selected table name
-    $(this).css({
-        "color": "red"
-    });
+  
+      $(this).attr('data-selected', '1');
+      //highligth selected table name
+      
     
     
-    if(counter === ''){
-        counter = 1;
-    }else{
-        counter++;
-    }
+     /*if(counter === ''){
+          counter = 1;
+      }else{
+          counter++;
+      }*/
     
 
-    if(recId == ''){
-        //ajax call
-        $.ajax({
-        url: '/reports/'+tbl+'/'+fld,
-        type: 'get',
-        success: function(res){
-          
-            $('.reports-table-section-ctn').find('.reports-table-pkg[data-table="'+rtbl+'"] .ctn-row').append(res);
+      if(recId == ''){
+          //ajax call
+          $.ajax({
+          url: '/reports/'+tbl+'/'+fld,
+          type: 'get',
+          success: function(res){
+              console.log(tbl)
+              $('.reports-table-section-ctn').find('.reports-table-pkg[data-table="'+rtbl+'"] .ctn-row').append(res);
+              var color = $('.table-item[data-btn="'+tbl+'"]').attr('data-color');
+              $('.reports-table-pkg[data-table="'+rtbl+'"]').find('.reports-table-col-ctn[data-table="'+tbl+'"]').css('border-color', color);
+          }
 
-        }
+        });
+      }else{
+          $.ajax({
+          url: '/reports/'+tbl+'/'+fld+'/'+recId,
+          type: 'get',
+          success: function(res){
+              $('.reports-table-section-ctn').find('.reports-table-pkg[data-table="'+rtbl+'"] .ctn-row').append(res);
+               var color = $('.table-item[data-btn="'+tbl+'"]').attr('data-color');
+              $('.reports-table-pkg[data-table="'+rtbl+'"]').find('.reports-table-col-ctn[data-table="'+tbl+'"]').css('border-color', color);
+          }
 
-      });
-    }else{
-        $.ajax({
-        url: '/reports/'+tbl+'/'+fld+'/'+recId,
-        type: 'get',
-        success: function(res){
-            $('.reports-table-section-ctn').find('.reports-table-pkg[data-table="'+rtbl+'"] .ctn-row').append(res);
+        });
+      }
 
-        }
+  }else{
 
-      });
-    }
+   var html = '<div class="pop-over"><span class="arrow-left"></span><p>Porfavor seleccione o adicione una tabla en el documento.</p></div>';
+   $('.report-add-to-table-select').parent().append(html);
+   setTimeout(function(){
+      $('.report-add-to-table-select').parent().find('.pop-over').remove();
+   },4000)
 
-   
   }
-  $('.table-item[data-btn="'+tbl+'"]').siblings('.reports-selected-item-counter').text(counter);
+  
+   
+  
+  //$('.table-item[data-btn="'+tbl+'"]').siblings('.reports-selected-item-counter').text(counter);
   
   
 });
 
+$('body').on('click','.reports-talbe-remove-col-btn', function(){
+  $(this).parent().parent().remove();
+})
+$('body').on('click','.reports-tools-highlight-btn', function(){
+  
+  var selected = $(this).attr('data-estate');
+  var table = $(this).parent().siblings('.table-item').attr('data-btn');
+  var color = $(this).parent().siblings('.table-item').attr('data-color');
+  if(selected == 'false'){
+    $(this).css({
+      'color':'white',
+      'background-color': color
+    })
+
+    
+    /*$(this).parent().siblings('.table-item').css({
+      'color':'white',
+      'background-color': color
+     })*/
+    $(this).parent().siblings('.table-item').attr('data-setColor', 'true');
+    $('.reports-table-col-ctn[data-table="'+table+'"]').css('border', '1px dashed '+color);
+    $(this).attr('data-estate', 'true');
+    $(this).parent().siblings('.reports-selected-item-counter').show();
+    $(this).parent().siblings('.reports-selected-item-counter').css({
+      'color':'white',
+      'background-color': color
+     })
+  }else{
+    $(this).css({
+      'color':'black',
+      'background-color': 'initial'
+    })
+     $(this).parent().siblings('.table-item').attr('data-setColor', 'false');
+     /*$(this).parent().siblings('.table-item').css({
+      'color':'white',
+      'background-color': 'black'
+     })*/
+     $('.reports-table-col-ctn[data-table="'+table+'"]').css('border', 'none');
+    $(this).attr('data-estate', 'false');
+    $(this).parent().siblings('.reports-selected-item-counter').hide();
+    $(this).parent().siblings('.reports-selected-item-counter').css({
+      'color':'white',
+      'background-color': 'initial'
+     })
+  }
+})
+
+
+
+
 $('body').on('click','.reports-show-all-tbls-btn', function(){
     var table = $(this).attr('data-table');
+     var rtbl = $('.report-add-to-table-select').val();
+
+  if(rtbl != ''){
     $.ajax({
         url: '/reports/table/all/'+table,
         type: 'get',
@@ -944,13 +1017,24 @@ $('body').on('click','.reports-show-all-tbls-btn', function(){
               var t = $(elms[i]).attr('data-table');
               var field = $(elms[i]).attr('data-field');
               $('.fields-list-ctn[data-table="'+t+'"] .field-item[data-selected="1"][data-field="'+field+'"]').css('color', '#888').attr('data-selected', '0');
-              var counter = Number($('.fields-list-ctn[data-table="'+t+'"]').parent().siblings('.reports-selected-item-counter').text()) - 1;
-              $('.fields-list-ctn[data-table="'+t+'"]').parent().siblings('.reports-selected-item-counter').text((counter == 0)?'':counter);
+              
+              
             }
+
+
          
         }
     });
+  }else{
+   var html = '<div class="pop-over"><span class="arrow-left"></span><p>Porfavor seleccione o adicione una tabla en el documento.</p></div>';
+   $('.report-add-to-table-select').parent().append(html);
+   setTimeout(function(){
+      $('.report-add-to-table-select').parent().find('.pop-over').remove();
+   },4000)
+  }
 });
+
+
 $('body').on('click','.reports-table-remove-btn', function(){
     var table = $(this).attr('data-table');
 
@@ -1029,9 +1113,7 @@ $('.reports-tools-coments-textarea').on('keyup', function(){
     
 });
 
-$('.reports-tools-print-btn').on('click', function(){
-    window.print();
-});
+
 
 
 
@@ -1136,6 +1218,7 @@ $('.menu-btn').on('click', function(){
           success: function(res){
          
            hideModules()
+           getModuleTools('reports')
            $('body').find('.tbl-list-ctn').empty();
            $('body').find('.tbl-list-ctn').append(res);
            $('#module-reports').removeClass('in-the-shadows');
@@ -1146,6 +1229,7 @@ $('.menu-btn').on('click', function(){
     break;
     case 'users':
       hideModules();
+      getModuleTools('users');
       $('#module-users').removeClass('in-the-shadows');
       $('.menu').removeClass('zero-out-absolute-spaces');
       $('.white-blur').removeClass('reveal');

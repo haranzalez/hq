@@ -53,7 +53,7 @@ function getTemplate(obj){
         break;
         case 'plataforma':
 
-            return menu('menuMobil', {obj: obj.privilegios, nombre_rol: obj.nombre_rol, nombre_area: obj.nombre_area, user: obj.user})+header+
+            return menu('menuMobil', {obj: obj.privilegios, nombre_rol: obj.nombre_rol, nombre_area: obj.nombre_area, user: obj.user})+header+'<div class="module-tools"></div>'+
 
 
             '<div class="contener-fixed">'+

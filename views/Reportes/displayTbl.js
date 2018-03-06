@@ -8,7 +8,7 @@ module.exports = {
     tableCol: function(data, field, table){
        
       let html = '<div class="ctn-vertical reports-table-col-ctn zebra" data-field="'+field+'" data-table="'+table+'">'+
-              '<div class="ctn-col-div report-tbl-heading"><b>'+sanitizeHeadings(field)+'</b></div>';
+              '<div class="ctn-col-div report-tbl-heading"><b>'+sanitizeHeadings(field)+'</b><spam class="reports-talbe-remove-col-btn">  <i class="fas fa-minus-circle"></i></spam></div>';
    
       for(var i = 0; i < data.length; i++){
          
@@ -33,7 +33,7 @@ module.exports = {
         let html = '';
       for(var prop in data){
            html = html+'<div class="ctn-vertical reports-table-col-ctn zebra" data-field="'+prop+'" data-table="'+table+'">'+
-              '<div class="ctn-col-div report-tbl-heading"><b>'+sanitizeHeadings(prop)+'</b></div>';
+              '<div class="ctn-col-div report-tbl-heading"><b>'+sanitizeHeadings(prop)+'</b><spam class="reports-talbe-remove-col-btn">  <i class="fas fa-minus-circle"></i></spam></div>';
          
    
          

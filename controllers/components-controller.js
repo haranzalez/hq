@@ -3,6 +3,7 @@ var messageBox = require('../views/componentes/message-box.js');
 var selRolWindow = require('../views/Usuarios/sel-rol-window.js');
 var componentsModel = require('../models/components-model.js');
 var menues = require('../views/componentes/menues.js');
+var moduleTools = require('../views/componentes/module-tools.js')
 
 
 module.exports = {
@@ -59,6 +60,10 @@ module.exports = {
 			case "sub-user-logs"://for user logs
 					console.log(params);
 					res.send(menues(params.id, {id_acceso: params.id_acceso}));
+			break;
+			case "moduleTools"://for user logs
+					
+					res.send(moduleTools(params.extra));
 			break;
 
 			default:

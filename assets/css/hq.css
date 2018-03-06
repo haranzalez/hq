@@ -15,35 +15,145 @@
         
     }
     .reports-table-title{
+       display:block;
+    } 
+    .reports-table-coments p .the-coment{
         display:block;
     }
-    .reports-tools-title-input{
-        display:none;
-    }
-    .reports-table-tools-title-input{
-        display:none;
-    }
-    .reports-table-coments p .the-coment{
-        display: block;
-    }
+   
     .custom-reports-ctn-row{
         font-size: 12pt;
         white-space: nowrap;
+    }
+    .reports-table-tools-main-ctn,
+    .reports-talbe-remove-col-btn,
+    .reports-table-tools-title-input,
+    .reports-tools-title-input{
+      display:none;
+    }
+    .reporte-texto{
+      margin: 20px 0px;
     }
     @page { size: legal;size: landscape; }
     
 }
 
+.reports-show-all-tbls-btn:hover{
+  outline: none;
+  cursor: pointer;
+}
+.reports-table-list-tools-ctn div .reports-table-list-tools-btns-ctn{
+  width: 50%;
+  margin:0px auto;
+}
+.reports-table-list-tools-ctn div .reports-table-list-tools-btns-ctn div{
+  margin:0;
+}
+.reports-table-list-tools-btns-ctn button{
+    font-size: 13pt;
+    border: 1px solid #666;
+    border-radius: 0;
+    
+}
+
+
+.reports-tools-save-btn:focus,
+.reports-tools-print-btn:focus,
+.export-to-excel-btn:focus{
+  outline: none;
+}
+
+
+.export-to-excel-btn:hover{
+  background-color: rgb(37,127,84);
+  color:white;
+  cursor: pointer;
+}
+.export-to-excel-btn:hover::after{
+  left: 53px;
+  display: inline;
+  background-color: rgb(37,127,84);
+}
+.export-to-excel-btn:after{
+    content: 'Excel';
+   
+}
+.reports-tools-print-btn:hover::after{
+  left: 53px;
+  display: inline;
+}
+.reports-tools-print-btn:after{
+    content: 'Imprimir';
+    
+   
+}
+
+.reports-tools-save-btn:hover,
+.reports-tools-print-btn:hover{
+  background-color: black;
+  color:#E20024;
+  cursor: pointer;
+}
+.reports-tools-save-btn:hover::after{
+  left: 53px;
+  display: inline;
+}
+.reports-tools-save-btn:after{
+  content: 'Guardar';
+}
+.reports-tools-save-btn:after,
+.reports-tools-print-btn:after,
+.export-to-excel-btn:after{
+    position: absolute;
+    margin-top: -12px;
+    background-color: black;
+    color: white;
+    display: none;
+    box-shadow: 1px 0px 1px #888;
+  
+    font-size: 12px;
+    width: 0;
+    overflow: hidden;
+    transition: .3s ease-in-out;
+    left: 0;
+    padding:15.6px 6px;
+    width: 45px;
+}
+
+    
 .report-tbl-heading {
     border-bottom: 1px solid red;
 }
+
 .reports-selected-item-counter{
-    position: absolute;
+  position: absolute;
     top: 6px;
     right: 11px;
     color: white;
     font-size: 8pt;
+    display: block;
+    width: 15px;
+    height: 15px;
+    text-align: center;
+    border-radius: 50%;
+    display: none;
+    line-height: 1.5;
+    
 }
+
+.reports-talbe-remove-col-btn{
+  color:rgba(255,0,0,.4);
+  transition: .3s ease-in-out;
+}
+.reports-talbe-remove-col-btn:hover{
+  color:rgba(255,0,0,1);
+  cursor: pointer;
+}
+
+
+
+
+
 .user-status-table{
     
     height: 200px;
@@ -82,22 +192,22 @@
 }
 .reports-tools-addTbl-btn{
     position: absolute;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
-    top: 83%;
+    top: 90%;
     z-index: 20;
-   padding: 10px;
-    right: 35px;
-    font-size: 16px;
-    background-color: rgba(99,0,0,.6);
+    padding: 8px 0px;
+    right: 31px;
+    font-size: 12px;
+    background-color: rgba(226,0,36,.7);
     color: rgba(255,255,255,.6);
     transition: .3s ease-in-out;
     
 }
 
 .reports-tools-addTbl-btn:hover{
-    background-color: rgba(99,0,0,1);
+    background-color: rgba(226,0,36,1);
     color: rgba(255,255,255,1);
     cursor:pointer;
 }
@@ -1221,8 +1331,27 @@ font-size:25pt !important;
   border-bottom: 2px solid green;
 }
 
-
-
+.pop-over{
+  position: absolute;
+  z-index: 24;
+  right: -275px;
+  width: 250px;
+  background-color: white;
+  border-radius: 5px;
+  padding: 7px;
+  box-shadow: 0px 1px 1.3px #888;
+  border:1px solid #000;
+  top:-15px;
+}
+.pop-over p {
+  font-size: 12px;
+}
+.pop-over span{
+  position: absolute;
+  border-right:10px solid white; 
+  left: -10px;
+  top:10px;
+}
 
 /*LOGIN*/
 .login-form button{
