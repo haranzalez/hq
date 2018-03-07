@@ -33,8 +33,8 @@ class Users{
         url: 'http://localhost:8000/users/comp/createForm',
         type: 'get',
         success: function(res){
-          $('.list-result-ctn').empty();
-          $('.list-result-ctn').append(res);
+         
+          $('body').find('.users-forms-ctn').empty().append(res);
         }
       })
     
@@ -46,8 +46,7 @@ class Users{
       url: 'http://localhost:8000/recursos/componentes/f2/none/none',
       type: 'get',
       success: function(res){
-        $('.list-result-ctn').empty();
-        $('.list-result-ctn').append(res);
+        $('body').find('.users-forms-ctn').empty().append(res);
       }
     })
   }
@@ -57,7 +56,7 @@ class Users{
       url: 'http://localhost:8000/recursos/componentes/w1/none/none',
       type: 'get',
       success: function(res){
-        $('body').find('.mobile-window-ctn .back-btn').addClass('in-the-shadows');
+        $('body').find('.mobile-window-ctn .back-btn').hide();
         $('body').find('.mobile-window-ctn .ctn').empty().append(res);
       }
     })
@@ -81,7 +80,7 @@ class Users{
       url: 'http://localhost:8000/recursos/componentes/'+pkg.menuId+'/'+pkg.type+'/'+pkg.entId,
       type: 'get',
       success: function(res){
-        $('body').find('.sub-menues').empty().append(res);
+        $('body').find('.users-filter-nav').empty().append(res);
       }
     })
   }

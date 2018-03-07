@@ -7,7 +7,7 @@ module.exports = {
 		action: {
 			txt: 'Crear Rol',
 			data: 'crear-rol',
-			class: 'btn-ctr-form-rol'
+			class: 'btn-ctr-form-rol user-create-rol-btn'
 
 		},
 		cancel: {
@@ -18,21 +18,22 @@ module.exports = {
 	}
 	
 	return '<div class="form-create-rol">'+
+	'<h2 class="title">Crear Rol</h2>'+
 	'<form id="create-rol-form" data-parsley-trigger="keyup" data-parsley-validate>'+
 	'<div class="ctn">'+
 	'<div class="ctn-col-10">'+
 	'</div>'+
-	'<div class="ctn-col-10 bottom-40-px">'+
+	'<div class="ctn-col-10 bottom-10-px">'+
 	'<p class="sub-title-basic underlined">Escriba nombre para nuevo rol..</p>'+
 	'<input name="nombre_rol" class="text-box" type="text" required data-parsley-required-message="Se requiere un nombre">'+
 	'</div>'+
-	'<div class="ctn-col-10 bottom-40-px">'+
+	'<div class="ctn-col-10 bottom-10-px">'+
 	'<p class="sub-title-basic underlined">Seleccione area..</p>'+
 	'<select name="id_area" id="" class="select-basic-mobil" required>'+
 	renderAreas(pkg.areas)+
 	'</select>'+
 	'</div>'+
-	'<div class="ctn-col-10 bottom-40-px">'+
+	'<div class="ctn-col-10 bottom-10-px">'+
 	'<p class="sub-title-basic underlined text-to-the-left">Seleccione modulos..</p>'+
 	'<div class="privilegios-ctn">'+
 	'<div class="ctn text-center">'+
@@ -40,28 +41,9 @@ module.exports = {
 	'</div>'+
 	'</div>'+
 	'</div>'+
-        '<div class="ctn-col-10 bottom-40-px">'+
-	'<p class="sub-title-basic underlined text-to-the-left">Seleccione privilegios..</p>'+
-        '<div class="ctn">'+
-        '<div class="ctn-col-quarter">'+
-            '<p class="text-to-the-8p">Puede crear</p>'+
-            '<input name="poderes" type="checkbox" value="create" data-name="create">'+
-        '</div>'+
         
-        '<div class="ctn-col-quarter">'+
-            '<p class="text-to-the-8p">Puede editar</p>'+
-            '<input name="poderes" type="checkbox" value="update" data-name="update">'+
-        '</div>'+
-        
-        '<div class="ctn-col-quarter">'+
-            '<p class="text-to-the-8p">Puede eliminar</p>'+
-            '<input name="poderes" type="checkbox" value="delete" data-name="delete">'+
-        '</div>'+
-        '</div>'+
-
-	'</div>'+
-	'<div class="ctn-col-10 bottom-40-px">'+
-	btns('set-action-cancel', btnsData)+
+	'<div class="ctn-col-10">'+
+	'<button class="'+btnsData.action.class+'" data-btn="'+btnsData.action.data+'" type="button">Crear Rol</button>'+
 	'</div>'+
 	'</div>'+
 	'</form>'+

@@ -53,8 +53,7 @@ module.exports = function(type, obj){
                             '<li class="relativo"><a href="#" class="text-to-the-8p sub-menu-btn" data-link="online">En Linea</a><spam class="arrow-down"></spam></li>'+
                             '<li class="relativo"><a href="#" class="text-to-the-8p sub-menu-btn" data-link="offline">Offline</a><spam class="arrow-down"></spam></li>'+
                             '<li class="relativo"><a href="#" class="text-to-the-8p sub-menu-btn" data-link="inactivo">Bloqueados</a><spam class="arrow-down"></spam></li>'+
-                            '<li></li>'+
-                            '<li><a href="#" class="btn-sub-menu text-to-the-8p" data-btn="createUser">Crear Usuario <i class="fas fa-user-plus text-to-the-8p" aria-hidden="true"></i></a></li>'+
+                            '</a></li>'+
                     '</ul>'+
             '</div>'+
             '</div>';
@@ -64,7 +63,7 @@ module.exports = function(type, obj){
             '<div class="ctn-col-10 sub-menu-ctn-mobil">'+
             '<ul class="sub-menu-mobil">'+
             '<li><a href="#" class="text-to-the-8p btn-sub-menu" data-btn="listRol">Roles</a></li>'+
-            '<li><a href="#" class="text-to-the-8p btn-sub-menu" data-btn="createRol">Crear Rol <i class="fa fa-plus text-to-the-8p" aria-hidden="true"></i></a></li>'+
+           
             '</ul>'+
             '</div>'+
             '</div>';

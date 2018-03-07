@@ -7,7 +7,7 @@ var btnsData = {
 	action: {
 		txt: 'Registrar',
 		data: 'registrar',
-		class: 'btn-ctr-form-user'
+		class: 'btn-ctr-form-user user-reg-btn'
 
 	},
 	cancel: {
@@ -17,11 +17,10 @@ var btnsData = {
 	}
 }
 	
-	return '<div class="form-create-user"><div class="ctn-col-10 top-20-px ">'+
-	'<div class="sel-rol-btn"><i class="fas fa-plus" aria-hidden="true"></i><p style="line-height: 11;font-size: 16pt;">Rol</p></div>'+
-	'</div>'+
+	return '<div class="form-create-user">'+
+	'<h2 class="title">Crear Usuario</h2>'+
 	'<div class="ctn-col-10">'+
-	'<form class="create-user-form top-10-per" id="create-user-form" data-parsley-trigger="keyup" data-parsley-validate>'+
+	'<form class="create-user-form" id="create-user-form" data-parsley-trigger="keyup" data-parsley-validate>'+
 	'<input type="hidden" class="users-rol-input input-field" value="" name="nombre_rol" required>'+
 	'<h3 class="sub-title-basic underlined">Informacion Personal</h3>'+
 
@@ -128,12 +127,24 @@ var btnsData = {
 		'</div>'+
 
 	'</div>'+
+
+
+	'<h4 class="sub-title-basic underlined">Rol</h4>'+
+
+	'<div class="ctn form-elms-ctn-rol">'+
+
+		'<div class="ctn-col-10">'+
+			'<button class="sel-rol-btn" type="button">Seleccionar Rol</button>'+
+		'</div>'+
+
+	'</div>'+
+
 	
 	'<h4 class="sub-title-basic underlined">Comentarios</h4>'+
 
 	'<div class="ctn form-elms-ctn-comentario">'+
 
-		'<div class="ctn-col-10 bottom-40-px">'+
+		'<div class="ctn-col-10">'+
 		
 		'<textarea name="comentario" class="comment-box input-field" placeholder="...."></textarea>'+
 		
@@ -143,7 +154,7 @@ var btnsData = {
 	
 	'<div class="ctn-col-10">'+
 	
-	btn('set-action-cancel', btnsData)+
+	'<button class="'+btnsData.action.class+'" data-btn="'+btnsData.action.data+'" type="button">'+btnsData.action.txt+'</button>'+
 	
 	'</div>'+
 	'</form>'+

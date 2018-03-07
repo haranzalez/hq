@@ -1,4 +1,70 @@
 
+
+
+
+
+
+.form-create-user .form-elms-ctn-acceso .ctn-col-10, .form-create-user .form-elms-ctn-info .ctn-col-10, .form-create-user .form-elms-ctn-estado .ctn-col-10{
+  padding:3px 0px !important;
+}
+.sel-rol-btn{
+  padding: 10px;
+    margin-top: 5px;
+    font-size: 10px;
+    background-color: transparent;
+    border-radius: 0;
+   
+    border-bottom: 2px solid black;
+    font-weight: 700;
+}
+
+
+
+
+
+.btn-sub-menu[data-btn="createUser"]:after{
+  content: 'Crear Usuario';
+}
+.btn-sub-menu[data-btn="createRol"]:after{
+  content: 'Crear Rol';
+}
+.btn-sub-menu[data-btn="createUser"] svg,
+.btn-sub-menu[data-btn="createRol"] svg
+{
+  color: white;
+  width: 100%;
+  font-size: 14pt !important;
+  transition: .3s ease-in-out;
+}
+.btn-sub-menu[data-btn="createUser"] svg:hover,
+.btn-sub-menu[data-btn="createRol"] svg:hover
+{
+  color:red;
+}
+.btn-sub-menu[data-btn="createUser"]:after,
+.btn-sub-menu[data-btn="createRol"]:after{
+    position: absolute;
+    margin-top: -12px;
+    display:none;
+    font-size: 12px;
+    overflow: hidden;
+    transition: .3s ease-in-out;
+    padding: 7px;
+   
+    left: -48px;
+    top: -10px;
+    background-color: red;
+    color: white;
+}
+.btn-sub-menu[data-btn="createUser"]:hover::after,
+.btn-sub-menu[data-btn="createRol"]:hover::after{
+  display: inline;
+}
+
+
+
+
+
 .module-tools{
   width: 63px;
     background-color: white;
@@ -96,9 +162,10 @@ body{
 }
   
 .contener-fixed{
-      position: relative;
+    position: relative;
     left: 0px;
     margin: 0px auto;
+    margin-left: 66px;
     padding: 0px;
     max-width: 1350px;
     top: 60px;
@@ -147,18 +214,23 @@ body{
 }
 /*USER MODULE CTN*/
 .users-module-ctn{
-  max-width:1000px;
-  margin:auto;
-  padding:20px;
-  position: relative;
-  margin-top:50px;
+  max-width: 608px;
+    margin: auto;
+    margin-top: 23px;
+    /* padding: 10px; */
+    position: relative;
+
+}
+.search-box-ctn{
+  text-align: center;
 }
 .search-box-ctn .text-box{
-    padding: 5px;
-    width: 76%;
+    padding: 10px;
+    width: 95%;
     font-size: initial;
-    margin: auto;
     font-size: 10pt;
+    margin-top: 8px;
+    margin-left: 20px;
 }
 
 .user-module-tool-bar{
@@ -166,13 +238,23 @@ body{
   background-color: black;
   padding: 15px 0px;
   box-shadow: 0px 1px 1px #ccc;
+      border-bottom: 2px solid red;
+}
+.user-module-tool-bar .title{
+  margin: 0 22px;
+    color: white;
+    text-align: center;
 }
 .user-module-tool-bar .sub-menu-ctn-mobil{
   background-color: transparent;
   margin-left: 49px;
 }
-.sub-menu-mobil li a{
-    color:white;
+.sub-menu-ctn-mobil {
+    background-color: transparent;
+    padding: 2px 0px;
+    margin: auto;
+    margin-top: 14px;
+    width: 332px;
 }
 .user-module-nav-btns{
   display: block;
@@ -207,10 +289,33 @@ body{
 
 /*FORMS*/
 .form-create-user, .form-create-rol{
-  width: 80%;
-  margin:auto;
-  margin-top: 60px;
-  margin-bottom: 60px;
+    width: 90%;
+    margin: auto;
+    margin-top: 22px;
+    height: 610px;
+    overflow: auto;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0px 1px 2px #ccc;
+   
+}
+.form-create-user .user-reg-btn,
+.form-create-rol .user-create-rol-btn
+{
+      font-size: 14px;
+    padding: 10px;
+    border: none;
+    border-bottom: 1px solid red;
+    border-radius: 0;
+    position: absolute;
+    right: 0;
+}
+.form-create-user .title, .form-create-rol .title{
+      margin: 0;
+    /* background: black; */
+    padding: 10px;
+    /* color: white; */
+    text-align: center;
 }
 .form-create-user .form-elms-ctn-acceso .ctn-col-10,
 .form-create-user .form-elms-ctn-info .ctn-col-10,
@@ -219,29 +324,86 @@ body{
   padding:10px 0px;
 }
 .form-create-user .form-elms-ctn-estado .ctn-col-10{
-   padding:10px 10px;
+   padding:3px 10px;
 }
 .form-create-user .ctn .ctn-col-10 input[type="text"],
 .form-create-user .ctn .ctn-col-10 input[type="password"]{
-  width: 90%;
+  width: 98%;
   margin:auto;
 }
 .users-main-ctn{
-    height: 537px;
+    height: 590px;
     border-top: none;
     overflow: auto;
     position: relative;
     background-color: #fefefe;
-    border-bottom-right-radius: 4px;
-    border-bottom-left-radius: 4px;
-    box-shadow: 0px 3.5px 26px #999;
+    
+    box-shadow: 0px 1px 2px #ddd;
 }
 .user-list-result-ctn .ctn-tbl-row{
   background-color: white;
 }
 /*SEL ROL WINDOW*/
 .mobile-window-ctn{
-  width: 1000px;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 296px;
+    padding:0;
+    background-color: white;
+    display: none;
+}
+.mobile-window-ctn .avatar{
+      width: 50px;
+    height: 50px;
+    margin: auto;
+    line-height: 3.3;
+}
+.mobile-window-ctn p{
+  font-size: 10px;
+}
+.mobile-window-ctn h2{
+     text-align: left;
+    
+    padding: 10px 49px;
+    border-bottom: 2px solid red;
+    background-color: black;
+    color: white;
+}
+.mobile-window-ctn .back-btn{
+  left: 8px !important;
+    top: 14px !important;
+    font-size: 17px;
+    z-index: 23;
+    display: none;
+}
+.mobile-window-ctn .back-btn svg{
+  color: white;
+}
+.mobile-window-ctn .close-btn-ctn{
+         padding: 0 14px;
+    padding-bottom: 0px;
+
+    position: absolute;
+    bottom: 0;
+    width: 100px;
+    
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.mobile-window-ctn .close-btn-ctn button
+{
+  font-size: 15px;
+    background-color: transparent;
+    border: none;
+    
+    border-radius: 0;
+}
+.mobile-window-ctn .close-btn-ctn button:hover
+{
+  border-bottom: 1px solid red;
+  cursor: pointer;
 }
 .t-result-ctn{
   padding:60px;

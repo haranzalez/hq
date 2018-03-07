@@ -13,35 +13,55 @@ var sortMenu = require('../componentes/menues.js');
 
 
 module.exports = function(){
-	return selRolWindow.container()+'<div id="module-users" class="ctn"><div class="ctn-col-10"><div class="users-module-ctn">'+
-	
-		//section btns users and roles
-		'<div class="user-module-nav-btns">'+
-			'<button class="btn" data-btn="usuarios">Usuarios</button>'+
-			'<button class="btn" data-btn="roles">Roles</button>'+
-		'</div>'+
+	return selRolWindow.container()+
 
-		//Section tools [search bar, filter]
-		'<div class="ctn user-module-tool-bar">'+
-			'<div class="ctn-col-5">'+
-			'<div class="sub-menues">'+
-				sortMenu('sub-users')+
-			'</div>'+
-			'</div>'+
+'<div id="module-users" class="ctn">'+
+
+	'<div class="ctn-col-5">'+
+
+		'<div class="ctn users-roles-table">'+
 			
-			'<div class="ctn-col-5">'+
-			     searchBox.regular()+
-			'</div>'+
-		'</div>'+
-		//forms ctn
+			'<div class="ctn-col-10">'+
 
-		//results ctn
-		'<div class="users-main-ctn">'+
-			'<div class="users-forms-ctn">'+formUsers()+'</div>'+
-			'<div class="list-result-ctn"></div>'+
-		'</div>'+
-	'</div></div>'+
-	'</div>'; 
+				'<div class="users-module-ctn">'+
+					//Section tools [search bar, filter]
+					'<div class="ctn user-module-tool-bar">'+
+						'<div class="ctn-col-10">'+
+							'<h2 class="title"></h2>'+
+						'</div>'+
+						
+						
+
+					'</div>'+
+					//forms ctn
+
+					//results ctn
+					'<div class="users-main-ctn">'+
+						'<div class="list-result-ctn"></div>'+
+					'</div>'+
+
+				'</div>'+
+
+			'</div>'+
+
+	  	'</div>'+
+
+	'</div>'+
+
+
+	'<div class="ctn-col-5 users-forms-ctn">'+
+
+		
+		
+
+	'</div>'+
+
+
+
+
+
+		
+'</div>'; 
 }
 
 

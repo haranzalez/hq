@@ -56,61 +56,56 @@
     
 }
 
-
-.reports-tools-save-btn:focus,
-.reports-tools-print-btn:focus,
-.export-to-excel-btn:focus{
-  outline: none;
+.module-sec-tools{
+  width: 90% !important;
 }
 
 
-.export-to-excel-btn:hover{
-  background-color: rgb(37,127,84);
-  color:white;
-  cursor: pointer;
-}
-.export-to-excel-btn:hover::after{
-  left: 53px;
-  display: inline;
-  background-color: rgb(37,127,84);
-}
-.export-to-excel-btn:after{
-    content: 'Excel';
-   
-}
-.reports-tools-print-btn:hover::after{
-  left: 53px;
-  display: inline;
+.reports-tools-save-btn:after{
+  content: 'Guardar';
 }
 .reports-tools-print-btn:after{
     content: 'Imprimir';
-    
-   
+}
+.export-to-excel-btn:after{
+    content: 'Excel';
+}
+.users-prime-ctr-btn[data-btn="users"]:after{
+    content: 'Usuarios';
+}
+.users-prime-ctr-btn[data-btn="roles"]:after{
+    content: 'Roles';
 }
 
-.reports-tools-save-btn:hover,
-.reports-tools-print-btn:hover{
+.export-to-excel-btn:hover{
+  background-color: rgb(37,127,84) !important;
+  color:white !important;
+  cursor: pointer !important;
+}
+.export-to-excel-btn:hover::after{
+   background-color: rgb(37,127,84) !important;
+}
+.module-tool-btn:focus{
+  outline: none;
+}
+
+.module-tool-btn:hover{
   background-color: black;
   color:#E20024;
   cursor: pointer;
 }
-.reports-tools-save-btn:hover::after{
+.module-tool-btn:hover::after{
   left: 53px;
   display: inline;
 }
-.reports-tools-save-btn:after{
-  content: 'Guardar';
-}
-.reports-tools-save-btn:after,
-.reports-tools-print-btn:after,
-.export-to-excel-btn:after{
+
+.module-tool-btn:after{
     position: absolute;
     margin-top: -12px;
     background-color: black;
     color: white;
     display: none;
     box-shadow: 1px 0px 1px #888;
-  
     font-size: 12px;
     width: 0;
     overflow: hidden;
@@ -119,6 +114,8 @@
     padding:15.6px 6px;
     width: 45px;
 }
+
+
 
     
 .report-tbl-heading {
@@ -1075,35 +1072,7 @@ font-size:25pt !important;
   font-size:10pt !important;
   margin: 0px;
 }
-.sel-rol-btn{
-  position:relative;
-  width:100px;
-  height: 100px;
-  border-radius:50%;
-  background-color:#eee;
-  margin:auto;
-}
-.sel-rol-btn .fa-plus{
-  position: absolute;
-  left: 35%;
-  top: 32%;
-  font-size: 30pt;
-  color: #ccc;
-}
-.sel-rol-btn:active{
-  background-color: #ccc
-}
-.sel-rol-btn:active > .fa-plus{
-  color:#888;
-}
-.sel-rol-btn p{
-    text-align: center;
-    line-height: 2.5;
-    text-transform: capitalize;
-    font-weight: bold;
-    font-size: 30pt;
-    color: #666;
-}
+
 /*===================================================================================================================================================*/
 /*SHAPES*/
 .shape-drop{
@@ -1161,9 +1130,10 @@ font-size:25pt !important;
   font-size: 23pt;
 }
 .sub-title-basic{
-  padding: 0px;
-  font-size:15pt;
-  margin-bottom: 5px;
+     padding: 0px;
+    font-size: 15px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid red !important;
 }
 /*===================================================================================================================================================*/
 /*COLOR LAYERS*/
@@ -1177,7 +1147,7 @@ font-size:25pt !important;
   background-color: rgba(255,255,255,.7);
   -webkit-filter: blur(5px); /* Safari 6.0 - 9.0 */
 
-  z-index: 9;
+  z-index: 12;
   transition: .2s ease-in-out;
 
 }
@@ -1193,14 +1163,13 @@ font-size:25pt !important;
 /*===================================================================================================================================================*/
 /*TEXT BOXES*/
 .text-box{
-  width:100%;
-  font-size:12pt;
-  padding:10px;
-  outline:none;
-  border:solid 1px #eee;
-  display:block;
-  box-sizing:border-box;
-  border-radius: 4px;
+  width: 100%;
+    font-size: 12px !important;
+    padding: 4px;
+    outline: none;
+    border: solid 1px #eee;
+    display: block;
+    box-sizing: border-box;
 }
 
 
@@ -1227,10 +1196,10 @@ font-size:25pt !important;
 /*SELECT LIST BOXES*/
 .select-basic-mobil{
   border-radius: 0px;
- border: 1px solid #eee;
-  width: 100%;
-  height: 45px;
-  font-size: 12pt;
+    border: 1px solid #eee;
+    
+    height: 28px;
+    font-size: 14px;
 }
 /*===================================================================================================================================================*/
 /*MESSAGE WINDOWS*/
@@ -1242,11 +1211,10 @@ font-size:25pt !important;
   box-shadow:0px 0px 2px #bbb;
   position:fixed;
   width:100%;
-  top:-200%;
   transition:.4s ease-in-out;
   z-index:125;
 }
-.mobile-window-ctn div{
+.mobile-window-ctn .ctn-col-quarter{
   margin:20px 0px;
 }
 
@@ -1492,12 +1460,7 @@ font-size:25pt !important;
   cursor: pointer;
 }
 
-.users-forms-ctn{
-  background-color: white;
-  position: absolute;
-  display:none;
-  z-index: 23;
-}
+
 
 
 
@@ -1516,4 +1479,25 @@ font-size:25pt !important;
 .user-box p spam{
     color:#ccc;
 }
+
+
+
+
+.parsley-errors-list{
+      margin: 5px 15px;
+    list-style: none;
+    padding: 0;
+    font-size: 12px;
+}
+.parsley-errors-list li svg{
+  color: red;
+}
+
+
+
+
+
+
+
+
 

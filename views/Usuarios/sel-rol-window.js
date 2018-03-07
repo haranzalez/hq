@@ -11,9 +11,9 @@ module.exports = {
 			'</div>';
 
 			for(var prop in pkg){
-				html = html+'<div class="ctn-col-thirds btn-ctr-form-rol" data-id="'+pkg[prop]['id_area']+'" data-btn="sel-area-btn" data-img="http://placehold.it/50">'+
-					'<img src="http://placehold.it/80" alt="" class="avatar">'+
-					'<p class="text-center text-to-the-10p">'+pkg[prop]['nombre_area']+'</p>'+
+				html = html+'<div class="ctn-col-quarter btn-ctr-form-rol" data-id="'+pkg[prop]['id_area']+'" data-btn="sel-area-btn" data-img="http://placehold.it/50">'+
+					'<div class="avatar">'+pkg[prop]['nombre_area'].charAt(0)+'</div>'+
+					'<p class="text-center">'+pkg[prop]['nombre_area']+'</p>'+
 				'</div>';
 			}
 
@@ -32,8 +32,8 @@ module.exports = {
 			'</div>';
 
 			for(var prop in pkg){
-				html = html+'<div class="ctn-col-thirds btn-ctr-form-rol" data-btn="sel-rol-btn" data-name="'+pkg[prop]['nombre_rol']+'" data-img="http://placehold.it/50">'+
-					'<img src="http://placehold.it/80" alt="" class="avatar">'+
+				html = html+'<div class="ctn-col-quarter btn-ctr-form-rol" data-btn="sel-rol-btn" data-name="'+pkg[prop]['nombre_rol']+'">'+
+					'<div class="avatar">'+pkg[prop]['nombre_rol'].charAt(0)+'</div>'+
 					'<p class="text-center text-to-the-10p"><a class="btn-rol-ctr" href="#" data-id="'+pkg[prop]['id_rol']+'">'+pkg[prop]['nombre_rol']+'</a></p>'+
 				'</div>';
 			}
@@ -60,7 +60,10 @@ module.exports = {
                     '<i class="fa fa-arrow-left" aria-hidden="true"></i>'+
                 '</button>'+
                 '<div class="ctn"></div>'+
-                '<button class="close-up-btn helper-btn btn-transparent" data-btn="close-up-btn"><i class="fa fa-arrow-up" aria-hidden="true"></i></button>'+
+                '<div class="close-btn-ctn">'+
+                '<button class="" data-btn="close-up-btn">Cerrar</button>'+
+                '</div>'+
+                
             '</div>';
 	}
 

@@ -4,6 +4,7 @@ var selRolWindow = require('../views/Usuarios/sel-rol-window.js');
 var componentsModel = require('../models/components-model.js');
 var menues = require('../views/componentes/menues.js');
 var moduleTools = require('../views/componentes/module-tools.js')
+var secModuleTools = require('../views/componentes/module-sec-tools.js')
 
 
 module.exports = {
@@ -64,6 +65,10 @@ module.exports = {
 			case "moduleTools"://for user logs
 					
 					res.send(moduleTools(params.extra));
+			break;
+			case "secModuleTools"://for user logs
+					
+					res.send(secModuleTools(params.extra));
 			break;
 
 			default:

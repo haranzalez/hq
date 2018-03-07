@@ -154,6 +154,18 @@ function getModuleTools(module){
           }
       })
 }
+function getSecModuleTools(module){
+   $.ajax({
+          url: 'http://localhost:8000/recursos/componentes/secModuleTools/'+module+'/none',
+          type: 'get',
+          success: function(res){
+            console.log(res);
+             $('body').find('.module-sec-tools .ctn').empty().append(res);
+             
+             
+          }
+      })
+}
 
 //REPORTS TABLE LISTS RESIZING HEIGHT FUNCTION
 $(function(){
@@ -182,6 +194,10 @@ $(function(){
    
       $('.user-status-table ul li[data-user="'+d+'"]').remove();
     })
+     getModuleTools('users');
+     getSecModuleTools('users');
+     $('.user-module-tool-bar .title').text('Usuarios');
+     users.createUserForm();
     users.listUsers();
       //autoLogout.construir();
       
@@ -389,7 +405,7 @@ $('body').on('click','.mess-box-btn', function(){
 //========================================================================= USERS ===============================================================================
 //===============================================================================================================================================================
 //USERS CREATE USER BTN
-$('body').on('click', '.create-user-form .btn-basic', function(){
+$('body').on('click', '.create-user-form .user-reg-btn', function(){
    
     var valid = $('#create-user-form').parsley().validate();
     if(valid){
@@ -415,7 +431,7 @@ $('body').on('click', '.create-user-form .btn-basic', function(){
 //===============================================================================================================================================================
 //USERS SEARCH ACTIVATED ON KEY UP
 $('body').find('.search-quary-box').on('keyup', function(){
-  users.hideForms();
+  
   var keyword = $(this).val()
   console.log(keyword);
   $.ajax({
@@ -431,7 +447,7 @@ $('body').find('.search-quary-box').on('keyup', function(){
 //===============================================================================================================================================================
 //USERS SUBMENU SORTING [online, offline, inactive]
 $('body').on('click','.sub-menu-mobil .sub-menu-btn', function(){
-  users.hideForms();
+  
   var d = $(this).attr('data-link');
   var dta = {
     estado: d
@@ -457,15 +473,19 @@ $('body').on('click','.sel-rol-btn',function(){
           url: 'http://localhost:8000/recursos/componentes/w1/none/none',
           type: 'get',
           success: function(res){
-             $('body').find('.mobile-window-ctn .ctn').empty().append(res);
-             $('.mobile-window-ctn').addClass('zero-out-absolute-spaces');
-              $('.white-blur').addClass('reveal index-it-23');
+             $('body').find('.mobile-window-ctn .ctn').empty().append(res).parent().show();
+             $('body').find('.mobile-window-ctn .back-btn').hide();
+             $('.white-blur').show();
              
           }
       })
 
 });
 
+$('body').find('.mobile-window-ctn .close-btn-ctn button').on('click', function(){
+  $(this).parent().parent().hide();
+  $('.white-blur').hide();
+})
 
 //===============================================================================================================================================================
 //BTNS TO HANDLE USERS REQUESTS
@@ -507,7 +527,7 @@ $('body').on('click','.btn-ctr-form-user', function(){
             }
             
           }
-          $('body').find('#create-user-form').find('.btn-basic[data-btn="registrar"]').text('Actualizar').attr('data-btn', 'update').attr('data-id', id);
+          $('body').find('#create-user-form').find('.user-reg-btn[data-btn="registrar"]').text('Actualizar').attr('data-btn', 'update').attr('data-id', id);
           
           $('.users-forms-ctn').show();
            
@@ -678,9 +698,9 @@ case 'sel-area-btn':
           url: 'http://localhost:8000/recursos/componentes/w2/'+id+'/none',
           type: 'get',
           success: function(res){
-             $('body').find('.mobile-window-ctn .back-btn').removeClass('in-the-shadows');
+             $('body').find('.mobile-window-ctn .back-btn').show();
              $('body').find('.mobile-window-ctn .ctn').empty().append(res);
-             $('.white-blur').addClass('reveal');
+             
              
           }
       })
@@ -689,12 +709,9 @@ case 'sel-area-btn':
 //------------------------------------------------------------------------------------------------------------------------------------------------
 case 'sel-rol-btn':
      $('.users-rol-input').val($(this).attr('data-name'));
-      $('.sel-rol-btn').empty().append('<p>'+$(this).attr('data-name').charAt(0)+'</p>').append('<p style="line-height: 1.5 !important;font-size:unset;color:initial;">'+$(this).attr('data-name')+'</p>');
-      $('.mobile-window-ctn').removeClass('zero-out-absolute-spaces');
-      $('.white-blur').removeClass('reveal index-it-23');
-
-
-      
+      $('.sel-rol-btn').empty().append($(this).attr('data-name'));
+      $('.mobile-window-ctn').hide();
+      $('.white-blur').hide();
  break;
 //------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -730,18 +747,9 @@ $('body').on('click', '.list-result-ctn .btn-action', function(e){
 //===============================================================================================================================================================
 //USERS SUB-MENU BAR BTNS [USERS AND ROLS]
 $('body').on('click','.btn-sub-menu', function(){
-  users.hideForms();
+  //
   switch ($(this).attr('data-btn')) {
-    case 'createUser':
-     $('.users-forms-ctn').css({
-        'display': 'block'
-     });
-    
-    break;
-//------------------------------------------------------------------------------------------------------------------------------------------------
-    case 'createRol':
-     users.createRolForm();
-    break;
+
 //------------------------------------------------------------------------------------------------------------------------------------------------
     case 'listRol':
     users.getMenu({menuId:'sub-menu-roles', type: 'sub-roles', entId: 'none'});
@@ -1219,6 +1227,7 @@ $('.menu-btn').on('click', function(){
          
            hideModules()
            getModuleTools('reports')
+           getSecModuleTools('reports')
            $('body').find('.tbl-list-ctn').empty();
            $('body').find('.tbl-list-ctn').append(res);
            $('#module-reports').removeClass('in-the-shadows');
@@ -1230,6 +1239,7 @@ $('.menu-btn').on('click', function(){
     case 'users':
       hideModules();
       getModuleTools('users');
+      getSecModuleTools('users')
       $('#module-users').removeClass('in-the-shadows');
       $('.menu').removeClass('zero-out-absolute-spaces');
       $('.white-blur').removeClass('reveal');
@@ -1269,25 +1279,12 @@ $(document).mouseup(function(e){
 //===============================================================================================================================================================
 //USERS TABLE TABS
 
-$('.users-module-ctn .user-module-nav-btns .btn').on('click', function(){
+$('body').on('click','.module-tools-list .tool .users-prime-ctr-btn', function(){
   //hide forms
-  users.hideForms();
-  //set btn background color and siblings
-  $(this).css({
-    'border': 'solid 1px #000',
-    'border-bottom': 'none',
-    'border-top': '2px solid #E1001A',
-    'background': 'black',
-    'color': 'white',
-    'z-index': '1'
-  });
-  $(this).siblings().css({
-    'border': 'none',
-    'background': 'transparent',
-    "color": "black",
-    'z-index': '0'
+  
+  
+ //get dta-btn value
 
-  })
   
   //emptying container
   $('.list-result-ctn').empty();
@@ -1297,13 +1294,30 @@ $('.users-module-ctn .user-module-nav-btns .btn').on('click', function(){
 
   //appending data to ctn according to condition
    switch (data) {
-      case 'usuarios':
+      case 'users':
+      var elm = $('.btn-sub-menu[data-btn="createUser"]');
+      if(elm.length == 0){
+
+        $('.btn-sub-menu[data-btn="createRol"]').attr('data-btn', 'createUser');
+        
+
+      }
       users.getMenu({menuId:'sub-menu-users', type: 'sub-users', entId: 'none'});
+      $('.user-module-tool-bar .title').text('Usuarios')
       users.listUsers();
+      users.createUserForm();
+
       break;
       case 'roles':
+      var elm = $('.btn-sub-menu[data-btn="createRol"]');
+      if(elm.length == 0){
+        $('.btn-sub-menu[data-btn="createUser"]').attr('data-btn', 'createRol');
+        
+      }
       users.getMenu({menuId:'sub-menu-roles', type: 'sub-roles', entId: 'none'});
+      $('.user-module-tool-bar .title').text('Roles')
       users.listRols();
+      users.createRolForm();
       break;
    }
 
