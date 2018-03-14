@@ -17,17 +17,22 @@ module.exports = function(){
 
 '<div id="module-users" class="ctn">'+
 
-	'<div class="ctn-col-5">'+
+	'<div class="ctn-col-10">'+
 
 		'<div class="ctn users-roles-table">'+
 			
 			'<div class="ctn-col-10">'+
 
 				'<div class="users-module-ctn">'+
-					//Section tools [search bar, filter]
+					
 					'<div class="ctn user-module-tool-bar">'+
-						'<div class="ctn-col-10">'+
-							'<h2 class="title"></h2>'+
+						'<div class="ctn-col-9">'+
+							//'<h2 class="title"></h2>'+
+			
+							'<button class="back-btn" onclick="users.listUsers(); $(this).find(\'svg\').removeClass().addClass(\'fas fa-sync-alt\')" type="button"><i class="fas fa-sync-alt"></i></button>'+
+						'</div>'+
+						'<div class="ctn-col-1">'+
+							'<button class="users-add-btn" data-btn="users" type="button"><i class="fas fa-plus-square"></i></button>'+
 						'</div>'+
 						
 						
@@ -47,21 +52,8 @@ module.exports = function(){
 	  	'</div>'+
 
 	'</div>'+
-
-
-	'<div class="ctn-col-5 users-forms-ctn">'+
-
 		
-		
-
-	'</div>'+
-
-
-
-
-
-		
-'</div>'; 
+'<div class="users-forms-ctn"></div></div>'; 
 }
 
 

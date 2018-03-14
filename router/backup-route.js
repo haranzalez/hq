@@ -7,8 +7,8 @@ var controller = require('../controllers/backups-controller.js');
 module.exports = function(app, db){
     
     
-    app.get('/backup/:table', function(req, res){
-        var table = req.params.table;
-        controller.backup(db, table, res);
+    app.get('/backup', function(req, res){
+        console.log(controller);
+        controller.backup(db, res);
     })
 }

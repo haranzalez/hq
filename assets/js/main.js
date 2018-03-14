@@ -44,12 +44,55 @@ var tableToExcel = (function () {
      
 
  });
+  $('body').on('click','.reports-tools-save-btn', function(){
+     var html  = document.querySelector('.preview-sheet').innerHTML;
+
+     var html = 'nombre=prueba&html='+html.toString();
+     $.ajax({
+        type: 'post',
+        data: html,
+        url: '/reportes/guardar',
+        success: function(d){
+        $('body').append(d);
+        }
+     });
+ });
+
+function getSavedReports(){
+
+  $.ajax({
+    type: 'get',
+    url: '/reportes/guardados',
+    success: function(d){
+      $('.reports-saved-result-ctn').empty().append(d);
+    }
+  })
+
+
+}
+
+$('body').on('click','.reports-saved-open-btn', function(){
+  var id = $(this).attr('data-reportid');
+  $.ajax({
+    type: 'get',
+    url: '/reportes/guardados/'+id,
+    success: function(d){
+      $('.preview-sheet').empty().append(d);
+   
+    }
+  })
+})
+
+
+
  $('body').on('click','.reports-tools-print-btn', function(){
     window.print();
 });
 $('body').on('click','.reports-tools-save-btn', function(){
    
 });
+
+
 
 
 
@@ -142,6 +185,34 @@ function convertToTable(pkg){
 
  var autoLogout = new AutoLogout();
  var users = new Users();
+var updateFormCopy = '';
+var USER = '';
+
+
+
+
+
+
+
+
+function getOnlineUsers(){
+    var dta = {
+      estado: 'online'
+    }
+    $.ajax({
+      data: dta,
+      url: 'http://localhost:8000/users/comp/filter',
+      type: 'get',
+      success: function(res){
+        console.log(res);
+         $('.user-status-table').empty();
+         $('.user-status-table').append(res);
+      }
+    })
+}
+
+
+
 
 function getModuleTools(module){
    $.ajax({
@@ -159,7 +230,7 @@ function getSecModuleTools(module){
           url: 'http://localhost:8000/recursos/componentes/secModuleTools/'+module+'/none',
           type: 'get',
           success: function(res){
-            console.log(res);
+           
              $('body').find('.module-sec-tools .ctn').empty().append(res);
              
              
@@ -168,40 +239,96 @@ function getSecModuleTools(module){
 }
 
 //REPORTS TABLE LISTS RESIZING HEIGHT FUNCTION
-$(function(){
-  $('.tbl-list-main-ctn').css({ height: $(window).innerHeight() - 200 });
-  $(window).resize(function(){
-    $('.tbl-list-main-ctn').css({ height: $(window).innerHeight() - 200 });
-  });
-});
+
 
 
   //PREVENTS TO START AUTOLOGOUT FUNCTION AT LOGIN
   if(window.location.pathname != '/')
   {
-   var socket = io();
-  
-    socket.on('hi', function(d){
-      console.log(d);
-      $('body').append(d);
-    })
-    socket.on('user', function(d){
 
-      var html = '<li data-user="'+d+'"><i class="fas fa-circle" style="color:green;font-size:8pt;"></i> '+d+'</li>';
-      $('.user-status-table ul').append(html)
-    })
-     socket.on('offuser', function(d){
-   
-      $('.user-status-table ul li[data-user="'+d+'"]').remove();
-    })
-     getModuleTools('users');
-     getSecModuleTools('users');
-     $('.user-module-tool-bar .title').text('Usuarios');
-     users.createUserForm();
-    users.listUsers();
-      //autoLogout.construir();
+      var socket = io();
+    
+      socket.on('hi', function(d){
+        console.log(d);
+        $('body').append(d);
+      })
+      socket.on('username', function(username){
+         USER = username;
+      })
+      socket.on('user', function(d){
+        var count = $('.notification-counter').text();
+        if(count == ''){
+          count = 1
+        }else{
+          count++;
+        }
+        $('.notification-counter').text(count).show()
+        $('.notification-status-table').append(d)
+        
+      })
+
+      socket.on('noti', function(d){
+        var count = $('.notification-counter').text();
+        if(count == ''){
+          count = 1
+        }else{
+          count++;
+        }
+        $('.notification-counter').text(count).show()
+        $('.notification-status-table').append(d)
+      })
+      
+      socket.on('offuser', function(d){
+        var count = $('.notification-counter').text();
+        if(count == ''){
+          count = 1
+        }else{
+          count++;
+        }
+        $('.notification-counter').text(count).show()
+        $('.notification-status-table').append(d)
+
+      })
+
+
+
+
+        getSavedReports();
+       getModuleTools('users');
+       getSecModuleTools('users');
+       $('.user-module-tool-bar .title').text('Usuarios');
+       users.createUserForm();
+       users.listUsers();
+       //autoLogout.construir();
       
   }
+
+  $('body').on('click','.notification-component-btn', function(){
+  
+    if($(this).siblings('.notification-status-table-main-ctn').css('display') == 'block'){
+      $(this).siblings('.notification-status-table-main-ctn').hide();
+    }else{
+      $(this).siblings('.notification-status-table-main-ctn').show();
+    }
+    
+  })
+  $('body').on('click','.notification-row .notification-close-btn', function(){
+    var count = $('.notification-counter').text();
+    if(!count == '' || !count == 0){
+      count--;
+    }
+    if(count == 0)
+    {
+      count = '';
+      $('.notification-counter').text(count).hide();
+    }else{
+      $('.notification-counter').text(count);
+    }
+    
+    $(this).parent().remove();
+  })
+
+
 
 var getCookie = function (name) {
   var value = "; " + document.cookie;
@@ -247,7 +374,7 @@ $('.sign-out-btn').on('click', function(){
       type: 'get',
       success: function(res){
         if(res == 'done'){
-          autoLogout.destroy();
+          //autoLogout.destroy();
           window.location = 'http://localhost:8000/';
         }  
       }
@@ -430,7 +557,7 @@ $('body').on('click', '.create-user-form .user-reg-btn', function(){
 
 //===============================================================================================================================================================
 //USERS SEARCH ACTIVATED ON KEY UP
-$('body').find('.search-quary-box').on('keyup', function(){
+$('body').on('keyup','.search-quary-box', function(){
   
   var keyword = $(this).val()
   console.log(keyword);
@@ -457,7 +584,8 @@ $('body').on('click','.sub-menu-mobil .sub-menu-btn', function(){
     url: 'http://localhost:8000/users/comp/filter',
     type: 'get',
     success: function(res){
-       $('.list-result-ctn div').remove();
+      console.log(res);
+       $('.list-result-ctn').empty();
        $('.list-result-ctn').append(res);
     }
   })
@@ -484,13 +612,13 @@ $('body').on('click','.sel-rol-btn',function(){
 
 $('body').find('.mobile-window-ctn .close-btn-ctn button').on('click', function(){
   $(this).parent().parent().hide();
-  $('.white-blur').hide();
 })
 
 //===============================================================================================================================================================
 //BTNS TO HANDLE USERS REQUESTS
 //USERS BOTON. botones con esta clase hacen funciones basicas como editar, crear, borrar y buscar. Envia y recibe informacion asynchronous.
 $('body').on('click','.btn-ctr-form-user', function(){
+
   switch ($(this).attr('data-btn')) {
 
     case 'edit':
@@ -504,7 +632,7 @@ $('body').on('click','.btn-ctr-form-user', function(){
         type: 'get',
         success: function(res){
          
-
+          updateFormCopy = res;
           var keys = Object.keys(res);
           for(var prop in res){
             if(prop == 'estado'){
@@ -522,6 +650,8 @@ $('body').on('click','.btn-ctr-form-user', function(){
               .empty()
               .append('<p>'+res[prop].charAt(0)+'</p>')
               .append('<p style="line-height: 1.5 !important;font-size:unset;color:initial;">'+res[prop]+'</p>');
+              
+              $('.users-rol-input').val(res[prop]);
             }else{
               $('body').find('#create-user-form').find("input[name='"+prop+"']").val(res[prop]);
             }
@@ -529,7 +659,9 @@ $('body').on('click','.btn-ctr-form-user', function(){
           }
           $('body').find('#create-user-form').find('.user-reg-btn[data-btn="registrar"]').text('Actualizar').attr('data-btn', 'update').attr('data-id', id);
           
+          $('.white-blur').show();
           $('.users-forms-ctn').show();
+
            
         }
       })
@@ -537,20 +669,79 @@ $('body').on('click','.btn-ctr-form-user', function(){
     break;
 //------------------------------------------------------------------------------------------------------------------------------------------------
     case 'update':
+
+
       var id = $(this).attr('data-id');
-     
-        var dta = $('#create-user-form').serialize();
-        $.ajax({
-          url: 'http://localhost:8000/users/update/'+id,
-          data: dta,
-          type: 'post',
-          success: function(res){
-           
-             $('body').append(res);
-             users.listUsers();
-             
+
+
+      function processForm(form){
+        /*
+        When updating, form generates all values including unaltered ones from its imput fields. This creates a problem when updating the database 
+        since the forms are formed using information from different tables. The idea is to only upadate affected values changed values in the database.
+        */
+
+        //1. grab data from form and convert it to JSON
+        var formData = JSON.stringify(jQuery(form).serializeArray());
+        var newD = JSON.parse(formData);
+
+        //2. sanitize JSON obj by assigning proper keys and values then assign them to new onject PKG
+        var pkg = {};
+       
+        for(var prop in newD){
+          pkg[newD[prop]['name']] = newD[prop]['value']
+        }
+
+        /*
+        3. In this step, a copy of the original values in the from is grab from the variable updateFormCopy, 
+        Which was assign by the user when clicking the edit button Ref.(.btn-ctr-form-user[data-btn='edit']).
+        The data is copared with the created JSON obj [PKG] using function [deepEqual] returning a boolean value.
+        */
+
+        //create new jason to assing non-equal values
+        var p = {}
+        //if [deepEqual] returns false 
+        if(!deepEqual(pkg, updateFormCopy)){
+        //loop through [PKG] obj and assign non-equal values to new json [P]
+          for(var prop in pkg){
+            if(Object.values(updateFormCopy).indexOf(pkg[prop]) == -1){
+              p[prop] = pkg[prop];
+            }
           }
-        })
+          
+        }
+        //4. Convert Json into serialized data to be send via http using [AJAX]
+        var str = '';//var is created
+        for(var prop in p){
+          str = str+prop+'='+p[prop]+'&'; //Ex. name=value&...&
+
+        }
+        var serialData = str.slice(0, -1);//trim off las char from str [&] and assign new value to serialData
+        updateFormCopy = pkg;//form copy is apdated with new value to prevent data lost
+        return serialData;
+
+      }
+
+      function deepEqual(x, y) {//Function to compare 2 json obj. return value [BOOL]
+        const ok = Object.keys, tx = typeof x, ty = typeof y;
+        return x && y && tx === 'object' && tx === ty ? (
+          ok(x).length === ok(y).length &&
+            ok(x).every(key => deepEqual(x[key], y[key]))
+        ) : (x === y);
+      }
+
+     
+      $.ajax({//AJAX CALL
+        url: 'http://localhost:8000/users/update/'+id,
+        data: processForm('#create-user-form'),
+        type: 'post',
+        success: function(res){
+           socket.emit('noti', USER);
+           $('body').append(res);
+           users.listUsers();
+           
+           
+        }
+      })
     
     break;
 //------------------------------------------------------------------------------------------------------------------------------------------------
@@ -605,6 +796,7 @@ break;
 //------------------------------------------------------------------------------------------------------------------------------------------------
 case 'logs':
   users.getLogs($(this));
+
 break;
 //------------------------------------------------------------------------------------------------------------------------------------------------
 case 'cancel-form-btn-user':
@@ -708,10 +900,10 @@ case 'sel-area-btn':
  break;
 //------------------------------------------------------------------------------------------------------------------------------------------------
 case 'sel-rol-btn':
-     $('.users-rol-input').val($(this).attr('data-name'));
+     $('.users-rol-input').val($(this).attr('data-id'));
       $('.sel-rol-btn').empty().append($(this).attr('data-name'));
       $('.mobile-window-ctn').hide();
-      $('.white-blur').hide();
+      
  break;
 //------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -732,12 +924,20 @@ case 'sel-rol-btn':
 //===============================================================================================================================================================
 //FUNCION PARA ABRIR Y CERRAR INFORMACION EXTRA DE USUARIO
 $('body').on('click', '.list-result-ctn .btn-action', function(e){
-  if(e.target.innerText == 'Abrir'){
-    $(this).text('Cerrar');
+  if($(this).attr('data-btn') == 'abrir'){
+    $(this).find('svg').css({
+      'transform': 'rotate(180deg)',
+      'color': 'red'
+    })
+    $(this).attr('data-btn', 'cerrar');
     var id = $(this).attr('data-id')
     $('.t-result-ctn-'+id).toggle('fast');
-  }else if(e.target.innerText == 'Cerrar'){
-    $(this).text('Abrir');
+  }else if($(this).attr('data-btn') == 'cerrar'){
+     $(this).find('svg').css({
+      'transform': 'rotate(360deg)',
+      'color': 'black'
+    })
+     $(this).attr('data-btn', 'abrir');
     var id = $(this).attr('data-id')
     $('.t-result-ctn-'+id).toggle('fast');
   }
@@ -955,6 +1155,8 @@ $('body').on('click','#module-reports .fields-list-ctn .field-item', function(){
   
   
 });
+
+
 
 $('body').on('click','.reports-talbe-remove-col-btn', function(){
   $(this).parent().parent().remove();
@@ -1271,9 +1473,19 @@ $(document).mouseup(function(e){
   if (!$('.menu').is(e.target) && $('.menu').has(e.target).length === 0) 
   {
       $('.menu').removeClass('zero-out-absolute-spaces');
+     
       $('.white-blur').removeClass('reveal');
   }
 });
+$(document).mouseup(function(e){
+  if (!$('.notification-status-table-main-ctn').is(e.target) && $('.notification-status-table-main-ctn').has(e.target).length === 0) 
+  {
+      $('.notification-status-table-main-ctn').hide();
+     
+  }
+});
+
+
 
 
 //===============================================================================================================================================================
@@ -1295,35 +1507,52 @@ $('body').on('click','.module-tools-list .tool .users-prime-ctr-btn', function()
   //appending data to ctn according to condition
    switch (data) {
       case 'users':
-      var elm = $('.btn-sub-menu[data-btn="createUser"]');
+      var elm = $('.users-add-btn[data-btn="users"]');
       if(elm.length == 0){
 
-        $('.btn-sub-menu[data-btn="createRol"]').attr('data-btn', 'createUser');
+        $('.users-add-btn[data-btn="roles"]').attr('data-btn', 'users');
         
 
       }
       users.getMenu({menuId:'sub-menu-users', type: 'sub-users', entId: 'none'});
       $('.user-module-tool-bar .title').text('Usuarios')
       users.listUsers();
-      users.createUserForm();
+     
 
       break;
       case 'roles':
-      var elm = $('.btn-sub-menu[data-btn="createRol"]');
+      var elm = $('.users-add-btn[data-btn="roles"]');
       if(elm.length == 0){
-        $('.btn-sub-menu[data-btn="createUser"]').attr('data-btn', 'createRol');
+        $('.users-add-btn[data-btn="users"]').attr('data-btn', 'roles');
         
       }
       users.getMenu({menuId:'sub-menu-roles', type: 'sub-roles', entId: 'none'});
       $('.user-module-tool-bar .title').text('Roles')
       users.listRols();
-      users.createRolForm();
       break;
    }
 
   
 })
 
+$('body').on('click','.users-add-btn', function(){
+  console.log('click')
+  var id = $(this).attr('data-btn');
+  if(id == 'users'){
+    users.createUserForm();
+    $('.white-blur').show();
+    $('body').find('.users-forms-ctn').show();
+  }else{
+    users.createRolForm();
+    $('.white-blur').show();
+    $('body').find('.users-forms-ctn').show();
+  }
+  
+})
+
+$('body').on('click','.users-close-forms-ctn-btn', function(){
+    $('body').find('.users-forms-ctn,.white-blur').hide();
+})
 
 //
 //REPORTS

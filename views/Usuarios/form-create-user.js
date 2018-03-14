@@ -19,9 +19,10 @@ var btnsData = {
 	
 	return '<div class="form-create-user">'+
 	'<h2 class="title">Crear Usuario</h2>'+
+	'<i class="fas fa-window-close users-close-forms-ctn-btn"></i>'+
 	'<div class="ctn-col-10">'+
 	'<form class="create-user-form" id="create-user-form" data-parsley-trigger="keyup" data-parsley-validate>'+
-	'<input type="hidden" class="users-rol-input input-field" value="" name="nombre_rol" required>'+
+	'<input type="hidden" class="users-rol-input input-field" value="" name="id_rol" required>'+
 	'<h3 class="sub-title-basic underlined">Informacion Personal</h3>'+
 
 	'<div class="ctn form-elms-ctn-info">'+
@@ -134,7 +135,7 @@ var btnsData = {
 	'<div class="ctn form-elms-ctn-rol">'+
 
 		'<div class="ctn-col-10">'+
-			'<button class="sel-rol-btn" type="button">Seleccionar Rol</button>'+
+			'<button class="sel-rol-btn" type="button"><i class="fas fa-plus"></i></button>'+
 		'</div>'+
 
 	'</div>'+

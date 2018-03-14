@@ -25,16 +25,16 @@ module.exports = {
 	},
 
 	renderRoles: function(pkg){
-		
+		console.log(pkg);
 		if (pkg.length > 0) {
 			var html = '<div class="ctn-col-10 zero-margin">'+
 			'<h2 class="zero-margin">Seleccione Rol</h2>'+
 			'</div>';
 
 			for(var prop in pkg){
-				html = html+'<div class="ctn-col-quarter btn-ctr-form-rol" data-btn="sel-rol-btn" data-name="'+pkg[prop]['nombre_rol']+'">'+
+				html = html+'<div class="ctn-col-quarter btn-ctr-form-rol" data-btn="sel-rol-btn" data-id="'+pkg[prop]['id']+'" data-name="'+pkg[prop]['nombre_rol']+'">'+
 					'<div class="avatar">'+pkg[prop]['nombre_rol'].charAt(0)+'</div>'+
-					'<p class="text-center text-to-the-10p"><a class="btn-rol-ctr" href="#" data-id="'+pkg[prop]['id_rol']+'">'+pkg[prop]['nombre_rol']+'</a></p>'+
+					'<p class="text-center text-to-the-10p"><a class="btn-rol-ctr" href="#" data-id="'+pkg[prop]['id']+'">'+pkg[prop]['nombre_rol']+'</a></p>'+
 				'</div>';
 			}
 

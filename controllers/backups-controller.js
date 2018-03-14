@@ -5,11 +5,11 @@
  */
 var bmodel = require('../models/backup-model.js');
 
-module.eports = {
+module.exports = {
     
-    backup: function(db,table, res){
+    backup: function(db, res){
         
-        bmodel.backup(db,table);
+        res.send(bmodel.backup());
         
         
     }

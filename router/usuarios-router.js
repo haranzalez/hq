@@ -1,4 +1,7 @@
-module.exports = function(app, db, sessionChecker) {
+
+
+
+module.exports = function(app, db, sessionChecker, io) {
 
     var tbl = 'usuarios';
     app.get('/users', sessionChecker, function(req, res) {
@@ -21,6 +24,7 @@ module.exports = function(app, db, sessionChecker) {
     app.post('/users/create', sessionChecker, function(req, res) {
       
         req.body.db = db;
+        req.body.io = io;
         var username = req.session.user;
         require('../controllers/usuarios-controller').createUser(req.body, res, username);
     });
@@ -48,15 +52,16 @@ module.exports = function(app, db, sessionChecker) {
 
     app.post('/users/update/:id', sessionChecker, function(req, res) {
         var username = req.session.user;
+        
         crudParams = {
             bd: db,
             metodo: 'update',
             funcion: 'record',
             data: req.body,
             record_id: req.params.id,
-            tabla: tbl
+            io: io
         }
-        
+
         require('../controllers/usuarios-controller').updateUser(crudParams, res, username);
     });
 
@@ -65,8 +70,10 @@ module.exports = function(app, db, sessionChecker) {
         crudParams = {
             bd: db,
             funcion: 'del_user',
-            record_id: req.params.id
+            record_id: req.params.id,
+            io: io
         }
+
         require('../controllers/usuarios-controller').delUser(crudParams, res, username);
     });
 
@@ -114,8 +121,6 @@ module.exports = function(app, db, sessionChecker) {
         
         require('../controllers/usuarios-controller').getLog({db:db,id_acceso:req.params.id, type: req.params.type}, res)
     })
-
-
 
 
 

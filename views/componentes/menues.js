@@ -49,7 +49,7 @@ module.exports = function(type, obj){
             return '<div class="ctn">'+
             '<div class="ctn-col-10 sub-menu-ctn-mobil">'+
                     '<ul class="sub-menu-mobil">'+
-                        '<li class="relativo"><a href="#" class="text-to-the-8p sub-menu-btn" data-link="todos">Todos</a><spam class="arrow-down"></spam></li>'+
+                        
                             '<li class="relativo"><a href="#" class="text-to-the-8p sub-menu-btn" data-link="online">En Linea</a><spam class="arrow-down"></spam></li>'+
                             '<li class="relativo"><a href="#" class="text-to-the-8p sub-menu-btn" data-link="offline">Offline</a><spam class="arrow-down"></spam></li>'+
                             '<li class="relativo"><a href="#" class="text-to-the-8p sub-menu-btn" data-link="inactivo">Bloqueados</a><spam class="arrow-down"></spam></li>'+

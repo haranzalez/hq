@@ -130,12 +130,12 @@ module.exports = {
                     "comentarios e "+
                     "on a.id = e.id_usuario "+
                     "where a.email like '%"+params.keyword+"%' or "+
-                    "a.nombres like '%"+params.keyword+"' or "+
-                    "a.apellidos like '%"+params.keyword+"' or "+
+                    "a.nombres like '%"+params.keyword+"%' or "+
+                    "a.apellidos like '%"+params.keyword+"%' or "+
                     "b.email_interno like '%"+params.keyword+"%' or "+
-                    "c.estado like '%"+params.keyword+"' or "+
+                    "c.estado like '%"+params.keyword+"%' or "+
                     "b.nombre_de_usuario like '%"+params.keyword+"%' or "+
-                    "d.nombre_rol like '%"+params.keyword+"';";
+                    "d.nombre_rol like '%"+params.keyword+"%';";
 
             break;
         }
@@ -366,6 +366,52 @@ update: function(tabla, params, username) {
 
         break;
 //------------------------------------------------------------------------------------------------
+ case 'update_user_case_3':
+
+            var l = Object.keys(params.data).length;
+           
+            if(l > 1){
+                var count = 0;
+                var sql = "SET hq.usuario = '"+username+"';with ";
+                for(var prop in params.data){
+                    count++
+                    if(count == l - 1){
+                        var id = (prop=='usuarios')?'id='+params.record_id:'id_usuario='+params.record_id
+                        sql = sql+prop+' as (update '+prop+' set '+helpers.renderUpdate(params.data[prop])+' where '+id+') ';
+                    }else if(count == l){
+                        var id = (prop=='usuarios')?'id='+params.record_id:'id_usuario='+params.record_id
+                        sql = sql+'update '+prop+' set '+helpers.renderUpdate(params.data[prop])+' where '+id;
+                    }else{
+                        var id = (prop=='usuarios')?'id='+params.record_id:'id_usuario='+params.record_id
+                        sql = sql+prop+' as (update '+prop+' set '+helpers.renderUpdate(params.data[prop])+' where '+id+'), ';
+                    }
+                  
+                    console.log('With -1: l: '+l+' count: '+count);
+                 
+                }
+                console.log('394: '+sql);
+
+            }else if(l == 1){
+                var sql = '';
+                for(var prop in params.data){
+                  var id = (prop=='usuarios')?'id='+params.record_id:'id_usuario='+params.record_id
+                  sql = sql+"SET hq.usuario = '"+username+"';update "+prop+' set '+helpers.renderUpdate(params.data[prop])+' where '+id;
+                }
+                
+            }
+        
+         
+           
+           console.log(sql);
+           params.bd.any(sql).catch(e => {return e})
+
+            return {
+                mes: 'El usuario '+username+' se ah actualizado exitosamente.',
+                type: 'success'
+            };
+
+
+        break;
 
 
 
@@ -578,7 +624,6 @@ delete: function(tabla, params, username) {
         return res;
 
     }
-
 
 
 

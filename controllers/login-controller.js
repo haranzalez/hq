@@ -18,6 +18,7 @@ module.exports = {
 					req.session.user = r.user;
 					req.session.id_cuenta = r.id_cuenta;
 					req.session.id_usuario = r.id_usuario;
+					req.session.id_rol = r.id_rol;
 					req.cookies.id_acceso = r.id_acceso;
 
 					res.send({

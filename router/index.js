@@ -5,6 +5,8 @@ const users = require('./usuarios-router'),
       reports = require('./reports-route'),
       loginCtr = require('../controllers/login-controller'),
       compCtr = require('../controllers/components-controller.js'),
+      backup = require('./backup-route'),
+      notifications = require('../controllers/notifications.js'),
       plataforma = require('../controllers/plataforma-controller');
 
 
@@ -54,7 +56,7 @@ var id_cuenta = '';
 
   app.get('/plataforma/:area/:rol/:id/:user',sessionChecker, function(req, res){
     user = req.params.user;
-    room = req.params.rol;
+    room = req.params.area;
     id_cuenta = req.session.id_cuenta;
     var pkg = {
         id_rol: req.params.id,
@@ -68,14 +70,23 @@ var id_cuenta = '';
 
     
   })
+
+
   io.sockets.on('connection', function(socket){
   //add client to room once connected. Room name is the same as the rol name
     socket.join(room)
   //Welcoming client ot platform
-    io.in('Admin').emit('user',user);
+    io.in('Admin').emit('user',notifications.users(user+' inicio session. '));
+
+    socket.on('noti', function(user){
+      io.in('Admin').emit('noti', notifications.dbChanges(user+' genero cambios en los registros. '));
+    })
+
+    io.in('Admin').emit('username', user)
 
     socket.on('disconnect', function(){
-      io.in('Admin').emit('offuser',user);
+     
+      io.in('Admin').emit('offuser',notifications.users(user+' termino session. '));
       loginCtr.signOut({db: db, id_cuenta: id_cuenta});
     })
 
@@ -83,8 +94,8 @@ var id_cuenta = '';
 
 
   reports(app, db, sessionChecker);
-
-  users(app, db, sessionChecker);
+  backup(app, db);
+  users(app, db, sessionChecker, io);
   comp(app,db, sessionChecker);
   roles(app,db, sessionChecker);
 };

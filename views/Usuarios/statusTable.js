@@ -1,5 +1,5 @@
 
 
 module.exports = function() {
-	return '';
+	return '<div class="user-status-table ctn"></div>';
 }

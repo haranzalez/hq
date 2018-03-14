@@ -55,7 +55,24 @@ module.exports = {
         getFieldsDataAll: function(params){
             var sql = "SELECT * FROM "+params.table;
             return params.db.any(sql);
-        }
+        },
+
+        saveReport: function(params){
+            var sql = "insert into reportes_guardados(id_cuenta, html, nombre)values("+params.id_cuenta+", '"+params.html+"', '"+params.nombre+"')";
+            var res = params.db.any(sql).catch(e => {console.log(e)});
+            return 'Reporte guardado exitosamente';
+        },
+        savedReportsList: function(params){
+            var sql = "select id, nombre, fecha from reportes_guardados where id_cuenta="+Number(params.id_cuenta);
+            var res = params.db.any(sql).catch(e => {console.log(e)});
+            return res;
+        },
+        getReport: function(params){
+            var sql = "select html from reportes_guardados where id_cuenta="+Number(params.id_cuenta)+" and id="+params.reportID;
+            var res = params.db.any(sql).catch(e => {console.log(e)});
+            return res;
+        }   
+ 
 
 
 

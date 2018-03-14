@@ -62,10 +62,10 @@ module.exports = {
 
  function fechaHora(raw){
     
-        var fecha = raw.toString().slice(0, -14);
-	var hora = fecha.substr(fecha.length - 9);
-        return fecha;
-    }
+    var fecha = raw.toString().slice(0, -14);
+     var hora = fecha.substr(fecha.length - 9);
+    return fecha;
+}
     
  function sanitizeHeadings(h){
      var space = h.replace(/#|_/g,' ');

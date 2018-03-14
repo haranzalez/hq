@@ -6,36 +6,39 @@ module.exports = function(obj){
 
 //=================================================================================================================================================================
 function results(obj){
-
-    if(Object.keys(obj).length - 1 > 0){
+    console.log(obj);
+    if(Object.keys(obj).length > 0 && Object.keys(obj)[0] != 'type'){
         var html = '<div class="zebra user-list-result-ctn">';// <-- ZEBRA CTN
         switch (obj.type) {
             case 'usuarios':
                 delete obj.type;
                 for(var prop in obj)
                 {
-                    html = html+'<div class="ctn-col-10 zebra-stripe">'+
-                    '<div class="ctn-tbl-row">'+
+                   
+                        html = html+'<div class="ctn-col-10 zebra-stripe">'+
+                        '<div class="ctn-tbl-row">'+
 
-                        '<div class="ctn-tbl-div width-pix-100">'+
-                          '<p class="avatar-user text-capital">'+obj[prop]['nombres'].charAt(0)+'</p>'+
-                        '</div>'+
+                            '<div class="ctn-tbl-div width-pix-100">'+
+                              '<p class="avatar-user text-capital">'+obj[prop]['nombres'].charAt(0)+'</p>'+
+                            '</div>'+
 
-                        '<div class="ctn-tbl-div text-to-the-left width-pix-400">'+
-                            '<p class="zero-margin zero-padding">'+
-                                obj[prop]['nombres']+ ' ' +obj[prop]['apellidos']+
-                            '</p>'+
-                            '<spam class="txt-gray-special">'+obj[prop]['nombre_rol']+' - <i class="u-status" data-id="'+obj[prop]['id']+'"></i>';
-                            html = html+'</spam>'+
-                        '</div>'+
+                            '<div class="ctn-tbl-div text-to-the-left width-pix-400">'+
+                                '<p class="zero-margin zero-padding">'+
+                                    obj[prop]['nombres']+ ' ' +obj[prop]['apellidos']+
+                                '</p>'+
+                                '<spam class="txt-gray-special">'+obj[prop]['nombre_rol']+' - <i class="u-status" data-id="'+obj[prop]['id']+'"></i>';
+                                html = html+'</spam>'+
+                            '</div>'+
 
-                        '<div class="ctn-tbl-div width-pix-100">'+
-                          '<button data-id="'+obj[prop]['id']+'" class="btn-action">Abrir</button>'+
+                            '<div class="ctn-tbl-div width-pix-100">'+
+                              '<button data-id="'+obj[prop]['id']+'" class="btn-action" data-btn="abrir"><i class="fas fa-angle-down"></i></button>'+
+                            '</div>'+
                         '</div>'+
-                    '</div>'+
-                    '</div>'+
-                        
-                    '<div>'+buildTableUsers(obj[prop])+'</div>';
+                        '</div>'+
+                            
+                        '<div>'+buildTableUsers(obj[prop])+'</div>';
+                    
+                    
                 }
             break;
             default:

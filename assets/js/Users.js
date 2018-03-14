@@ -35,6 +35,7 @@ class Users{
         success: function(res){
          
           $('body').find('.users-forms-ctn').empty().append(res);
+          
         }
       })
     
@@ -47,6 +48,7 @@ class Users{
       type: 'get',
       success: function(res){
         $('body').find('.users-forms-ctn').empty().append(res);
+
       }
     })
   }
@@ -100,6 +102,7 @@ class Users{
             $('.list-result-ctn div').remove();
             $('.list-result-ctn').append(res);
             cls.getMenu({menuId:'sub-user-logs', type: type, entId: id});
+            $('.user-module-tool-bar').find('.back-btn').find('svg').removeClass().addClass('fas fa-arrow-left');
           }
          
            

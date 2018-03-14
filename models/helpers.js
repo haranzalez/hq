@@ -17,6 +17,25 @@ module.exports = {
             }
         }
         return s;
+    },
+
+    renderUpdateConditions: function(par){
+        var numElms = 0;
+        for (var prop in par) {
+            numElms++;
+        }
+
+        var count = 0;
+        var s = ' and ';
+        for (var prop in par) {
+            count++;
+            if (count < numElms) {
+                s = s + prop + " IS DISTINCT FROM '" + par[prop] + "' or ";
+            } else {
+                s = s + prop + " IS DISTINCT FROM '" + par[prop] + "'";
+            }
+        }
+        return s;
     }
 
 

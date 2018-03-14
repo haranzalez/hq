@@ -82,6 +82,35 @@ module.exports = function(app,db, sessionChecker){
 		};
             reportsCtr.components(pkg);
         });
+
+
+        app.post('/reportes/guardar', function(req, res){
+            var pkg = {
+            	db: db,
+                html: req.body.html,
+                nombre: req.body.nombre,
+                id_cuenta: req.session.id_cuenta,
+                res:res
+			};
+            reportsCtr.saveReport(pkg);
+        });
+         app.get('/reportes/guardados', function(req, res){
+            var pkg = {
+            	db: db,
+                id_cuenta: req.session.id_cuenta,
+                res:res
+			};
+            reportsCtr.savedReportsList(pkg);
+        });
+         app.get('/reportes/guardados/:id', function(req, res){
+            var pkg = {
+            	db: db,
+                id_cuenta: req.session.id_cuenta,
+                reportID: req.params.id,
+                res:res
+			};
+            reportsCtr.getReport(pkg);
+        });
         
        
 

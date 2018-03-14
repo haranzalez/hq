@@ -4,6 +4,7 @@ var menu = require('./componentes/menues.js');
 var login = require('./login.js')();
 var usuarios = require('./Usuarios');
 var reportes = require('./Reportes');
+var onlineUsers = require('./componentes/online-users-notification.js');
 
 
 
@@ -53,8 +54,9 @@ function getTemplate(obj){
         break;
         case 'plataforma':
 
-            return menu('menuMobil', {obj: obj.privilegios, nombre_rol: obj.nombre_rol, nombre_area: obj.nombre_area, user: obj.user})+header+'<div class="module-tools"></div>'+
-
+            return menu('menuMobil', {obj: obj.privilegios, nombre_rol: obj.nombre_rol, nombre_area: obj.nombre_area, user: obj.user})+header+
+            '<div class="module-tools"><div class="ctn"></div></div>'+
+            onlineUsers.getComponent()+
 
             '<div class="contener-fixed">'+
 

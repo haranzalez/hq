@@ -23,6 +23,7 @@ module.exports = {
 				var result = componentsModel.getAreas(db);
 
 				result.then(function(pkg){
+					console.log(pkg);
 					res.send(selRolWindow.renderAreas(pkg));
 				})
 

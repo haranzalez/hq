@@ -11,7 +11,8 @@ const
     server = http.createServer(app),
     bcrypt = require('bcrypt');
     io = require('socket.io').listen(server);
-    
+
+ 
     
 //BASE DE DATOS [POSTGRES]
 var db = require('./db_components.js')('dbcred');
@@ -56,6 +57,16 @@ var setUserForChanges = (req, res, next) => {
     next();
   
 }
+
+
+
+
+
+
+
+
+
+
 
 
 

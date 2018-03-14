@@ -2,22 +2,30 @@
 
 
 
+#create-rol-form .ctn .ctn-col-10{
+  margin:10px 0px;
+}
+
+
 
 
 .form-create-user .form-elms-ctn-acceso .ctn-col-10, .form-create-user .form-elms-ctn-info .ctn-col-10, .form-create-user .form-elms-ctn-estado .ctn-col-10{
   padding:3px 0px !important;
 }
 .sel-rol-btn{
-  padding: 10px;
+  padding: 10px; */
     margin-top: 5px;
-    font-size: 10px;
+    font-size: 17px;
     background-color: transparent;
     border-radius: 0;
-   
-    border-bottom: 2px solid black;
+    /* border-bottom: 2px solid black; */
     font-weight: 700;
+    border: none;
+    cursor: pointer;
 }
-
+.sel-rol-btn:hover{
+  color:red;
+}
 
 
 
@@ -61,10 +69,6 @@
   display: inline;
 }
 
-
-
-
-
 .module-tools{
   width: 63px;
     background-color: white;
@@ -92,6 +96,9 @@
   border-radius: 0px;
   font-size: 13pt;
 }
+
+
+
 
 
 
@@ -214,7 +221,7 @@ body{
 }
 /*USER MODULE CTN*/
 .users-module-ctn{
-  max-width: 608px;
+  max-width: 800px;
     margin: auto;
     margin-top: 23px;
     /* padding: 10px; */
@@ -233,18 +240,48 @@ body{
     margin-left: 20px;
 }
 
+
+.users-add-btn{
+ color: red;
+    cursor: pointer;
+    font-size: 22px;
+    margin-left: 40px;
+    background-color: transparent;
+    border: none;
+}
+.users-add-btn:hover{
+  color:darkred;
+}
+
 .user-module-tool-bar{
   border-bottom: solid 1px #ccc;
   background-color: black;
-  padding: 15px 0px;
+  padding: 12px 0px;
   box-shadow: 0px 1px 1px #ccc;
-      border-bottom: 2px solid red;
+  border-bottom: 2px solid red;
 }
 .user-module-tool-bar .title{
   margin: 0 22px;
     color: white;
     text-align: center;
+    font-size: 22px;
 }
+.user-module-tool-bar .back-btn{
+  left: 15px;
+  color: white;
+  background-color: transparent;
+  border: none;
+  font-size: 17px;
+  top: 5px;
+  cursor: pointer;
+}
+.user-module-tool-bar .back-btn:hover{
+  color:red;
+}
+.user-module-tool-bar .back-btn:focus{
+  outline: none;
+}
+
 .user-module-tool-bar .sub-menu-ctn-mobil{
   background-color: transparent;
   margin-left: 49px;
@@ -291,30 +328,34 @@ body{
 .form-create-user, .form-create-rol{
     width: 90%;
     margin: auto;
-    margin-top: 22px;
-    height: 610px;
+   
     overflow: auto;
     background-color: white;
     padding: 20px;
-    box-shadow: 0px 1px 2px #ccc;
+    box-shadow: 0px 2px 37px #000;
    
 }
 .form-create-user .user-reg-btn,
 .form-create-rol .user-create-rol-btn
 {
-      font-size: 14px;
+     font-size: 14px;
     padding: 10px;
-    border: none;
-    border-bottom: 1px solid red;
+    width: 100%;
+   
     border-radius: 0;
-    position: absolute;
-    right: 0;
+   
+    background-color: black;
+    color: white;
+    margin-top: 20px;
+}
+.form-create-user .user-reg-btn:hover,
+.form-create-rol .user-create-rol-btn:hover{
+  color: red;
+  background-color: #222;
+  cursor: pointer;
 }
 .form-create-user .title, .form-create-rol .title{
-      margin: 0;
-    /* background: black; */
-    padding: 10px;
-    /* color: white; */
+       margin: 0;
     text-align: center;
 }
 .form-create-user .form-elms-ctn-acceso .ctn-col-10,
@@ -343,70 +384,17 @@ body{
 .user-list-result-ctn .ctn-tbl-row{
   background-color: white;
 }
-/*SEL ROL WINDOW*/
-.mobile-window-ctn{
-    top: 35%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 600px;
-    height: 296px;
-    padding:0;
-    background-color: white;
-    display: none;
+.users-close-forms-ctn-btn{
+      position: absolute;
+    top: 14px;
+    right: 20px;
+    color: red;
+    cursor:pointer;
 }
-.mobile-window-ctn .avatar{
-      width: 50px;
-    height: 50px;
-    margin: auto;
-    line-height: 3.3;
-}
-.mobile-window-ctn p{
-  font-size: 10px;
-}
-.mobile-window-ctn h2{
-     text-align: left;
-    
-    padding: 10px 49px;
-    border-bottom: 2px solid red;
-    background-color: black;
-    color: white;
-}
-.mobile-window-ctn .back-btn{
-  left: 8px !important;
-    top: 14px !important;
-    font-size: 17px;
-    z-index: 23;
-    display: none;
-}
-.mobile-window-ctn .back-btn svg{
-  color: white;
-}
-.mobile-window-ctn .close-btn-ctn{
-         padding: 0 14px;
-    padding-bottom: 0px;
 
-    position: absolute;
-    bottom: 0;
-    width: 100px;
-    
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-.mobile-window-ctn .close-btn-ctn button
-{
-  font-size: 15px;
-    background-color: transparent;
-    border: none;
-    
-    border-radius: 0;
-}
-.mobile-window-ctn .close-btn-ctn button:hover
-{
-  border-bottom: 1px solid red;
-  cursor: pointer;
-}
 .t-result-ctn{
-  padding:60px;
+     padding: 10px 20px;
+         border-bottom: 1px solid #ddd;
 }
 .t-result-ctn .btn-basic{
   margin-right: 3px;
@@ -467,6 +455,7 @@ background-color: #f1f1f1;
 
 
 }
+
 .preview-sheet-copy{
     display:none;
     position:absolute;

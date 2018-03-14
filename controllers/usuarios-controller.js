@@ -5,6 +5,7 @@ var usersList = require('../views/Usuarios/usuarios.js');
 var rolList = require('../views/Usuarios/roles.js');
 var usersForm = require('../views/Usuarios/form-create-user.js');
 var log = require('../views/Usuarios/logs.js');
+var notifications = require('./notifications.js');
 
 module.exports = {
 	getMain: function(req, res){
@@ -74,6 +75,9 @@ module.exports = {
 			switch (d.type) {
 				case 'success':
 					res.send(messBox.success(d.mess));
+
+
+					
 					break;
 				case 'warning':
 					res.send(messBox.warning(d.mess));
@@ -90,37 +94,78 @@ module.exports = {
 //==============================================================================================================================================================
 	
 	updateUser: function(pkg, res, username){
-		
+
 		var dta = {
-			cuenta: {
-				estado: pkg.data.estado
+			cuentas: {
+				estado: null,
+				id_rol: null
 			},
-			acceso: {
-				email_interno: pkg.data.email_interno,
-				password: pkg.data.password,
-				nombre_de_usuario: pkg.data.nombre_de_usuario
+			accesos: {
+				email_interno: null,
+				password: null,
+				nombre_de_usuario: null
 			},
-			coment: {
-				comentario: pkg.data.comentario
-			},
-			rol: {
-				nombre_rol: pkg.data.nombre_rol
+			comentarios: {
+				comentario: null
+			}
+			
+		};
+
+		for(var prop in pkg.data){
+			for(var prop2 in dta){
+				for(var prop3 in dta[prop2]){
+					if(prop3 == prop){
+						dta[prop2][prop3] = pkg.data[prop];
+					}
+				}
 			}
 		}
+		
+		
 
 
 		delete pkg.data.estado;
 		delete pkg.data.password;
 		delete pkg.data.email_interno;
 		delete pkg.data.comentario;
-		delete pkg.data.nombre_rol;
+		delete pkg.data.id_rol;
 		delete pkg.data.nombre_de_usuario;
 		
-		dta.user = pkg.data;
+		dta.usuarios = pkg.data;
+		const removeNestedEpties = (obj) => {
+		  const o = JSON.parse(JSON.stringify(obj)); // Clone source oect.
+
+		  Object.keys(o).forEach(key => {
+		    if (o[key] && typeof o[key] === 'object')
+		      o[key] = removeNestedEpties(o[key]);  // Recurse.
+		    else if (o[key] === undefined || o[key] === null)
+		      delete o[key]; // Delete undefined and null.
+		    else
+		      o[key] = o[key];  // Copy value.
+		  });
+
+		  return o; // Return new object.
+		};
+		newDta = removeNestedEpties(dta);
+		function clearEmptyObjects(o) {
+		  for (var k in o) {
+		    if (!o[k] || typeof o[k] !== "object") {
+		      continue // If null or not an object, skip to the next iteration
+		    }
+
+		    // The property is an object
+		    if (Object.keys(o[k]).length === 0) {
+		      delete o[k]; // The object had no properties, so delete that property
+		    }
+		  }
+		}
+		//cleaning object from empty objects
+		clearEmptyObjects(newDta)
+		
 		
 		var inst = {
-			funcion: 'update_user',
-			data: dta,
+			funcion: 'update_user_case_3',
+			data: newDta,
 			record_id: pkg.record_id,
 			bd: pkg.bd
 		}
@@ -130,6 +175,7 @@ module.exports = {
 		switch (d.type) {
 			case 'success':
 				res.send(messBox.success(d.mes));
+				
 				break;
 			case 'warning':
 				res.send(messBox.warning(d.mes));
@@ -147,6 +193,7 @@ module.exports = {
 		switch (d.type) {
 			case 'success':
 				res.send(messBox.success(d.mes));
+				
 				break;
 			case 'warning':
 				res.send(messBox.warning(d.mes));
@@ -235,7 +282,6 @@ module.exports = {
 		
 	},
 //==============================================================================================================================================================
-	
 
 	getComponent: function(req, res){
 
@@ -344,21 +390,6 @@ module.exports = {
 
 		
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

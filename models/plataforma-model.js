@@ -76,14 +76,14 @@ module.exports = {
                    
                     case 'success':
                         var ip = req.connection.remoteAddress;
-                        var log_access = params.db.any("insert into log_logins (ip, id_acceso, fecha) values('"+ip+"', '"+e.id+"', now())").catch(err => {console.log(err)});
-                        var online = params.db.any("update cuentas set estado = 'online' where id = $1", e.id_cuenta).catch(e => {console.log(e)});
+                        var log_access = params.db.any("set hq.usuario = 'robot';insert into log_logins (ip, id_acceso, fecha) values('"+ip+"', '"+e.id+"', now())").catch(err => {console.log(err)});
+                        var online = params.db.any("set hq.usuario = 'robot';update cuentas set estado = 'online' where id = $1", e.id_cuenta).catch(e => {console.log(e)});
                         return e;
                     break;
                     case 'wrong pass':
 
                         var ip = req.connection.remoteAddress;
-                        var log_access = params.db.any("insert into log_login_fallidos (ip, id_acceso, fecha) values('"+ip+"', '"+e.id+"', now())").catch(err => {console.log(err)});
+                        var log_access = params.db.any("set hq.usuario ='robot';insert into log_login_fallidos (ip, id_acceso, fecha) values('"+ip+"', '"+e.id+"', now())").catch(err => {console.log(err)});
                         return e;
                     break;
                    
@@ -107,7 +107,7 @@ module.exports = {
     },
      signOut: function(params){
         console.log(params);
-        var res = params.db.any("update cuentas set estado = 'offline' where id = $1", params.id_cuenta)
+        var res = params.db.any("set hq.usuario = 'robot';update cuentas set estado = 'offline' where id = $1", params.id_cuenta)
         return 'done';
     }
 

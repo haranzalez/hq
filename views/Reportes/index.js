@@ -1,4 +1,5 @@
 var tools = require('./tools.js');
+var reportsSaved = require('./reportes-guardados.js');
 
 
 module.exports = function(user){
@@ -42,9 +43,8 @@ return '<div id="module-reports" class="ctn in-the-shadows">'+
             
      '</div>'+
     
-
-
     '<div class="tbl-list-main-ctn"><div class="ctn tbl-list-ctn"></div></div>'+
+    reportsSaved.saveRepBox()+
 '</div>'+
 
 

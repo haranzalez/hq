@@ -2,6 +2,8 @@ var reportsTblList = require('../views/Reportes/tables-list.js');
 var model = require('../models/reports-model.js');
 var previewTbl = require('../views/Reportes/displayTbl.js');
 var tools = require('../views/Reportes/tools.js');
+var messBox = require('../views/componentes/message-box.js');
+var reportsSaved = require('../views/Reportes/reportes-guardados.js');
 
 module.exports = {
 
@@ -108,6 +110,42 @@ module.exports = {
                     params.res.send(tools.tblTools(params.tname));
                 break;
             }
+        },
+
+        saveReport: function(params){
+            var mess = model.saveReport(params);
+            
+                params.res.send(messBox.success(mess));
+       
+        },
+         savedReportsList: function(params){
+            var result = model.savedReportsList(params);
+            
+            result.then(d => {
+                console.log(d);
+                var pkg = [];
+                for(var prop in d){
+
+                    pkg.push(reportsSaved.savedRepRes(d[prop]));
+                }
+                pkg = pkg.join('');
+
+                params.res.send(pkg);
+            })
+            
+       
+        },
+        getReport: function(params){
+            var result = model.getReport(params);
+            
+            result.then(d => {
+                console.log(d);
+                
+
+                params.res.send(d[0].html);
+            })
+            
+       
         }
 
 
