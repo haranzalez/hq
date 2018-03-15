@@ -127,7 +127,7 @@ function render(obj){
                 break;
                 case 'Registros':
 
-                        html = html+'<a href="#" class="menu-link menu-btn">'+
+                        html = html+'<a href="#" class="menu-link menu-btn" data-btn="registros">'+
                         '<div class="ctn">'+
                                 '<div class="ctn-col-3">'+
                                         '<i class="icon fas fa-list-alt" aria-hidden="true"></i>'+

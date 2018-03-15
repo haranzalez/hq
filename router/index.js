@@ -7,6 +7,7 @@ const users = require('./usuarios-router'),
       compCtr = require('../controllers/components-controller.js'),
       backup = require('./backup-route'),
       notifications = require('../controllers/notifications.js'),
+      registros = require('./registros-route');
       plataforma = require('../controllers/plataforma-controller');
 
 
@@ -95,6 +96,7 @@ var id_cuenta = '';
 
   reports(app, db, sessionChecker);
   backup(app, db);
+  registros(app, db);
   users(app, db, sessionChecker, io);
   comp(app,db, sessionChecker);
   roles(app,db, sessionChecker);

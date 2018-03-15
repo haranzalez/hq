@@ -1,3 +1,34 @@
+/*REGISTROS*/
+
+
+function getRegistros(){
+
+  $.ajax({
+    url: '/registros',
+    type: 'get',
+    success: function(d){
+      console.log(d);
+    }
+
+  })
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 var tableToExcel = (function () {
     var uri = 'data:application/vnd.ms-excel;base64,',
@@ -1488,6 +1519,14 @@ $('.menu-btn').on('click', function(){
       getModuleTools('users');
       getSecModuleTools('users')
       $('#module-users').removeClass('in-the-shadows');
+      $('.menu').removeClass('zero-out-absolute-spaces');
+      $('.white-blur').removeClass('reveal');
+    break;
+    case 'registros':
+      hideModules();
+      getSecModuleTools('registros');
+      getRegistros();
+      $('#module-registros').removeClass('in-the-shadows');
       $('.menu').removeClass('zero-out-absolute-spaces');
       $('.white-blur').removeClass('reveal');
     break;

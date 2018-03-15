@@ -124,13 +124,18 @@ module.exports = {
             result.then(d => {
                 console.log(d);
                 var pkg = [];
-                for(var prop in d){
+                if(d.length > 0){
+                    for(var prop in d){
 
-                    pkg.push(reportsSaved.savedRepRes(d[prop]));
+                        pkg.push(reportsSaved.savedRepRes(d[prop]));
+                    }
+                    pkg = pkg.join('');
+                    params.res.send(pkg);
+                }else{
+                    params.res.send('<p class="empty-list-message"><i class="fas fa-times"></i> Vacio</p>');
                 }
-                pkg = pkg.join('');
-
-                params.res.send(pkg);
+               
+                
             })
             
        

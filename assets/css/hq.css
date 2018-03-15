@@ -12,7 +12,12 @@
 
 
 
-
+.empty-list-message{
+  text-align: center;
+  padding: 20px !important;
+  letter-spacing: 2px !important;
+  color: #bbb;
+}
 
 
 
@@ -351,18 +356,17 @@
 }
 .reports-tools-addTbl-btn{
     position: absolute;
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
+    border: none;
     top: 90%;
     z-index: 20;
-    padding: 8px 0px;
-    right: 31px;
+    padding: 7px 0px;
     font-size: 12px;
-    background-color: rgba(226,0,36,.7);
+    background-color: red;
     color: rgba(255,255,255,.6);
-    transition: .3s ease-in-out;
-    
+    transition: .3s ease-in-out; 
 }
 
 .reports-tools-addTbl-btn:hover{

@@ -90,10 +90,10 @@ function ecosis(obj, user){
                 html = html+reportes(user);
             break;
             case 'Registros':
-                html = html+'<div style="position:absolute; top: 20%;text-align:center;">'+obj[prop]+'</div>';
+                html = html+'<div style="position:absolute; top: 20%;text-align:center;"></div>';
             break;
              case 'Backups':
-                html = html+'<div style="position:absolute; top: 20%;text-align:center;">'+obj[prop]+'</div>';
+                html = html+'<div style="position:absolute; top: 20%;text-align:center;"></div>';
             break;
         }
     }

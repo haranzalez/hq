@@ -169,13 +169,13 @@ body{
 }
   
 .contener-fixed{
-    position: relative;
-    left: 0px;
-    margin: 0px auto;
-    margin-left: 66px;
-    padding: 0px;
-    max-width: 1350px;
-    top: 60px;
+  position: relative;
+  left: 0px;
+  margin: 0px auto;
+  /* margin-left: 66px; */
+  padding: 0px;
+  max-width: 1296px;
+  top: 60px;
 }
 
 .content{
@@ -462,7 +462,6 @@ background-color: #f1f1f1;
     z-index:-1;
 }
 #module-reports{
-   width:90%;
    margin:auto;
    margin-top:20px
 }

@@ -13,6 +13,19 @@ module.exports =function(module){
             '</select>'+   
 			'</div>';
 		break;
+		case 'registros':
+		var style = "line-height: 3.3;text-align: left;height: 56px;padding: 0px 23px;";
+			return '<div class="ctn-col-3" style="'+style+'">'+
+			'<input type="text" placeholder="Ej: john.doe" class="registros-filter-input-box">'+
+			'<select class="rregistros-filter-select">'+
+				'<option value="">Nombre de usuario</option>'+
+				'<option value="">Fecha</option>'+
+				'<option value="">Hora</option>'+
+				'<option value="">Tabla</option>'+
+				'<option value="">Operacion</option>'+
+            '</select>'+   
+			'</div>';
+		break;
 		default:
 			// statements_def
 		break;
