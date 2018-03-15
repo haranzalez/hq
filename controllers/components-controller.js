@@ -71,6 +71,21 @@ module.exports = {
 					
 					res.send(secModuleTools(params.extra));
 			break;
+			case "mesBoxTextInput"://for user logs
+					
+					res.send(messageBox.mesBoxTextInput(params));
+			break;
+			case "confirm"://for user logs
+					
+					params = {
+						mess: params.extra,
+						class: params.id_acceso,
+						data: params.param
+					}
+
+					res.send(messageBox.confirm(params));
+			break;
+
 
 			default:
 				// statements_def

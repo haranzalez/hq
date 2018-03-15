@@ -111,6 +111,14 @@ module.exports = function(app,db, sessionChecker){
 			};
             reportsCtr.getReport(pkg);
         });
+         app.get('/reportes/guardados/eliminar/:id', function(req, res){
+            var pkg = {
+            	db: db,
+                id: req.params.id,
+                res:res
+			};
+            reportsCtr.delReport(pkg);
+        });
         
        
 

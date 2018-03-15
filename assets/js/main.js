@@ -40,23 +40,61 @@ var tableToExcel = (function () {
      $('.preview-sheet-copy').find('.reporte-titulo-principal').attr('colspan', numOfCols - 2);
   
      tableToExcel('.preview-sheet-copy', title);
-     
-     
-
  });
-  $('body').on('click','.reports-tools-save-btn', function(){
-     var html  = document.querySelector('.preview-sheet').innerHTML;
 
-     var html = 'nombre=prueba&html='+html.toString();
+  $('body').on('click','.reports-tools-confirm-save-btn', function(){
+     var html  = document.querySelector('.preview-ctn').innerHTML;
+
+     var html = 'nombre='+$(this).parent().siblings('.text-box').val()+'&html='+html.toString();
      $.ajax({
         type: 'post',
         data: html,
         url: '/reportes/guardar',
         success: function(d){
+        $('.message-box-ctn').remove();
+        $('body').append(d);
+        getSavedReports();
+        }
+     });
+ });
+ $('body').on('click','.reports-tools-save-btn', function(){
+      $.ajax({
+        type: 'get',
+        url: '/recursos/componentes/mesBoxTextInput/Guardar reporte/reports-tools-confirm-save-btn/none',
+        success: function(d){
         $('body').append(d);
         }
      });
  });
+
+$('body').on('click','.reports-saved-del-btn', function(){
+  var id = $(this).attr('data-reportID');
+
+  $.ajax({
+    url: '/recursos/componentes/confirm/Este reporte sera eliminado permanentemente. Desea continuar/reports-saved-confirm-del-btn/'+id,
+    type: 'get',
+    success: function(d){
+      $('body').append(d);
+    }
+  })
+
+})
+
+$('body').on('click','.reports-saved-confirm-del-btn', function(){
+  var id = $(this).attr('data-btn');
+  $.ajax({
+    url: '/reportes/guardados/eliminar/'+id,
+    type: 'get',
+    success: function(d){
+      $('.message-box-ctn').remove();
+      $('body').append(d);
+      getSavedReports();
+    }
+  })
+})
+
+
+
 
 function getSavedReports(){
 
@@ -77,7 +115,12 @@ $('body').on('click','.reports-saved-open-btn', function(){
     type: 'get',
     url: '/reportes/guardados/'+id,
     success: function(d){
-      $('.preview-sheet').empty().append(d);
+      $('.preview-ctn').empty().append(d);
+      var tbls = $('.reports-table-tools-title-input');
+      $('.report-add-to-table-select').empty()
+      for(var i = 0; i < tbls.length; i++){
+        $('.report-add-to-table-select').append('<option value="'+$(tbls[i]).siblings('.reports-table-title').attr('data-table')+'">'+$(tbls[i]).val()+'</option>');
+      }
    
     }
   })
@@ -88,9 +131,7 @@ $('body').on('click','.reports-saved-open-btn', function(){
  $('body').on('click','.reports-tools-print-btn', function(){
     window.print();
 });
-$('body').on('click','.reports-tools-save-btn', function(){
-   
-});
+
 
 
 
@@ -201,7 +242,7 @@ function getOnlineUsers(){
     }
     $.ajax({
       data: dta,
-      url: 'http://localhost:8000/users/comp/filter',
+      url: '/users/comp/filter',
       type: 'get',
       success: function(res){
         console.log(res);
@@ -216,7 +257,7 @@ function getOnlineUsers(){
 
 function getModuleTools(module){
    $.ajax({
-          url: 'http://localhost:8000/recursos/componentes/moduleTools/'+module+'/none',
+          url: '/recursos/componentes/moduleTools/'+module+'/none/none',
           type: 'get',
           success: function(res){
              $('body').find('.module-tools').empty().append(res);
@@ -227,7 +268,7 @@ function getModuleTools(module){
 }
 function getSecModuleTools(module){
    $.ajax({
-          url: 'http://localhost:8000/recursos/componentes/secModuleTools/'+module+'/none',
+          url: '/recursos/componentes/secModuleTools/'+module+'/none/none',
           type: 'get',
           success: function(res){
            
@@ -598,7 +639,7 @@ $('body').on('click','.sub-menu-mobil .sub-menu-btn', function(){
 $('body').on('click','.sel-rol-btn',function(){
  
   $.ajax({
-          url: 'http://localhost:8000/recursos/componentes/w1/none/none',
+          url: 'http://localhost:8000/recursos/componentes/w1/none/none/none',
           type: 'get',
           success: function(res){
              $('body').find('.mobile-window-ctn .ctn').empty().append(res).parent().show();
@@ -748,7 +789,7 @@ $('body').on('click','.btn-ctr-form-user', function(){
     case 'delete':
       var id = $(this).attr('data-id');
       $.ajax({
-        url:'http://localhost:8000/recursos/componentes/awb/Este usuario sera eliminado permanentemente. Desea continuar%3F./confirm-delete',
+        url:'http://localhost:8000/recursos/componentes/awb/Este usuario sera eliminado permanentemente. Desea continuar%3F./confirm-delete/none',
         type: 'get',
         success: function(mesBox){
           $('body').append(mesBox);
@@ -764,7 +805,7 @@ case 'block':
     var id = $(this).attr('data-id');
 
     $.ajax({
-      url:'http://localhost:8000/recursos/componentes/awb/La entrada al sistema sera restringida para este usuario. Desea continuar%3F./confirm-ban',
+      url:'http://localhost:8000/recursos/componentes/awb/La entrada al sistema sera restringida para este usuario. Desea continuar%3F./confirm-ban/none',
       type: 'get',
       success: function(mesBox){
 
@@ -781,7 +822,7 @@ case 'unblock':
     var id = $(this).attr('data-id');
     console.log(id);
     $.ajax({
-      url:'http://localhost:8000/recursos/componentes/awb/La entrada al sistema sera habilitada para este usuario. Desea continuar%3F./confirm-unban',
+      url:'http://localhost:8000/recursos/componentes/awb/La entrada al sistema sera habilitada para este usuario. Desea continuar%3F./confirm-unban/none',
       type: 'get',
       success: function(mesBox){
         $('body').append(mesBox);
@@ -848,7 +889,7 @@ $('body').on('click','.btn-ctr-form-rol', function(){
 case 'edit-rol-name':
       var id = $(this).attr('data-id');
       $.ajax({
-          url: 'http://localhost:8000/recursos/componentes/bf1/none/none',
+          url: 'http://localhost:8000/recursos/componentes/bf1/none/none/none',
           type: 'get',
           success: function(res){
             
@@ -887,7 +928,7 @@ case 'sel-area-btn':
       
       $.ajax({
         data: id,
-          url: 'http://localhost:8000/recursos/componentes/w2/'+id+'/none',
+          url: 'http://localhost:8000/recursos/componentes/w2/'+id+'/none/none',
           type: 'get',
           success: function(res){
              $('body').find('.mobile-window-ctn .back-btn').show();
@@ -1300,23 +1341,25 @@ $('.reports-open-tools-btn').on('click', function(){
     }
     
 });
-$('.reports-tools-title-input').on('keyup', function(){
+$('body').on('keyup','.reports-tools-title-input', function(){
     var txt = $(this).val();
     
-   
+          
         if(txt === ''){
-        $('.reporte-titulo-principal').text("Escriba titulo..");
+          $('.reporte-titulo-principal').text("Escriba titulo..");
         }else{
             $('.reporte-titulo-principal').text(txt);
+            $(this).attr('value', txt)
         }
         
   
     
 })
-$('.reports-tools-coments-textarea').on('keyup', function(){
+$('body').on('keyup','.reports-tools-coments-textarea', function(){
     
     var txt = $(this).val();
     $('.reports-observaciones-txt').text(txt);
+    $(this).attr('value', txt)
     
    
   
@@ -1331,6 +1374,7 @@ $('body').on('keyup','.reports-table-tools-coments-textarea', function(){
     var id = $(this).parent().parent().attr('data-table');
     var txt = $(this).val();
     $('.reports-table-coments').find('.the-coment[data-table="'+id+'"]').text(txt);
+    $(this).attr('value', txt)
     
 });
 
@@ -1342,6 +1386,7 @@ $('body').on('keyup','.reports-table-tools-title-input', function(){
     if(txt == ''){
         txt = 'Tabla '+id;
     }
+    $(this).attr('value', txt)
     $('.reports-table-title[data-table="'+id+'"]').text(txt);
  
     setTimeout(function(){
@@ -1359,7 +1404,7 @@ $('.report-add-to-table-select').on('change', function(){
 })
 
 
-$('.reports-tools-addTbl-btn').on('click', function(){
+$('body').on('click','.reports-tools-addTbl-btn', function(){
     
     var pkgs = $('.reports-table-section-ctn').find('.reports-table-pkg');
     var numOfTbls = pkgs.length;

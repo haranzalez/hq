@@ -13,6 +13,10 @@ const
     io = require('socket.io').listen(server);
 
  
+
+//Setting data transfer limit form 1mb to 50mb
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
     
 //BASE DE DATOS [POSTGRES]
 var db = require('./db_components.js')('dbcred');

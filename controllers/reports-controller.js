@@ -146,6 +146,11 @@ module.exports = {
             })
             
        
+        },
+        delReport: function(params){
+            var mess = model.delReport(params);
+            params.res.send(messBox.success(mess));
+        
         }
 
 

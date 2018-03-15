@@ -39,6 +39,16 @@ module.exports = {
 			'</div>'+
 		'</div>';
 	},
+	mesBoxTextInput: function(pkg){
+		return '<div class="message-box-ctn"><div class="message-box form-box">'+
+			'<h2>'+pkg.extra+'</h2>'+
+			'<input type="text" class="text-box">'+
+			'<div class="btn-ctn">'+
+			'<button class="'+pkg.id_acceso+' mess-box-btn" data-btn="'+pkg.btnData+'">Continuar</button>'+
+			'<button class="btn-basic mess-box-btn" data-btn="cancel">cancelar</button>'+
+			'</div>'+
+		'</div></div>';
+	},
 	RolName: function(){
 		return '<div class="message-box-ctn"><div class="message-box form-box">'+
 			'<h2>Nuevo nombre</h2>'+
@@ -48,7 +58,17 @@ module.exports = {
 			'<button class="btn-basic mess-box-btn" data-btn="cancel">cancelar</button>'+
 			'</div>'+
 		'</div></div>';
-	}
+	},
+	confirm: function(params){
+		return '<div class="message-box-ctn"><div class="message-box warning-box">'+
+			'<h2><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Atencion!</h2>'+
+			'<p>'+params.mess+'</p>'+
+			'<div class="btn-ctn">'+
+			'<button class="btn-basic '+params.class+'" data-btn="'+params.data+'">Continuar</button>'+
+			'<button class="btn-basic mess-box-btn" data-btn="cancel">Cancelar</button>'+
+			'</div>'+
+		'</div></div>';
+	},
 
 
 
