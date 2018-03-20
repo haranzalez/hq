@@ -8,7 +8,13 @@ module.exports = function(app, db){
     
     
     app.get('/backup', function(req, res){
-        console.log(controller);
+    
+
         controller.backup(db, res);
+    })
+    app.get('/getBackups', function(req, res){
+    
+
+        controller.getBackups(res);
     })
 }

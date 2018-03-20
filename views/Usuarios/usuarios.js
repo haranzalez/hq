@@ -6,7 +6,7 @@ module.exports = function(obj){
 
 //=================================================================================================================================================================
 function results(obj){
-    console.log(obj);
+
     if(Object.keys(obj).length > 0 && Object.keys(obj)[0] != 'type'){
         var html = '<div class="zebra user-list-result-ctn">';// <-- ZEBRA CTN
         switch (obj.type) {

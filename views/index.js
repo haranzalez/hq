@@ -4,6 +4,7 @@ var menu = require('./componentes/menues.js');
 var login = require('./login.js')();
 var usuarios = require('./Usuarios');
 var reportes = require('./Reportes');
+var registros = require('./Registros');
 var onlineUsers = require('./componentes/online-users-notification.js');
 
 
@@ -28,6 +29,17 @@ exports.build = function(obj) {
     '<link rel="stylesheet" media="screen and (min-width: 728px)" href="/estaticos/css/desktop.css">'+
     '<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css"/>'+
 
+
+    
+    '<link rel="stylesheet" type="text/css" href="/estaticos/css/datatables.min.css"/>'+
+    '<link rel="stylesheet" type="text/css" href="/estaticos/css/buttons.dataTables.min.css"/>'+
+    '<link rel="stylesheet" type="text/css" href="/estaticos/css/responsive.dataTables.min.css"/>'+
+    '<link rel="stylesheet" type="text/css" href="/estaticos/css/rowReorder.dataTables.min.css"/>'+
+    '<link rel="stylesheet" type="text/css" href="/estaticos/css/scroller.dataTables.min.css"/>'+
+    '<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.1/css/buttons.dataTables.min.css"/>'+
+ 
+
+
     '</head>' +
     '<body>' +
 
@@ -35,9 +47,17 @@ exports.build = function(obj) {
    
     '<script src="/socket.io/socket.io.js"></script>'+
     '<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>'+
+    '<script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>'+
+    '<script type="text/javascript" src="/estaticos/js/datatables.min.js"></script>'+
+    '<script type="text/javascript" src="/estaticos/js/dataTables.buttons.min.js"></script>'+
+    '<script type="text/javascript" src="/estaticos/js/dataTables.responsive.min.js"></script>'+
+    '<script type="text/javascript" src="/estaticos/js/dataTables.rowReorder.min.js"></script>'+
+    '<script type="text/javascript" src="/estaticos/js/dataTables.scroller.min.js"></script>'+
+    
     '<script src="/estaticos/js/parsley.js"></script>'+
     '<script src="/estaticos/js/autoLogout.js"></script>'+
     '<script src="/estaticos/js/Users.js"></script>'+
+    
     '<script src="/estaticos/js/main.js"></script>'+
     '</body>' +
     '</html>';
@@ -90,10 +110,10 @@ function ecosis(obj, user){
                 html = html+reportes(user);
             break;
             case 'Registros':
-                html = html+'<div style="position:absolute; top: 20%;text-align:center;"></div>';
+                html = html+'<div id="module-registros"></div>';
             break;
              case 'Backups':
-                html = html+'<div style="position:absolute; top: 20%;text-align:center;"></div>';
+                html = html+'<div id="module-backups"></div>';
             break;
         }
     }

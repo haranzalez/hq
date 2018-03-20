@@ -17,12 +17,14 @@ module.exports =function(module){
 		var style = "line-height: 3.3;text-align: left;height: 56px;padding: 0px 23px;";
 			return '<div class="ctn-col-3" style="'+style+'">'+
 			'<input type="text" placeholder="Ej: john.doe" class="registros-filter-input-box">'+
-			'<select class="rregistros-filter-select">'+
-				'<option value="">Nombre de usuario</option>'+
-				'<option value="">Fecha</option>'+
-				'<option value="">Hora</option>'+
-				'<option value="">Tabla</option>'+
-				'<option value="">Operacion</option>'+
+			'<select class="registros-filter-select">'+
+				'<option value="4">Usuario</option>'+
+				'<option value="1">Fecha</option>'+
+				'<option value="2">Tabla</option>'+
+				'<option value="3">Operacion</option>'+
+				'<option value="6">Valor Nuevo</option>'+
+				'<option value="5">Valor Anterior</option>'+
+				'<option value="7">Campo</option>'+
             '</select>'+   
 			'</div>';
 		break;

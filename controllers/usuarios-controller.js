@@ -40,7 +40,8 @@ module.exports = {
 
 		//Al igual que la instancia de base de datos, estas variables provenientes del formulario [form-create-user]
 		//son assignadas a variables locales en la funcion. Esto con el proposito de entrar los valores a sus respectivas tablas.
-        var nombre_rol = params.nombre_rol;
+		var id_rol = params.id_rol;
+		
         var estado = params.estado;
 		var email_interno = params.email_interno;
 		var password = params.password;
@@ -48,6 +49,8 @@ module.exports = {
 		var nombre_de_usuario = params.nombre_de_usuario;
 		
 		//Se remueven variables para evitar conflicto con el CRUD
+		delete params.id_rol;
+		delete params.io;
 		delete params.nombre_rol;
 		delete params.estado;
 		delete params.email_interno;
@@ -63,7 +66,7 @@ module.exports = {
 			comentario: coment,
 			email_interno: email_interno,
 			password: password,
-			nombre_rol: nombre_rol,
+			id_rol: id_rol,
 			nombre_de_usuario: nombre_de_usuario,
 			estado: estado
 		}
@@ -130,7 +133,7 @@ module.exports = {
 		delete pkg.data.comentario;
 		delete pkg.data.id_rol;
 		delete pkg.data.nombre_de_usuario;
-		
+	
 		dta.usuarios = pkg.data;
 		const removeNestedEpties = (obj) => {
 		  const o = JSON.parse(JSON.stringify(obj)); // Clone source oect.
@@ -161,8 +164,8 @@ module.exports = {
 		}
 		//cleaning object from empty objects
 		clearEmptyObjects(newDta)
-		
-		
+		console.log(newDta);
+
 		var inst = {
 			funcion: 'update_user_case_3',
 			data: newDta,

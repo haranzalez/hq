@@ -249,6 +249,7 @@ create: function(tabla, params, username) {
                         "first as "+
                         "(insert into usuarios(";
                         for (var prop in params.user) {
+                            console.log(prop);
                             count++;
                             if (count < numElms) {
                                 sql = sql + prop + ", ";
@@ -269,16 +270,15 @@ create: function(tabla, params, username) {
                         }
 
                         sql = sql + ") returning id, email), "+
-                        "second as"+
-                        "(select * from roles where nombre_rol = '"+params.nombre_rol+"'), "+
                         "third as "+
-                        "(insert into cuentas(estado, id_usuario, id_rol)values('"+params.estado+"',(select id from first), (select id from second)) returning id), "+
+                        "(insert into cuentas(estado, id_usuario, id_rol)values('"+params.estado+"',(select id from first), "+params.id_rol+") returning id), "+
                         "forth as "+
                         "(insert into comentarios(id_usuario, comentario)values((select id from first), '"+params.comentario+"')) "+
                         "insert into accesos(email_interno, password, id_usuario, nombre_de_usuario) "+
                         "values('"+params.email_interno+"','"+params.password+"', (select id from first), '"+params.nombre_de_usuario+"') ";
 
-                        params.db.any(sql);
+                        params.db.any(sql).catch(e => {console.log(e)});
+                        console.log(sql);
                         var pkg = {
                             mess: 'El usuario '+params.user.nombres+' '+params.user.apellidos+' ah sido creado exitosamente.',
                             type: 'success'
@@ -288,7 +288,7 @@ create: function(tabla, params, username) {
                 }
                   
                     var pkg = {
-                            mess: 'El usuario '+params.user.nombres+' '+params.user.apellidos+' ya existe creado en la base de datos con email: '+params.user.email,
+                            mess: 'Ya existe un usuario creado en la base de datos con el email: '+params.user.email,
                             type: 'warning'
                         }
                     return pkg;
@@ -340,7 +340,7 @@ update: function(tabla, params, username) {
         break;
 //------------------------------------------------------------------------------------------------
         case 'update_user':
-        
+           
              var sql = "SET hq.usuario = '"+username+"';with "+
                 "first as "+
                 "(UPDATE usuarios SET ";
@@ -380,16 +380,16 @@ update: function(tabla, params, username) {
                         sql = sql+prop+' as (update '+prop+' set '+helpers.renderUpdate(params.data[prop])+' where '+id+') ';
                     }else if(count == l){
                         var id = (prop=='usuarios')?'id='+params.record_id:'id_usuario='+params.record_id
-                        sql = sql+'update '+prop+' set '+helpers.renderUpdate(params.data[prop])+' where '+id;
+                        sql = sql+'update '+prop+' set '+helpers.renderUpdate(params.data[prop])+' where '+id+';';
                     }else{
                         var id = (prop=='usuarios')?'id='+params.record_id:'id_usuario='+params.record_id
                         sql = sql+prop+' as (update '+prop+' set '+helpers.renderUpdate(params.data[prop])+' where '+id+'), ';
                     }
                   
-                    console.log('With -1: l: '+l+' count: '+count);
+                   
                  
                 }
-                console.log('394: '+sql);
+             
 
             }else if(l == 1){
                 var sql = '';
@@ -402,7 +402,7 @@ update: function(tabla, params, username) {
         
          
            
-           console.log(sql);
+         
            params.bd.any(sql).catch(e => {return e})
 
             return {
@@ -458,8 +458,8 @@ delete: function(tabla, params, username) {
             'second as (delete from cuentas where id_usuario = (select id from first) returning id),'+
             'third as (delete from accesos where id_usuario = (select id from first))'+
             'delete from comentarios where id_usuario = (select id from first)';
-
-             params.bd.any(sql).catch(e => {return {
+        
+             params.bd.any(sql).catch(e => {console.log(e);return {
                 mes: e,
                 type: 'warning'
             }})

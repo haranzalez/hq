@@ -1,3 +1,18 @@
+/*BAKCUPS*/
+
+function getBakcups(){
+  $.ajax({
+    url: '/getBackups',
+    type: 'get',
+    success: function(d){
+      $('#module-backups').empty().append(d);
+    }
+  })
+}
+
+
+
+
 /*REGISTROS*/
 
 
@@ -7,13 +22,80 @@ function getRegistros(){
     url: '/registros',
     type: 'get',
     success: function(d){
-      console.log(d);
+      $('#module-registros').empty().append(d);
+      $('#module-registros').find('.registros-table').DataTable({
+        "language": {
+            "lengthMenu": "Mostrar _MENU_ registros por pagina",
+            "zeroRecords": "No hay registros para mostrar",
+            "info": "Pagina _PAGE_ de _PAGES_",
+            "infoEmpty": "No registros disponibles.",
+            "search": "Buscar:",
+            "infoFiltered": "(Mostrando _MAX_ registros)",
+            "paginate": {
+              "first":      "Primero",
+              "last":       "Ultimo",
+              "next":       "Siguiente",
+              "previous":   "Anterior"
+          }
+          
+        },
+        "columnDefs": [
+          { "targets": 1 }
+        ],
+        "pageLength": 25,
+        "dom": '<"ctn registros-tools" <"ctn-col-thirds outer" <"middle" <"inner" f>>><"ctn-col-thirds outer" <"middle" B<"inner" >>><"ctn-col-thirds outer" <"middle" <"inner" >>>>t',
+        "rowReorder": true,
+        "buttons": [
+          'excel'
+        ],
+        "scrollY":        "500px",
+        "responsive": true,
+        "scrollCollapse":       true
+    });
+      
     }
 
   })
 
 
 }
+
+
+$('body').on('keyup','.registros-filter-input-box', function(){
+  var type = $('.registros-filter-select').val();
+  filter(type);
+  
+})
+
+
+
+
+function filter(type) {
+  // Declare variables 
+  var input, filter, table, tr, td, i;
+  input = document.querySelector(".registros-filter-input-box");
+  filter = input.value.toUpperCase();
+  table = document.querySelector(".registros-table tbody");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[type];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    } 
+  }
+}
+
+
+
+
+
+
 
 
 
@@ -298,16 +380,20 @@ function getModuleTools(module){
       })
 }
 function getSecModuleTools(module){
-   $.ajax({
-          url: '/recursos/componentes/secModuleTools/'+module+'/none/none',
-          type: 'get',
-          success: function(res){
-           
-             $('body').find('.module-sec-tools .ctn').empty().append(res);
-             
-             
-          }
-      })
+  $('body').find('.module-sec-tools .ctn').empty()
+  if(module != ''){
+    $.ajax({
+      url: '/recursos/componentes/secModuleTools/'+module+'/none/none',
+      type: 'get',
+      success: function(res){
+       
+         $('body').find('.module-sec-tools .ctn').append(res);
+         
+         
+      }
+    })
+  }
+   
 }
 
 //REPORTS TABLE LISTS RESIZING HEIGHT FUNCTION
@@ -703,8 +789,9 @@ $('body').on('click','.btn-ctr-form-user', function(){
         url: 'http://localhost:8000/users/'+id,
         type: 'get',
         success: function(res){
-         
+          
           updateFormCopy = res;
+          
           var keys = Object.keys(res);
           for(var prop in res){
             if(prop == 'estado'){
@@ -749,7 +836,7 @@ $('body').on('click','.btn-ctr-form-user', function(){
       function processForm(form){
         /*
         When updating, form generates all values including unaltered ones from its imput fields. This creates a problem when updating the database 
-        since the forms are formed using information from different tables. The idea is to only upadate affected values changed values in the database.
+        since the forms are formed using information from different tables. The idea is to only upadate changed values in the database.
         */
 
         //1. grab data from form and convert it to JSON
@@ -772,15 +859,18 @@ $('body').on('click','.btn-ctr-form-user', function(){
         //create new jason to assing non-equal values
         var p = {}
         //if [deepEqual] returns false 
+      
         if(!deepEqual(pkg, updateFormCopy)){
         //loop through [PKG] obj and assign non-equal values to new json [P]
           for(var prop in pkg){
-            if(Object.values(updateFormCopy).indexOf(pkg[prop]) == -1){
+            if(Object.values(updateFormCopy).indexOf(pkg[prop]) === -1){
+              
               p[prop] = pkg[prop];
             }
           }
           
         }
+      
         //4. Convert Json into serialized data to be send via http using [AJAX]
         var str = '';//var is created
         for(var prop in p){
@@ -789,6 +879,7 @@ $('body').on('click','.btn-ctr-form-user', function(){
         }
         var serialData = str.slice(0, -1);//trim off las char from str [&] and assign new value to serialData
         updateFormCopy = pkg;//form copy is apdated with new value to prevent data lost
+       
         return serialData;
 
       }
@@ -803,7 +894,7 @@ $('body').on('click','.btn-ctr-form-user', function(){
 
      
       $.ajax({//AJAX CALL
-        url: 'http://localhost:8000/users/update/'+id,
+        url: '/users/update/'+id,
         data: processForm('#create-user-form'),
         type: 'post',
         success: function(res){
@@ -1524,9 +1615,18 @@ $('.menu-btn').on('click', function(){
     break;
     case 'registros':
       hideModules();
-      getSecModuleTools('registros');
+      getSecModuleTools('');
       getRegistros();
+      
       $('#module-registros').removeClass('in-the-shadows');
+      $('.menu').removeClass('zero-out-absolute-spaces');
+      $('.white-blur').removeClass('reveal');
+    break;
+    case 'backups':
+      hideModules();
+      getBakcups();
+      
+      $('#module-backups').removeClass('in-the-shadows');
       $('.menu').removeClass('zero-out-absolute-spaces');
       $('.white-blur').removeClass('reveal');
     break;

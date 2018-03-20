@@ -142,7 +142,7 @@ function render(obj){
                 break;
                 case 'Backups':
 
-                        html = html+'<a href="#" class="menu-link menu-btn">'+
+                        html = html+'<a href="#" class="menu-link menu-btn" data-btn="backups">'+
                         '<div class="ctn">'+ 
                                 '<div class="ctn-col-3">'+
                                         '<i class="icon fas fa-database" aria-hidden="true"></i>'+

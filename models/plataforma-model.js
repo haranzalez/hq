@@ -71,7 +71,7 @@ module.exports = {
                     }
                 });
             }).then(e => {
-                 console.log(e);
+                
                 switch (e.mess) {
                    
                     case 'success':
@@ -106,7 +106,7 @@ module.exports = {
         
     },
      signOut: function(params){
-        console.log(params);
+       
         var res = params.db.any("set hq.usuario = 'robot';update cuentas set estado = 'offline' where id = $1", params.id_cuenta)
         return 'done';
     }

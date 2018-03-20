@@ -25,7 +25,7 @@ module.exports = {
 	},
 
 	renderRoles: function(pkg){
-		console.log(pkg);
+		
 		if (pkg.length > 0) {
 			var html = '<div class="ctn-col-10 zero-margin">'+
 			'<h2 class="zero-margin">Seleccione Rol</h2>'+

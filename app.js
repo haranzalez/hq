@@ -10,9 +10,12 @@ const
     morgan = require('morgan'),
     server = http.createServer(app),
     bcrypt = require('bcrypt');
-    io = require('socket.io').listen(server);
+    var serveIndex = require('serve-index');
+    var serveStatic = require('serve-static');
+    var io = require('socket.io').listen(server);
 
  
+   
 
 //Setting data transfer limit form 1mb to 50mb
 app.use(bodyParser.json({limit: '50mb'}));
@@ -21,7 +24,8 @@ app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 //BASE DE DATOS [POSTGRES]
 var db = require('./db_components.js')('dbcred');
 
-//CONFIGURACION servidor y base de datos
+//CONFIGURACION servidor y base de datosnodemon
+
 const config = require("./config.json");
 //integracion de middelware para bodyparser
 app.use(bodyParser.urlencoded({
@@ -76,6 +80,9 @@ var setUserForChanges = (req, res, next) => {
 
 //middleware para uso de archivos estaticos como .css .js .png .jpg
 app.use('/estaticos', express.static('assets'))
+//Backups middleware
+app.use('/backups', serveIndex('backups', {icons: true, stylesheet: 'http://'+config.host+':'+config.port+'/estaticos/css/hq.css'}));
+app.use('/backups', express.static('backups'))
 
 
 //ROUTER
