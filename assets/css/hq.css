@@ -1,3 +1,132 @@
+
+.loading-ctn{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display:none;
+  z-index: 22;
+  background-color: rgba(255,255,255,.7);
+}
+.loading-ctn .loading-inner-ctn .loading-img{
+  background-image: url(/estaticos/img/loading.svg);
+    background-position: center;
+    width: 55px;
+    height: 55px;
+    margin: auto;
+}
+.loading-ctn .loading-inner-ctn{
+  position: absolute;
+  padding: 6px;
+  width: 80px;
+  height: 80px;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  box-shadow: 0px 0px 2px #999;
+}
+.loading-ctn .loading-text{
+  font-size: 11px;
+  text-align: center;
+  line-height: 2;
+}
+
+
+
+
+/*BACKUPS*/
+.backups-select-period{
+  width:100%;
+  height: 100%;
+  overflow: auto;
+  border: 1px solid #bbb;
+
+  display: block;
+}
+.backups-select-period:focus{
+  outline: none;
+  
+}
+.backups-select-period option{
+  padding: 5.4px;
+    border-bottom: 1px solid #ddd;
+}
+.backups-select-period option:selected{
+  background-color: red !important;
+  color: white !important;
+}
+.backups-select-period option:active{
+  background-color: #bbb;
+  color: black;
+}
+.backups-main-ctn{
+      width: 85%;
+      margin: auto;
+      padding: 30px 0px;
+      /* text-align: left; */
+}
+.backups-main-ctn h3{
+  width: 100%;
+  background-color: black;
+  color: white;
+  margin: 0;
+  padding: 10px;
+  font-size: 15px;
+}
+.backups-programmer-ctn{
+  width: 94%;
+    margin: auto;
+}
+.backups-table{
+  border-collapse: collapse;
+  font-size: 11px;
+}
+.backups-table thead{
+  background-color: black;
+  color: white;
+  text-align: left;
+}
+.backups-table tbody{
+  text-align: left;
+}
+#backups-programmer{
+  display: block;
+}
+.backups-program-backup-btn,.backups-backup-btn{
+  width: 100%;
+  margin: auto;
+  display: block;
+  height: 37px;
+  background-color: black;
+  color: white;
+  font-size: 14px;
+  border-radius: 0;
+  border: 1px solid #bbb;
+  border-top: 0;
+  cursor: pointer;
+}
+.backups-backup-btn{
+  background-color: red;
+}
+.backups-program-backup-btn:hover{
+  background-color:#333
+}
+.backups-backup-btn:hover{
+  background-color: darkred;
+}
+.xdsoft_ xdsoft_inline, .xdsoft_datetimepicker{
+  position: relative !important;
+  left: 0 !important;
+  height: 100%;
+  border-left: 0px !important;
+  width: 100%;
+    padding: 0 !important;
+    z-index: 1 !important;
+}
+.xdsoft_timepicker{
+  /*margin-left: 19px !important;*/
+}
+/*REGISTROS*/
 #module-registros table{
   margin: auto;
 }
@@ -27,7 +156,7 @@
   position: fixed !important;
   top: 1px;
   left: 0px;
-  z-index: 20;
+  z-index: 11;
   font-size: 12px;
   width: 100%;
   padding: 18px 0px;
@@ -133,6 +262,9 @@
         line-height: 18px;
         z-index:2045;
         
+    }
+    .reports-tools-addTbl-btn{
+      display: none;
     }
     .reports-table-title{
        display:block;
@@ -287,7 +419,9 @@
 }
 
 
-
+.notification-row{
+  flex-wrap: nowrap !important;
+}
 
 .notification-row .notification-close-btn{
   position: absolute;
@@ -321,12 +455,16 @@
   font-size: 11px;
   color: silver;
 }
-.notification-row .ctn-col-2{
-  line-height: 1.8;
+.notification-row .ctn-col-1, .notification-row .ctn-col-9{
+  padding:7px;
+  font-size: 12px;
+}
+.notification-row .ctn-col-1{
+  line-height: 1;
 }
 
-.notification-row .ctn-col-2 svg{
-  font-size: 17px;
+.notification-row .ctn-col-1 svg{
+  font-size: 13px;
 }
 
 .notification-component{
@@ -336,7 +474,7 @@
     right: 0;
         top: 10px;
     right: 30px;
-    z-index: 22;
+    z-index: 13;
 
 }
 .notification-component-btn:hover {
@@ -449,18 +587,19 @@
     top:-145px;
 }
 .reports-tools-addTbl-btn{
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: none;
-    top: 90%;
-    z-index: 20;
-    padding: 7px 0px;
-    font-size: 12px;
-    background-color: red;
-    color: rgba(255,255,255,.6);
-    transition: .3s ease-in-out; 
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  right: 24px;
+  top: 91%;
+  z-index: 20;
+  padding: 7px 0px;
+  font-size: 12px;
+  background-color: red;
+  color: rgba(255,255,255,.6);
+  transition: .3s ease-in-out;
 }
 
 .reports-tools-addTbl-btn:hover{
@@ -669,6 +808,7 @@ a:hover{
 .ctn-col-div{
     max-width:250px;
     padding:5px;
+    height: 12px;
 }
 .ctn-col-quarter{
   width: 25%;
@@ -1428,7 +1568,7 @@ font-size:25pt !important;
   background-color: rgba(0,0,0,.7);
   -webkit-filter: blur(5px); /* Safari 6.0 - 9.0 */
 
-  z-index: 12;
+  z-index: 17;
   transition: .2s ease-in-out;
 
 }
@@ -1645,23 +1785,25 @@ font-size:25pt !important;
 .pop-over{
   position: absolute;
   z-index: 24;
-  right: -275px;
+  /* right: -275px; */
   width: 250px;
   background-color: white;
   border-radius: 5px;
   padding: 7px;
   box-shadow: 0px 1px 1.3px #888;
-  border:1px solid #000;
-  top:-15px;
+  border: 1px solid #000;
+  top: 47px;
 }
 .pop-over p {
   font-size: 12px;
+  line-height: 1.3;
+
 }
 .pop-over span{
-  position: absolute;
-  border-right:10px solid white; 
-  left: -10px;
-  top:10px;
+    position: absolute;
+    border-right: 5px solid white;
+    left: 125px;
+    top: -5px;
 }
 
 /*LOGIN*/

@@ -4,17 +4,32 @@
  * and open the template in the editor.
  */
 var controller = require('../controllers/backups-controller.js');
-module.exports = function(app, db){
+var messBox = require('../views/componentes/message-box');
+module.exports = function(app, db, io, sessionChecker){
     
     
-    app.get('/backup', function(req, res){
+    app.get('/backup',sessionChecker, function(req, res){
     
-
+     
         controller.backup(db, res);
     })
-    app.get('/getBackups', function(req, res){
-    
+    app.get('/getBackups',sessionChecker, function(req, res){
+        var params = {
+            db: db,
+            res:res
+        }
 
-        controller.getBackups(res);
+        controller.getBackups(db,res);
+    })
+    app.get('/programBackUp/:second/:minute/:hour/:day/:period/:month/:year',sessionChecker, function(req, res){
+        var params = {
+            db: db,
+            res: res,
+            io: io,
+            data: req.params
+        }
+  
+        controller.scheduleBackup(params);
+
     })
 }

@@ -16,16 +16,7 @@ module.exports = function(type, obj){
 
 
                 render(obj.obj)+
-                '<a href="#" class="menu-link">'+
-                        '<div class="ctn">'+
-                                '<div class="ctn-col-3">'+
-                                        '<i class="icon fas fa-sliders-h" aria-hidden="true"></i>'+
-                                '</div>'+
-                                '<div class="ctn-col-7">'+
-                                        'Configuración'+
-                                '</div>'+
-                        '</div>'+
-                '</a>'+
+                
 
                 '<a href="#" class="menu-link sign-out-btn">'+
                         '<div class="ctn">'+

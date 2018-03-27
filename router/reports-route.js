@@ -3,7 +3,7 @@ var reportsCtr = require('../controllers/reports-controller.js');
 module.exports = function(app,db, sessionChecker){
 
 
-	app.get('/reports', function(req, res){
+	app.get('/reports',sessionChecker, function(req, res){
              var pkg = {
 			db: db,
 			keyword: 'all',
@@ -13,7 +13,7 @@ module.exports = function(app,db, sessionChecker){
 	    reportsCtr.getTables(pkg);
 
 	});
-        app.get('/reports/search/:keyword', function(req, res){
+        app.get('/reports/search/:keyword',sessionChecker, function(req, res){
              var pkg = {
 			db: db,
 			keyword: req.params.keyword,
@@ -23,7 +23,7 @@ module.exports = function(app,db, sessionChecker){
 
 	});
 
-	app.get('/reports/:table', function(req, res){
+	app.get('/reports/:table',sessionChecker, function(req, res){
 
 		var pkg = {
 			db: db,
@@ -34,7 +34,7 @@ module.exports = function(app,db, sessionChecker){
 		reportsCtr.getFields(pkg);
 
 	});
-        app.get('/reports/table/all/:table', function(req, res){
+        app.get('/reports/table/all/:table',sessionChecker, function(req, res){
 
 		var pkg = {
 			db: db,
@@ -46,7 +46,7 @@ module.exports = function(app,db, sessionChecker){
 
 	});
         
-        app.get('/reports/:table/:field', function(req, res){
+        app.get('/reports/:table/:field',sessionChecker, function(req, res){
 		var pkg = {
 			db: db,
                         user: req.session.user,
@@ -60,7 +60,7 @@ module.exports = function(app,db, sessionChecker){
 	});
         
         
-         app.get('/reports/:table/:field/:id', function(req, res){
+         app.get('/reports/:table/:field/:id',sessionChecker, function(req, res){
 		var pkg = {
 			db: db,
                         user: req.session.user,
@@ -74,7 +74,7 @@ module.exports = function(app,db, sessionChecker){
 
 	});
         
-        app.get('/reportes/herramientas/:id/:tname', function(req, res){
+        app.get('/reportes/herramientas/:id/:tname',sessionChecker, function(req, res){
             var pkg = {
                     type: req.params.id,
                     tname: req.params.tname,
@@ -84,7 +84,7 @@ module.exports = function(app,db, sessionChecker){
         });
 
 
-        app.post('/reportes/guardar', function(req, res){
+        app.post('/reportes/guardar',sessionChecker, function(req, res){
             var pkg = {
             	db: db,
                 html: req.body.html,
@@ -94,7 +94,7 @@ module.exports = function(app,db, sessionChecker){
 			};
             reportsCtr.saveReport(pkg);
         });
-         app.get('/reportes/guardados', function(req, res){
+         app.get('/reportes/guardados',sessionChecker, function(req, res){
             var pkg = {
             	db: db,
                 id_cuenta: req.session.id_cuenta,
@@ -102,7 +102,7 @@ module.exports = function(app,db, sessionChecker){
 			};
             reportsCtr.savedReportsList(pkg);
         });
-         app.get('/reportes/guardados/:id', function(req, res){
+         app.get('/reportes/guardados/:id',sessionChecker, function(req, res){
             var pkg = {
             	db: db,
                 id_cuenta: req.session.id_cuenta,
@@ -111,7 +111,7 @@ module.exports = function(app,db, sessionChecker){
 			};
             reportsCtr.getReport(pkg);
         });
-         app.get('/reportes/guardados/eliminar/:id', function(req, res){
+         app.get('/reportes/guardados/eliminar/:id',sessionChecker, function(req, res){
             var pkg = {
             	db: db,
                 id: req.params.id,

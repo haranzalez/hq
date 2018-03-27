@@ -5,12 +5,12 @@ module.exports = {
 
 		return '<div class="ctn notification-row" data-user="'+username+'" style="width:100%;border-top: 1px solid #ccc;">'+
 			'<button class="notification-close-btn" type="button"><i class="fas fa-times-circle"></i></button>'+
-			'<div class="ctn-col-2">'+
+			'<div class="ctn-col-1">'+
 				
 					'<i class="fas fa-user"></i>'+
 			
 			'</div>'+
-			'<div class="ctn-col-8">'+mess+'<span class="notification-date">'+fecha('#hh#:#mm#:#ss# #AMPM#')+'</span></div>'+
+			'<div class="ctn-col-9">'+mess+'<span class="notification-date">'+fecha('#hh#:#mm#:#ss# #AMPM#')+'</span></div>'+
 		'</div>';
 	},
 
@@ -18,10 +18,10 @@ module.exports = {
 
 		return '<div class="ctn notification-row" style="width:100%;border-top: 1px solid #ccc;">'+
 			'<button class="notification-close-btn" type="button"><i class="fas fa-times-circle"></i></button>'+
-			'<div class="ctn-col-2">'+
+			'<div class="ctn-col-1">'+
 				'<i class="fas fa-info-circle"></i>'+
 			'</div>'+
-			'<div class="ctn-col-8">'+mess+'<br><span class="notification-date">'+fecha('#hh#:#mm#:#ss# #AMPM#')+'</span></div>'+
+			'<div class="ctn-col-9">'+mess+'<br><span class="notification-date">'+fecha('#hh#:#mm#:#ss# #AMPM#')+'</span></div>'+
 		'</div>';
 
 	}

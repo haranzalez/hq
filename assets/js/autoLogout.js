@@ -2,7 +2,7 @@
 class AutoLogout {
 
   construir() {
-    console.log('setting...');
+   
     this.events = ['load', 'mousemove', 'mousedown',
                    'click', 'scroll', 'keypress'];
 
@@ -39,7 +39,7 @@ class AutoLogout {
 
   warn() {
     $.ajax({
-      url: 'http://localhost:8000/recursos/componentes/bw/Su session terminara por inactividad en exactamente 1 minuto.',
+      url: '/recursos/componentes/bw/Su session terminara por inactividad en exactamente 1 minuto.',
       type: 'get',
       success: function(res){
         $('body').append(res);
@@ -51,7 +51,7 @@ class AutoLogout {
     // Send a logout request to the API
     console.log('Enviando logout a API....');
     $.ajax({
-      url: 'http://localhost:8000/signOut',
+      url: '/signOut',
       type: 'get',
       success: function(res){
         if(res == 'done'){
@@ -65,7 +65,6 @@ class AutoLogout {
   }
 
   destroy() {
-    console.log('destroyed');
     this.clearTimeout();
 
     for(var i in this.events) {

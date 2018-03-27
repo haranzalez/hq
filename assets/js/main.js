@@ -1,14 +1,156 @@
 /*BAKCUPS*/
+$('body').on('click','.backups-program-backup-btn', function(){
+
+  
+  
+  var fecha = $(this).attr('data-fecha');
+  fecha = fecha.split('-');
+   console.log(fecha);
+   var day = fecha[0],
+    month = fecha[1],
+    year = fecha[2].split(' ')[0],
+    hour = fecha[2].split(' ')[1].split(':')[0],
+    minute = fecha[2].split(' ')[1].split(':')[1],
+    second = fecha[2].split(' ')[1].split(':')[2],
+    period = $('.backups-select-period').val();
+
+  
+  $.ajax({
+    url: '/programBackUp/'+second+'/'+minute+'/'+hour+'/'+day+'/'+period+'/'+month+'/'+year,
+    type: 'get',
+    success: function(d){
+      redirect(d)
+      console.log(d)
+      $('body').append(d);
+    }
+  })
+})
+
+
 
 function getBakcups(){
+ $('.loading-ctn').show();
   $.ajax({
     url: '/getBackups',
     type: 'get',
     success: function(d){
+      redirect(d)
       $('#module-backups').empty().append(d);
+      $('#module-backups').find('.backups-table').DataTable({
+        "language": {
+            "lengthMenu": "Mostrar _MENU_ registros por pagina",
+            "zeroRecords": "No hay registros para mostrar",
+            "info": "Pagina _PAGE_ de _PAGES_",
+            "infoEmpty": "No registros disponibles.",
+            "search": "Buscar:",
+            "infoFiltered": "(Mostrando _MAX_ registros)",
+            "paginate": {
+              "first":      "Primero",
+              "last":       "Ultimo",
+              "next":       "Siguiente",
+              "previous":   "Anterior"
+          }
+          
+        },
+        "columnDefs": [
+          { "targets": 1 }
+        ],
+        "pageLength": 25,
+        "dom": '<"ctn registros-tools" <"ctn-col-thirds outer" <"middle" <"inner" f>>><"ctn-col-thirds outer" <"middle" <"inner" >>><"ctn-col-thirds outer" <"middle" <"inner" >>>>t',
+       
+        "buttons": [
+          'excel'
+        ],
+        "scrollY":        "600px",
+        "responsive": true,
+        "scrollCollapse":       true
+    });
+
+    function quarterHours(){
+      var quarterHours = ["00", "15", "30", "45"];
+      var times = [];
+      for(var i = 0; i < 24; i++){
+        for(var j = 0; j < 4; j++){
+          if(i < 10){
+            times.push("0" + i + ":" + quarterHours[j]);
+          } else {
+            times.push(i + ":" + quarterHours[j]);
+          }
+        }
+      }
+      return times;
     }
+
+    jQuery.datetimepicker.setLocale('es');
+    $('#backups-programmer').datetimepicker({
+      allowTimes:quarterHours(),
+      format: 'd-m-Y h:i:s',
+      inline: true,
+      lang: 'es',
+      i18n:{
+        es:{
+         months:[
+          'Enero','Febrero','Marzo','Abril',
+          'Mayo','Junio','Julio','Agosto',
+          'Septiembre','Octubre','Noviembre','Diciembre',
+         ],
+         dayOfWeek:[
+          "Dom", "Lun", "Mar", "Mier", 
+          "Jue", "Vie", "Sab",
+         ]
+        }
+       },
+       onChangeDateTime:function(dp,$input){
+        $('.backups-program-backup-btn').attr('data-fecha', $input.val())
+      }
+    }).datetimepicker('show');
+    
+    $('.loading-ctn').fadeOut();
+
+    }
+
+   
+
   })
 }
+
+$('body').on('click','.backup-now-btn', function(){
+  $('.loading-ctn').show();
+      $.ajax({
+        type: 'get',
+        url: '/recursos/componentes/confirm/Es recomendable ejecutar un BackUp en horas de no actividad en el sistema para evitar perdida de informacion. Desea continuar/backups-confirm-backup-btn/none',
+        success: function(d){
+        redirect(d);
+        $('body').append(d);
+        $('.loading-ctn').fadeOut();
+        }
+     });
+ });
+ 
+
+$('body').on('click','.backups-confirm-backup-btn', function(){
+  $('.loading-ctn').show();
+  $.ajax({
+   url: '/backup',
+   type:'get',
+   success: function(d){
+     redirect(d);
+     getBakcups();
+     $('body').append(d);
+     $('.loading-ctn').fadeOut();
+     
+   }
+
+  })
+});
+$('body').on('click','.backups-sync-table', function(){
+  getBakcups();
+})
+$('body').on('click','.registros-sync-table', function(){
+  getRegistros();
+})
+ 
+
 
 
 
@@ -17,11 +159,12 @@ function getBakcups(){
 
 
 function getRegistros(){
-
+  $('.loading-ctn').show();
   $.ajax({
     url: '/registros',
     type: 'get',
     success: function(d){
+      redirect(d)
       $('#module-registros').empty().append(d);
       $('#module-registros').find('.registros-table').DataTable({
         "language": {
@@ -42,17 +185,19 @@ function getRegistros(){
         "columnDefs": [
           { "targets": 1 }
         ],
-        "pageLength": 25,
-        "dom": '<"ctn registros-tools" <"ctn-col-thirds outer" <"middle" <"inner" f>>><"ctn-col-thirds outer" <"middle" B<"inner" >>><"ctn-col-thirds outer" <"middle" <"inner" >>>>t',
-        "rowReorder": true,
+        "paging": false,
+        "dom": '<"ctn registros-tools" <"ctn-col-thirds outer" <"middle" <"inner" f>>><"ctn-col-thirds outer" <"middle" B<"inner" >>><"ctn-col-thirds outer" <"middle" <"inner" l>>>>t',
+       
         "buttons": [
           'excel'
         ],
-        "scrollY":        "500px",
+        "scrollY":        "600px",
         "responsive": true,
-        "scrollCollapse":       true
+        "scrollCollapse": true,
+        "order": [[ 3, "desc" ]]
+        
     });
-      
+    $('.loading-ctn').fadeOut();
     }
 
   })
@@ -156,6 +301,7 @@ var tableToExcel = (function () {
  });
 
   $('body').on('click','.reports-tools-confirm-save-btn', function(){
+    $('.loading-ctn').show();
      var html  = document.querySelector('.preview-ctn').innerHTML;
 
      var html = 'nombre='+$(this).parent().siblings('.text-box').val()+'&html='+html.toString();
@@ -167,41 +313,51 @@ var tableToExcel = (function () {
         $('.message-box-ctn').remove();
         $('body').append(d);
         getSavedReports();
+        $('.loading-ctn').fadeOut();
         }
      });
  });
  $('body').on('click','.reports-tools-save-btn', function(){
+  $('.loading-ctn').show();
       $.ajax({
         type: 'get',
         url: '/recursos/componentes/mesBoxTextInput/Guardar reporte/reports-tools-confirm-save-btn/none',
         success: function(d){
+          redirect(d)
         $('body').append(d);
+        $('.loading-ctn').fadeOut();
         }
      });
  });
 
 $('body').on('click','.reports-saved-del-btn', function(){
+  $('.loading-ctn').show();
   var id = $(this).attr('data-reportID');
 
   $.ajax({
     url: '/recursos/componentes/confirm/Este reporte sera eliminado permanentemente. Desea continuar/reports-saved-confirm-del-btn/'+id,
     type: 'get',
     success: function(d){
+      redirect(d)
       $('body').append(d);
+      $('.loading-ctn').fadeOut();
     }
   })
 
 })
 
 $('body').on('click','.reports-saved-confirm-del-btn', function(){
+  $('.loading-ctn').show();
   var id = $(this).attr('data-btn');
   $.ajax({
     url: '/reportes/guardados/eliminar/'+id,
     type: 'get',
     success: function(d){
+      redirect(d)
       $('.message-box-ctn').remove();
       $('body').append(d);
       getSavedReports();
+      $('.loading-ctn').fadeOut();
     }
   })
 })
@@ -210,12 +366,14 @@ $('body').on('click','.reports-saved-confirm-del-btn', function(){
 
 
 function getSavedReports(){
-
+  $('.loading-ctn').show();
   $.ajax({
     type: 'get',
     url: '/reportes/guardados',
     success: function(d){
+      redirect(d)
       $('.reports-saved-result-ctn').empty().append(d);
+      $('.loading-ctn').fadeOut();
     }
   })
 
@@ -223,18 +381,20 @@ function getSavedReports(){
 }
 
 $('body').on('click','.reports-saved-open-btn', function(){
+  $('.loading-ctn').show();
   var id = $(this).attr('data-reportid');
   $.ajax({
     type: 'get',
     url: '/reportes/guardados/'+id,
     success: function(d){
+      redirect(d)
       $('.preview-ctn').empty().append(d);
       var tbls = $('.reports-table-tools-title-input');
       $('.report-add-to-table-select').empty()
       for(var i = 0; i < tbls.length; i++){
         $('.report-add-to-table-select').append('<option value="'+$(tbls[i]).siblings('.reports-table-title').attr('data-table')+'">'+$(tbls[i]).val()+'</option>');
       }
-   
+      $('.loading-ctn').fadeOut();
     }
   })
 })
@@ -335,6 +495,13 @@ function convertToTable(pkg){
     
 }
 
+function redirect(b){
+
+  if(b == 'redirect'){
+    window.location.replace('/');
+    return;
+  }
+}
 
 
  var autoLogout = new AutoLogout();
@@ -358,7 +525,8 @@ function getOnlineUsers(){
       url: '/users/comp/filter',
       type: 'get',
       success: function(res){
-        console.log(res);
+        
+     
          $('.user-status-table').empty();
          $('.user-status-table').append(res);
       }
@@ -373,6 +541,7 @@ function getModuleTools(module){
           url: '/recursos/componentes/moduleTools/'+module+'/none/none',
           type: 'get',
           success: function(res){
+            redirect(res)
              $('body').find('.module-tools').empty().append(res);
              
              
@@ -386,7 +555,7 @@ function getSecModuleTools(module){
       url: '/recursos/componentes/secModuleTools/'+module+'/none/none',
       type: 'get',
       success: function(res){
-       
+        redirect(res)
          $('body').find('.module-sec-tools .ctn').append(res);
          
          
@@ -457,7 +626,7 @@ function getSecModuleTools(module){
        $('.user-module-tool-bar .title').text('Usuarios');
        users.createUserForm();
        users.listUsers();
-       //autoLogout.construir();
+       autoLogout.construir();
       
   }
 
@@ -511,11 +680,12 @@ function login(form){
       url: '/',
       type: 'post',
       success: function(res){
-       
+        
         if(res.mess == 'granted'){
          
          window.location = '/plataforma/'+res.nombre_area+'/'+res.nombre_rol+'/'+res.id_rol+'/'+username;
         }else{
+        
           $('body').append(res);
         }
         
@@ -528,11 +698,11 @@ function login(form){
 //SIGN OUT BTN btn is located in main menu
 $('.sign-out-btn').on('click', function(){
   $.ajax({
-      url: 'http://localhost:8000/signOut',
+      url: '/signOut',
       type: 'get',
       success: function(res){
         if(res == 'done'){
-          //autoLogout.destroy();
+          autoLogout.destroy();
           window.location = 'http://localhost:8000/';
         }  
       }
@@ -624,49 +794,55 @@ $('body').on('click','.mess-box-btn', function(){
       $(this).parent().parent().parent().remove();
     break;
     case 'confirm-delete':
+    $('.loading-ctn').show();
        var id = $(this).attr('data-id');
     
        $.ajax({
-        url: 'http://localhost:8000/users/delete/'+id,
+        url: '/users/delete/'+id,
         type: 'get',
         success: function(res){
+           redirect(res);
            $('body').append(res);
            users.listUsers();
+           $('.loading-ctn').fadeOut();
         }
       })
       $(this).parent().parent().parent().remove();
     break;
     case 'confirm-ban':
+    $('.loading-ctn').show();
       var id = $(this).attr('data-id');
       $.ajax({
-          url: 'http://localhost:8000/users/block/'+id,
+          url: '/users/block/'+id,
           type: 'get',
           success: function(res){
-
+            redirect(res);
              $('.btn-ctr-form-user[data-btn="block"][data-id="'+id+'"]').attr('data-btn', 'unblock')
              .css({
                 'color': '#E1001A'
              }).find('.fa-unlock').removeClass('fa-unlock').addClass('fa-lock');
               
              $('body').append(res);
+             $('.loading-ctn').fadeOut();
              
           }
       })
       $(this).parent().parent().parent().remove();
     break;
     case 'confirm-unban':
+    $('.loading-ctn').show();
       var id = $(this).attr('data-id');
       $.ajax({
-          url: 'http://localhost:8000/users/unblock/'+id,
+          url: '/users/unblock/'+id,
           type: 'get',
           success: function(res){
-
+            redirect(res)
             $('.btn-ctr-form-user[data-btn="unblock"][data-id="'+id+'"]').attr('data-btn', 'block')
              .css({
                 'color': 'black'
              }).find('.fa-lock').removeClass('fa-lock').addClass('fa-unlock');
 
-            
+             $('.loading-ctn').fadeOut();
              
           }
       })
@@ -691,17 +867,19 @@ $('body').on('click','.mess-box-btn', function(){
 //===============================================================================================================================================================
 //USERS CREATE USER BTN
 $('body').on('click', '.create-user-form .user-reg-btn', function(){
-   
+  $('.loading-ctn').show();
     var valid = $('#create-user-form').parsley().validate();
     if(valid){
       var dta = $('#create-user-form').serialize();
       if($(this).attr('data-btn') == 'registrar'){
         $.ajax({
           data: dta,
-          url: 'http://localhost:8000/users/create',
+          url: '/users/create',
           type: 'post',
           success: function(res){
+            redirect(res)
               $('body').append(res);
+              $('.loading-ctn').fadeOut();
           }
         })
       }
@@ -720,9 +898,10 @@ $('body').on('keyup','.search-quary-box', function(){
   var keyword = $(this).val()
   console.log(keyword);
   $.ajax({
-    url: 'http://localhost:8000/users/comp/search/'+keyword,
+    url: '/users/comp/search/'+keyword,
     type: 'get',
     success: function(res){
+      redirect(res)
       $('.list-result-ctn').empty();
        $('.list-result-ctn').append(res);
     }
@@ -739,10 +918,11 @@ $('body').on('click','.sub-menu-mobil .sub-menu-btn', function(){
   }
   $.ajax({
     data: dta,
-    url: 'http://localhost:8000/users/comp/filter',
+    url: '/users/comp/filter',
     type: 'get',
     success: function(res){
-      console.log(res);
+      redirect(res)
+     
        $('.list-result-ctn').empty();
        $('.list-result-ctn').append(res);
     }
@@ -756,9 +936,10 @@ $('body').on('click','.sub-menu-mobil .sub-menu-btn', function(){
 $('body').on('click','.sel-rol-btn',function(){
  
   $.ajax({
-          url: 'http://localhost:8000/recursos/componentes/w1/none/none/none',
+          url: '/recursos/componentes/w1/none/none/none',
           type: 'get',
           success: function(res){
+            redirect(res)
              $('body').find('.mobile-window-ctn .ctn').empty().append(res).parent().show();
              $('body').find('.mobile-window-ctn .back-btn').hide();
              $('.white-blur').show();
@@ -780,16 +961,16 @@ $('body').on('click','.btn-ctr-form-user', function(){
   switch ($(this).attr('data-btn')) {
 
     case 'edit':
-      
+    $('.loading-ctn').show();
       var id = $(this).attr('data-id');
        
       
       
       $.ajax({
-        url: 'http://localhost:8000/users/'+id,
+        url: '/users/'+id,
         type: 'get',
         success: function(res){
-          
+          redirect(res)
           updateFormCopy = res;
           
           var keys = Object.keys(res);
@@ -820,7 +1001,7 @@ $('body').on('click','.btn-ctr-form-user', function(){
           
           $('.white-blur').show();
           $('.users-forms-ctn').show();
-
+          $('.loading-ctn').fadeOut();
            
         }
       })
@@ -829,7 +1010,7 @@ $('body').on('click','.btn-ctr-form-user', function(){
 //------------------------------------------------------------------------------------------------------------------------------------------------
     case 'update':
 
-
+    $('.loading-ctn').show();
       var id = $(this).attr('data-id');
 
 
@@ -898,10 +1079,11 @@ $('body').on('click','.btn-ctr-form-user', function(){
         data: processForm('#create-user-form'),
         type: 'post',
         success: function(res){
+          redirect(res)
            socket.emit('noti', USER);
            $('body').append(res);
            users.listUsers();
-           
+           $('.loading-ctn').fadeOut();
            
         }
       })
@@ -909,14 +1091,16 @@ $('body').on('click','.btn-ctr-form-user', function(){
     break;
 //------------------------------------------------------------------------------------------------------------------------------------------------
     case 'delete':
+    $('.loading-ctn').show();
       var id = $(this).attr('data-id');
       $.ajax({
-        url:'http://localhost:8000/recursos/componentes/awb/Este usuario sera eliminado permanentemente. Desea continuar%3F./confirm-delete/none',
+        url:'/recursos/componentes/awb/Este usuario sera eliminado permanentemente. Desea continuar%3F./confirm-delete/none',
         type: 'get',
         success: function(mesBox){
+          redirect(mesBox)
           $('body').append(mesBox);
           $('body').find('.message-box-ctn').find('.mess-box-btn').attr('data-id', id);
-          
+          $('.loading-ctn').fadeOut();
         }
 
       })
@@ -924,16 +1108,17 @@ $('body').on('click','.btn-ctr-form-user', function(){
     break;
 //------------------------------------------------------------------------------------------------------------------------------------------------
 case 'block':
+$('.loading-ctn').show();
     var id = $(this).attr('data-id');
 
     $.ajax({
       url:'http://localhost:8000/recursos/componentes/awb/La entrada al sistema sera restringida para este usuario. Desea continuar%3F./confirm-ban/none',
       type: 'get',
       success: function(mesBox){
-
+        redirect(mesBox)
         $('body').append(mesBox);
         $('body').find('.message-box-ctn').find('.mess-box-btn').attr('data-id', id);
-        
+        $('.loading-ctn').fadeOut();
       }
 
     })
@@ -941,15 +1126,17 @@ case 'block':
 break;
 //------------------------------------------------------------------------------------------------------------------------------------------------
 case 'unblock':
+$('.loading-ctn').show();
     var id = $(this).attr('data-id');
     console.log(id);
     $.ajax({
-      url:'http://localhost:8000/recursos/componentes/awb/La entrada al sistema sera habilitada para este usuario. Desea continuar%3F./confirm-unban/none',
+      url:'/recursos/componentes/awb/La entrada al sistema sera habilitada para este usuario. Desea continuar%3F./confirm-unban/none',
       type: 'get',
       success: function(mesBox){
+        redirect(mesBox)
         $('body').append(mesBox);
         $('body').find('.message-box-ctn').find('.mess-box-btn').attr('data-id', id);
-      
+        $('.loading-ctn').fadeOut();
         
       }
 
@@ -978,21 +1165,22 @@ break;
 //========================================================================================================================================================
 //BTNS TO HANDLE ROLE REQUESTS
 $('body').on('click','.btn-ctr-form-rol', function(){
-
+  
   switch ($(this).attr('data-btn')) {
     case 'crear-rol':
-   
+    $('.loading-ctn').show();
       var valid = $('#create-rol-form').parsley().validate();
       if(valid){
          var data = $('#create-rol-form').serialize();
           $.ajax({
-            url: 'http://localhost:8000/roles/crear/',
+            url: '/roles/crear/',
             data: data,
             type: 'post',
             success: function(res){
+              redirect(res)
               $('body').append(res);
               users.listRols();
-               
+              $('.loading-ctn').fadeOut();
             }
           })
       }
@@ -1009,15 +1197,16 @@ $('body').on('click','.btn-ctr-form-rol', function(){
       
 //------------------------------------------------------------------------------------------------------------------------------------------------
 case 'edit-rol-name':
+$('.loading-ctn').show();
       var id = $(this).attr('data-id');
       $.ajax({
-          url: 'http://localhost:8000/recursos/componentes/bf1/none/none/none',
+          url: '/recursos/componentes/bf1/none/none/none',
           type: 'get',
           success: function(res){
-            
+            redirect(res)
             $('body').append(res);
             $('body').find('.message-box-ctn').find('.mess-box-btn').attr('data-id', id);
-
+            $('.loading-ctn').fadeOut();
              
           }
       })
@@ -1026,17 +1215,19 @@ case 'edit-rol-name':
  break;
 //------------------------------------------------------------------------------------------------------------------------------------------------
 case 'update-rol-name':
+$('.loading-ctn').show();
       var id = $(this).attr('data-id');
       var data = 'nombre_rol='+$('.message-box-ctn').find('.text-box').val()+'&id_rol='+id;
 
      $.ajax({
-          url: 'http://localhost:8000/roles/update/name/',
+          url: '/roles/update/name/',
           data: data,
           type: 'post',
           success: function(res){
+            redirect(res)
              $('body').append(res);
              users.listRols();
-             
+             $('.loading-ctn').fadeOut();
           }
       })
 
@@ -1046,16 +1237,18 @@ case 'update-rol-name':
 //BOTON PARA SELECCIONAR ROL BASADO EN EL ID DEL AREA ASIGNADO
 
 case 'sel-area-btn':
+$('.loading-ctn').show();
       var id = $(this).attr('data-id');
       
       $.ajax({
         data: id,
-          url: 'http://localhost:8000/recursos/componentes/w2/'+id+'/none/none',
+          url: '/recursos/componentes/w2/'+id+'/none/none',
           type: 'get',
           success: function(res){
+            redirect(res)
              $('body').find('.mobile-window-ctn .back-btn').show();
              $('body').find('.mobile-window-ctn .ctn').empty().append(res);
-             
+             $('.loading-ctn').fadeOut();
              
           }
       })
@@ -1231,6 +1424,7 @@ $('body').on('click','#module-reports .tbl-list-ctn .table-item', function(){
           url: '/reports/'+table,
           type: 'get',
           success: function(res){
+              redirect(res)
               $('body').find('.fields-list-ctn[data-table="'+table+'"]').append(res);
               $('.fields-list-ctn[data-table="'+table+'"]').parent().css('max-height', '250px');
           }
@@ -1282,7 +1476,7 @@ $('body').on('click','#module-reports .fields-list-ctn .field-item', function(){
           url: '/reports/'+tbl+'/'+fld,
           type: 'get',
           success: function(res){
-              console.log(tbl)
+             redirect(res)
               $('.reports-table-section-ctn').find('.reports-table-pkg[data-table="'+rtbl+'"] .ctn-row').append(res);
               var color = $('.table-item[data-btn="'+tbl+'"]').attr('data-color');
               $('.reports-table-pkg[data-table="'+rtbl+'"]').find('.reports-table-col-ctn[data-table="'+tbl+'"]').css('border-color', color);
@@ -1294,6 +1488,7 @@ $('body').on('click','#module-reports .fields-list-ctn .field-item', function(){
           url: '/reports/'+tbl+'/'+fld+'/'+recId,
           type: 'get',
           success: function(res){
+            redirect(res)
               $('.reports-table-section-ctn').find('.reports-table-pkg[data-table="'+rtbl+'"] .ctn-row').append(res);
                var color = $('.table-item[data-btn="'+tbl+'"]').attr('data-color');
               $('.reports-table-pkg[data-table="'+rtbl+'"]').find('.reports-table-col-ctn[data-table="'+tbl+'"]').css('border-color', color);
@@ -1304,7 +1499,7 @@ $('body').on('click','#module-reports .fields-list-ctn .field-item', function(){
 
   }else{
 
-   var html = '<div class="pop-over"><span class="arrow-left"></span><p>Porfavor seleccione o adicione una tabla en el documento.</p></div>';
+   var html = '<div class="pop-over"><span class="arrow-up"></span><p>Porfavor seleccione o adicione una tabla en el documento.</p></div>';
    $('.report-add-to-table-select').parent().append(html);
    setTimeout(function(){
       $('.report-add-to-table-select').parent().find('.pop-over').remove();
@@ -1380,7 +1575,7 @@ $('body').on('click','.reports-show-all-tbls-btn', function(){
         url: '/reports/table/all/'+table,
         type: 'get',
         success: function(res){
-            
+          redirect(res)
             var rtbl = $('.report-add-to-table-select').val();
             $('.reports-table-section-ctn').find('.reports-table-pkg[data-table="'+rtbl+'"] .ctn-row').append(res);
             var elms = $(this).siblings('.custom-reports-ctn-row').find('.reports-table-col-ctn');
@@ -1540,6 +1735,7 @@ $('body').on('click','.reports-tools-addTbl-btn', function(){
            url: '/reportes/herramientas/tblTools/'+numOfTbls,
            type: 'get',
            success: function(res){
+            redirect(res)
                var html = '<div class="reports-table-pkg" data-table="'+numOfTbls+'">'+
                 '<h3 class="reports-table-title" data-table="'+numOfTbls+'">Tabla '+numOfTbls+'</h3>'+
                 '<input placeholder="Tabla '+numOfTbls+'" type="text" class="reports-table-tools-title-input">'+
@@ -1567,6 +1763,7 @@ $('.reports-search-tables-input').on('keyup', function(key){
           url: '/reports',
           type: 'get',
           success: function(res){
+            redirect(res)
            $('body').find('.tbl-list-ctn').empty();
            $('body').find('.tbl-list-ctn').append(res);
           }
@@ -1576,6 +1773,7 @@ $('.reports-search-tables-input').on('keyup', function(key){
           url: '/reports/search/'+keyword,
           type: 'get',
           success: function(res){
+            redirect(res)
            $('body').find('.tbl-list-ctn').empty();
            $('body').find('.tbl-list-ctn').append(res);
           }
@@ -1589,11 +1787,12 @@ $('.menu-btn').on('click', function(){
   var d = $(this).attr('data-btn');
   switch (d) {
     case 'reports':
+    $('.loading-ctn').show();
       $.ajax({
           url: '/reports',
           type: 'get',
           success: function(res){
-         
+           redirect(res)
            hideModules()
            getModuleTools('reports')
            getSecModuleTools('reports')
@@ -1602,6 +1801,7 @@ $('.menu-btn').on('click', function(){
            $('#module-reports').removeClass('in-the-shadows');
            $('.menu').removeClass('zero-out-absolute-spaces');
            $('.white-blur').removeClass('reveal');
+           $('.loading-ctn').fadeOut();
           }
       })
     break;
@@ -1617,6 +1817,8 @@ $('.menu-btn').on('click', function(){
       hideModules();
       getSecModuleTools('');
       getRegistros();
+      getModuleTools('registros');
+      
       
       $('#module-registros').removeClass('in-the-shadows');
       $('.menu').removeClass('zero-out-absolute-spaces');
@@ -1625,6 +1827,8 @@ $('.menu-btn').on('click', function(){
     case 'backups':
       hideModules();
       getBakcups();
+      getModuleTools('backups');
+      getSecModuleTools('')
       
       $('#module-backups').removeClass('in-the-shadows');
       $('.menu').removeClass('zero-out-absolute-spaces');

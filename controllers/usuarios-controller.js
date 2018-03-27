@@ -164,7 +164,7 @@ module.exports = {
 		}
 		//cleaning object from empty objects
 		clearEmptyObjects(newDta)
-		console.log(newDta);
+	
 
 		var inst = {
 			funcion: 'update_user_case_3',
@@ -210,7 +210,7 @@ module.exports = {
 //==============================================================================================================================================================
 	sort: function(pkg, res){
 		
-
+		
 		switch (pkg.type) {
 			case 'usuarios':
 				if(pkg.filter == 'todos'){
@@ -235,7 +235,7 @@ module.exports = {
 					pkg.funcion = 'select_roles';
 					var d = crud.listRol(pkg);
 					d.then(d => {
-						
+					
 						for (var i = 0; i < d[0].length; i++) {
 								
 								for(var prop in d[0][i]){

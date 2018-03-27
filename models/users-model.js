@@ -515,8 +515,9 @@ delete: function(tabla, params, username) {
       
         var sql = "SET hq.usuario = '"+username+"';with "+
         "a as "+
-        "(update rol_privilegios_relation set privilegios = '{"+params.privilegios+"}' where id_rol = "+params.id_rol+") "+
-        "update roles set id_area = "+params.id_area+", poderes = '{"+params.poderes+"}' where id = "+params.id_rol;
+        "(update rol_privilegios_relation set privilegios = '{"+params.privilegios+"}' where id_rol = "+params.id_rol+" and privilegios <> '{"+params.privilegios+"}')"+
+        " update roles set id_area = "+params.id_area+" where id = "+params.id_rol+" and id_area IS DISTINCT FROM "+params.id_area+"";
+        console.log(sql);
          params.db.any(sql).catch(e => {console.log(e);});
         return {
             mess: 'Rol actualizado exitosamente.',

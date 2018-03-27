@@ -24,6 +24,7 @@ app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 //BASE DE DATOS [POSTGRES]
 var db = require('./db_components.js')('dbcred');
 
+
 //CONFIGURACION servidor y base de datosnodemon
 
 const config = require("./config.json");
@@ -54,17 +55,10 @@ var sessionChecker = (req, res, next) => {
     if (req.session.user && req.cookies.id_acceso && req.session.id_cuenta) {
         next();
     } else {
-        res.redirect('/');
+        res.send('redirect');
     }    
 };
-//MIDDLE WARE TO LOG CHANGES IN RECORDS
-var setUserForChanges = (req, res, next) => {
-    
-    var user = req.params.user;
-    db.any("SET hq.usuario = '"+user+"'");
-    next();
-  
-}
+
 
 
 
@@ -81,12 +75,12 @@ var setUserForChanges = (req, res, next) => {
 //middleware para uso de archivos estaticos como .css .js .png .jpg
 app.use('/estaticos', express.static('assets'))
 //Backups middleware
-app.use('/backups', serveIndex('backups', {icons: true, stylesheet: 'http://'+config.host+':'+config.port+'/estaticos/css/hq.css'}));
+
 app.use('/backups', express.static('backups'))
 
 
 //ROUTER
-require('./router')(app, db, sessionChecker, io, setUserForChanges);
+require('./router')(app, db, sessionChecker, io);
 
 //SERVIDOR
 require('./server.js')(server,config);

@@ -4,10 +4,12 @@ class Users{
 
 
   listUsers() {
+    var cls = this;
     $.ajax({
       url: 'http://localhost:8000/users/comp/lista/usuarios',
       type: 'get',
       success: function(res){
+        cls.redir(res)
         $('.list-result-ctn div').remove();
         $('body').find('.list-result-ctn').append(res);
       }
@@ -15,11 +17,12 @@ class Users{
   }
 
   listRols(){
+    var cls = this;
     $.ajax({
-      url: 'http://localhost:8000/users/comp/lista/roles',
+      url: '/users/comp/lista/roles',
       type: 'get',
       success: function(res){
-       
+        cls.redir(res)
         $('.list-result-ctn div').remove();
         $('body').find('.list-result-ctn').append(res);
       }
@@ -28,12 +31,12 @@ class Users{
 
   createUserForm(){
   
-
+    var cls = this;
       $.ajax({
-        url: 'http://localhost:8000/users/comp/createForm',
+        url: '/users/comp/createForm',
         type: 'get',
         success: function(res){
-         
+          cls.redir(res)
           $('body').find('.users-forms-ctn').empty().append(res);
           
         }
@@ -43,10 +46,12 @@ class Users{
   }
 
   createRolForm(){
+    var cls = this;
     $.ajax({
-      url: 'http://localhost:8000/recursos/componentes/f2/none/none',
+      url: '/recursos/componentes/f2/none/none',
       type: 'get',
       success: function(res){
+        cls.redir(res)
         $('body').find('.users-forms-ctn').empty().append(res);
 
       }
@@ -54,10 +59,12 @@ class Users{
   }
 
   getAreasWindow(){
+    var cls = this;
     $.ajax({
-      url: 'http://localhost:8000/recursos/componentes/w1/none/none',
+      url: '/recursos/componentes/w1/none/none',
       type: 'get',
       success: function(res){
+        cls.redir(res)
         $('body').find('.mobile-window-ctn .back-btn').hide();
         $('body').find('.mobile-window-ctn .ctn').empty().append(res);
       }
@@ -65,23 +72,25 @@ class Users{
   }
 
   updateRol(data){
+    var cls = this;
     $.ajax({
       data: data,
-      url: 'http://localhost:8000/roles/update/',
+      url: '/roles/update/',
       type: 'post',
       success: function(res){
-
+        cls.redir(res)
         $('body').append(res);
       }
     })
   }
 
   getMenu(pkg){
-    console.log(pkg);
+    var cls = this;
      $.ajax({
-      url: 'http://localhost:8000/recursos/componentes/'+pkg.menuId+'/'+pkg.type+'/'+pkg.entId,
+      url: '/recursos/componentes/'+pkg.menuId+'/'+pkg.type+'/'+pkg.entId,
       type: 'get',
       success: function(res){
+        cls.redir(res)
         $('body').find('.users-filter-nav').empty().append(res);
       }
     })
@@ -92,9 +101,10 @@ class Users{
     var id = elm.attr('data-id');
     var type = elm.attr('data-type');
     $.ajax({
-        url: 'http://localhost:8000/users/logs/'+type+'/'+id,
+        url: '/users/logs/'+type+'/'+id,
         type: 'get',
         success: function(res){
+          cls.redir(res)
           if(res.mess){
 
             $('body').append(res.mess);
@@ -110,12 +120,17 @@ class Users{
     });
   }
 
-  createUser(){
-    
+  redir(b){
+   
+    if(b == 'redirect'){
+ 
+      window.location.replace('/');
+      return;
+    }
   }
 
   hideForms(){
-    console.log('hiding');
+   
     
     if($('.users-forms-ctn').find('form').length > 1)
     {

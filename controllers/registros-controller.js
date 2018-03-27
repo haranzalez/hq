@@ -9,7 +9,7 @@ module.exports = {
         
         var result = model.getAllRegistros(params.db);
         result.then(d => {
-            
+          
        
         for(var prop in d){
             var nuevo;
@@ -61,7 +61,7 @@ module.exports = {
             
             
         }
-    
+       
            var arr = [];
            var count = 0;
         for(let prop in d){
@@ -92,8 +92,9 @@ module.exports = {
 
            }
        
+          
 
-          console.log(arr)
+   
         params.res.send(view(arr));
            
         });

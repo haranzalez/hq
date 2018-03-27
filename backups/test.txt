@@ -1,4 +1,0 @@
-46;Efrain;Quintero;34234234;2442 brookhurst dr;mississauga;Ontario;6477071408;6477071408;efrain@gmail.com
-43;Hans Christian;Ramirez Aranzalez;1144026028;Carrera 91 # 16-48;Cali;Valle;3321714;3108389763;haranzalez@gmail.com
-47;William Josefo;Tamarindo;1215658;carrera 45 #13-12;Cali;Valle;6477071408;6477071408;josefo@gmail.com
-48;Teetetes;Spatacolus;2345678;2442 brookhurst dr;mississauga;Ontario;6477071408;6477071408;platon@teetetes.com

@@ -9,30 +9,25 @@ const { exec } = require('child_process');
 
 module.exports = {
     
-    backup: function(){
-     var user='haranzalez',file='/Users/haranzalez/Desktop/hqsis/backups/BU-'+fecha()+'.sql'
-     exec('touch /Users/haranzalez/Desktop/hqsis/backups/BU-'+fecha()+'.sql');
+    backup: function(params){
+     var fileName = params.fileName;
+     var user='haranzalez',file='/Users/haranzalez/Desktop/hqsis/backups/'+fileName;
+     exec('touch /Users/haranzalez/Desktop/hqsis/backups/'+fileName);
      exec('pg_dump -U '+user+' -F p hq > '+file);
+     var fecha = new Date();
+  
+    
+     return 'Backup <b>'+fileName+'</b> terminado.';
+    },
 
-     return 'Bakcup Done';
+    lastBackup: function(db){
+        var sql = "SELECT DISTINCT ON ('id') * FROM  backups_programmer  ORDER  BY id, 'fecha' DESC NULLS LAST;";
+        return db.any(sql);
     }
     
     
 }
 
 
-function fecha(){
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth()+1; //January is 0!
 
-    var yyyy = today.getFullYear();
-    if(dd<10){
-        dd='0'+dd;
-    } 
-    if(mm<10){
-        mm='0'+mm;
-    } 
-    var today = dd+mm+yyyy;
-    return today;
-}
+

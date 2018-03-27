@@ -11,7 +11,7 @@ const users = require('./usuarios-router'),
       plataforma = require('../controllers/plataforma-controller');
 
 
-module.exports = function(app, db, sessionChecker, io, setUserForChanges) {
+module.exports = function(app, db, sessionChecker, io) {
 
   
 var room = '';
@@ -55,7 +55,7 @@ var id_cuenta = '';
 //=======================================================================================================================================================
 
 
-  app.get('/plataforma/:area/:rol/:id/:user',sessionChecker, function(req, res){
+  app.get('/plataforma/:area/:rol/:id/:user', function(req, res){
     user = req.params.user;
     room = req.params.area;
     id_cuenta = req.session.id_cuenta;
@@ -95,8 +95,8 @@ var id_cuenta = '';
 
 
   reports(app, db, sessionChecker);
-  backup(app, db);
-  registros(app, db);
+  backup(app, db, io, sessionChecker);
+  registros(app, db, sessionChecker);
   users(app, db, sessionChecker, io);
   comp(app,db, sessionChecker);
   roles(app,db, sessionChecker);
