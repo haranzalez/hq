@@ -16,7 +16,7 @@ return '<div id="module-reports" class="ctn in-the-shadows">'+
         '<table style="max-width:30%;font-size:12pt;border-collapse: collapse;background-color:white;">'+
         '<tr >'+
             '<td style="border-bottom:1px solid red;" colspan="2" rowspan="5" >'+
-            '<img class="report-imge" src="http://localhost:8000/estaticos/img/hqlogoReportes.png">'+//LOGO
+            '<img class="report-imge" src="/estaticos/img/hqlogoReportes.png">'+//LOGO
             '</td>'+
             '<td valign="middle" class="td-ctn reporte-titulo-principal" style="border-bottom:1px solid red;font-size:23pt;font-weigth:900;" colspan="10" rowspan="5">'+
             'Reporte'+
@@ -52,7 +52,7 @@ return '<div id="module-reports" class="ctn in-the-shadows">'+
 '<div class="ctn" style="border-bottom: 1px solid red;">'+
  
      '<div class="ctn-col-3">'+
-     '<img style="width:150px;" class="report-imge" src="http://localhost:8000/estaticos/img/hqlogoReportes.png">'+//LOGO
+     '<img style="width:150px;" class="report-imge" src="/estaticos/img/hqlogoReportes.png">'+//LOGO
     '</div>'+
     
     '<div class="ctn-col-7">'+

@@ -50,12 +50,13 @@ class AutoLogout {
   logout() {
     // Send a logout request to the API
     console.log('Enviando logout a API....');
+    var cls = this;
     $.ajax({
       url: '/signOut',
       type: 'get',
       success: function(res){
         if(res == 'done'){
-          this.destroy();  // Cleanup
+          cls.destroy();  // Cleanup
           window.location = 'http://localhost:8000/';
 
         }  

@@ -6,7 +6,7 @@ class Users{
   listUsers() {
     var cls = this;
     $.ajax({
-      url: 'http://localhost:8000/users/comp/lista/usuarios',
+      url: '/users/comp/lista/usuarios',
       type: 'get',
       success: function(res){
         cls.redir(res)
@@ -51,6 +51,7 @@ class Users{
       url: '/recursos/componentes/f2/none/none',
       type: 'get',
       success: function(res){
+        console.log(res)
         cls.redir(res)
         $('body').find('.users-forms-ctn').empty().append(res);
 
@@ -90,6 +91,7 @@ class Users{
       url: '/recursos/componentes/'+pkg.menuId+'/'+pkg.type+'/'+pkg.entId,
       type: 'get',
       success: function(res){
+        console.log(res)
         cls.redir(res)
         $('body').find('.users-filter-nav').empty().append(res);
       }

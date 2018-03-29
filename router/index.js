@@ -92,7 +92,7 @@ var id_cuenta = '';
     })
 
   })
-
+  
 
   reports(app, db, sessionChecker);
   backup(app, db, io, sessionChecker);

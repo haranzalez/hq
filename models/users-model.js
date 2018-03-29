@@ -389,7 +389,6 @@ update: function(tabla, params, username) {
                    
                  
                 }
-             
 
             }else if(l == 1){
                 var sql = '';

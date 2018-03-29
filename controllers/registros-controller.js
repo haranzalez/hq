@@ -28,12 +28,15 @@ module.exports = {
              
             }
             
+            
             if(Object.keys(nuevo).length > 0 && Object.keys(anterior).length > 0){
                 for(var prop3 in nuevo){
+                    
                     if(Object.values(anterior).indexOf(nuevo[prop3]) === -1){
+                        
                         d[prop]['valor_anterior'][prop3] = anterior[prop3]
                         d[prop]['valor_nuevo'][prop3] = nuevo[prop3]
-                 
+                        
                         
                     }else{
                         
@@ -42,19 +45,24 @@ module.exports = {
                     }
     
                 }
-
+               
             }else if(Object.keys(nuevo).length > 0 && Object.keys(anterior).length == 0){
-                
-                d[prop]['valor_anterior'] = 'NA';
-                d[prop]['valor_nuevo'][prop3] = nuevo[prop3];
-
+                for(var prop3 in nuevo){
+                    
+                    d[prop]['valor_anterior'] = 'NA';
+                    d[prop]['valor_nuevo'][prop3] = nuevo[prop3];
+                }
+               
             }else if(Object.keys(nuevo).length == 0 && Object.keys(anterior).length > 0){
-                d[prop]['valor_anterior'][prop3] = anterior[prop3];
-                d[prop]['valor_nuevo'] = 'NA';
+                for(var prop3 in nuevo){
+                    d[prop]['valor_anterior'][prop3] = anterior[prop3];
+                    d[prop]['valor_nuevo'] = 'NA';
+                }
+                
 
             }
-
-
+            
+            
 
             
            
@@ -64,6 +72,7 @@ module.exports = {
        
            var arr = [];
            var count = 0;
+           
         for(let prop in d){
 
                
@@ -78,12 +87,12 @@ module.exports = {
                
                 for(var prop4 in obj)
                 {
-                    
                     var final = Object.assign({}, copy);
                     delete final['valor_anterior'];
                     delete final['valor_nuevo'];
-                    final['valor_anterior'] = (copy['valor_anterior'] == 'undefined')?'NA':copy['valor_anterior'][prop4];
-                    final['valor_nuevo'] = (copy['valor_nuevo'] == 'undefined')?'NA':copy['valor_nuevo'][prop4];
+                    
+                    final['valor_anterior'] = (copy['valor_anterior'] == 'undefined' || copy['valor_anterior'] == 'NA')?'NA':copy['valor_anterior'][prop4];
+                    final['valor_nuevo'] = (copy['valor_nuevo'] == 'undefined' || copy['valor_nuevo'] == 'NA')?'NA':copy['valor_nuevo'][prop4];
                     final['campo'] = prop4;
                     arr.push(final);
                     final = '';

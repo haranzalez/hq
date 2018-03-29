@@ -60,7 +60,7 @@ module.exports = {
 					res.send(menues(params.extra));
 			break;
 			case "sub-user-logs"://for user logs
-					console.log(params);
+					
 					res.send(menues(params.id, {id_acceso: params.id_acceso}));
 			break;
 			case "moduleTools"://for user logs

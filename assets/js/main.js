@@ -1895,28 +1895,28 @@ $('body').on('click','.module-tools-list .tool .users-prime-ctr-btn', function()
   //appending data to ctn according to condition
    switch (data) {
       case 'users':
-      var elm = $('.users-add-btn[data-btn="users"]');
-      if(elm.length == 0){
+        var elm = $('.users-add-btn[data-btn="users"]');
+        if(elm.length == 0){
 
-        $('.users-add-btn[data-btn="roles"]').attr('data-btn', 'users');
-        
+          $('.users-add-btn[data-btn="roles"]').attr('data-btn', 'users');
+          
 
-      }
-      users.getMenu({menuId:'sub-menu-users', type: 'sub-users', entId: 'none'});
-      $('.user-module-tool-bar .title').text('Usuarios')
-      users.listUsers();
+        }
+        users.getMenu({menuId:'sub-menu-users', type: 'sub-users', entId: 'none'});
+        $('.user-module-tool-bar .title').text('Usuarios')
+        users.listUsers();
      
 
       break;
       case 'roles':
-      var elm = $('.users-add-btn[data-btn="roles"]');
-      if(elm.length == 0){
-        $('.users-add-btn[data-btn="users"]').attr('data-btn', 'roles');
-        
-      }
-      users.getMenu({menuId:'sub-menu-roles', type: 'sub-roles', entId: 'none'});
-      $('.user-module-tool-bar .title').text('Roles')
-      users.listRols();
+        var elm = $('.users-add-btn[data-btn="roles"]');
+        if(elm.length == 0){
+          $('.users-add-btn[data-btn="users"]').attr('data-btn', 'roles');
+          
+        }
+        users.getMenu({menuId:'sub-menu-roles', type: 'sub-roles', entId: 'none'});
+        $('.user-module-tool-bar .title').text('Roles')
+        users.listRols();
       break;
    }
 

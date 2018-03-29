@@ -6,7 +6,12 @@ module.exports = function(type){
 	switch (type){
 		case 'dbcred':
 		//CONFIGURACION servidor y base de datos
-		const config = require("./config.json");
+		const config = {
+			user: 'haranzalez',
+			pass: '0926ara7',
+			host: '127.0.0.1:5432',
+			database: 'hq'
+		}
 		//coneccion a base de datos Postgres con modulo pg-promise 
 		var connectionString = 'postgres://'+config.user+':'+config.pass+'@'+config.host+'/'+config.database;
 		var db = pgp(connectionString);//callback se retiene en var db
