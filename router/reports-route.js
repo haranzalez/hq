@@ -1,4 +1,5 @@
 var reportsCtr = require('../controllers/reports-controller.js');
+var reportSheet = require('../views/Reportes/report-sheet.js');
 
 module.exports = function(app,db, sessionChecker){
 
@@ -118,7 +119,11 @@ module.exports = function(app,db, sessionChecker){
                 res:res
 			};
             reportsCtr.delReport(pkg);
-        });
+		});
+		
+		app.get('/reportes/sheet', sessionChecker, function(req, res){
+			res.send(reportSheet(req.session.user));
+		})
         
        
 

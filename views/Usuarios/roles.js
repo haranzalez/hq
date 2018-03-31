@@ -5,7 +5,7 @@ module.exports = function(obj){
 	privilegiosList = obj[1];
                
     delete obj.type;
-    console.log(obj)
+   
     for(var prop in obj[0])
     {
      if(obj[0][prop]['id'] === 48){//admin
@@ -41,7 +41,7 @@ module.exports = function(obj){
     }
 
     html = html+"</div>";
-
+     console.log(html)
     return html;
 
 

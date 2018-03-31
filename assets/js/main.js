@@ -28,6 +28,7 @@ $('body').on('click','.backups-program-backup-btn', function(){
 
 
 
+
 function getBakcups(){
  $('.loading-ctn').show();
   $.ajax({
@@ -310,6 +311,7 @@ var tableToExcel = (function () {
         data: html,
         url: '/reportes/guardar',
         success: function(d){
+          socket.emit('report', USER);
         $('.message-box-ctn').remove();
         $('body').append(d);
         getSavedReports();
@@ -595,6 +597,17 @@ function getSecModuleTools(module){
       })
 
       socket.on('noti', function(d){
+        var count = $('.notification-counter').text();
+        if(count == ''){
+          count = 1
+        }else{
+          count++;
+        }
+        $('.notification-counter').text(count).show()
+        $('.notification-status-table').append(d)
+      })
+
+      socket.on('report', function(d){
         var count = $('.notification-counter').text();
         if(count == ''){
           count = 1
@@ -1098,6 +1111,7 @@ $('body').on('click','.btn-ctr-form-user', function(){
         type: 'get',
         success: function(mesBox){
           redirect(mesBox)
+          socket.emit('noti', USER);
           $('body').append(mesBox);
           $('body').find('.message-box-ctn').find('.mess-box-btn').attr('data-id', id);
           $('.loading-ctn').fadeOut();
@@ -1116,6 +1130,7 @@ $('.loading-ctn').show();
       type: 'get',
       success: function(mesBox){
         redirect(mesBox)
+        
         $('body').append(mesBox);
         $('body').find('.message-box-ctn').find('.mess-box-btn').attr('data-id', id);
         $('.loading-ctn').fadeOut();
@@ -1509,12 +1524,22 @@ $('body').on('click','#module-reports .fields-list-ctn .field-item', function(){
   
    
   
-  //$('.table-item[data-btn="'+tbl+'"]').siblings('.reports-selected-item-counter').text(counter);
+ 
   
   
 });
 
-
+$('body').on('click', '.reports-reset-btn', function(){
+  $('.loading-ctn').show();
+  $.ajax({
+    type: 'get',
+    url: '/reportes/sheet',
+    success: function(d){
+      $('.preview-ctn').empty().append(d);
+      $('.loading-ctn').fadeOut();
+    }
+  })
+})
 
 $('body').on('click','.reports-talbe-remove-col-btn', function(){
   $(this).parent().parent().remove();

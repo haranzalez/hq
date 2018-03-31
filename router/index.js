@@ -83,6 +83,10 @@ var id_cuenta = '';
       io.in('Admin').emit('noti', notifications.dbChanges(user+' genero cambios en los registros. '));
     })
 
+    socket.on('report', function(user){
+      io.in('Admin').emit('noti', notifications.dbChanges(user+' genero reporte. '));
+    })
+
     io.in('Admin').emit('username', user)
 
     socket.on('disconnect', function(){

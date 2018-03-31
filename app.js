@@ -7,7 +7,6 @@ const
     session = require('express-session'),//
     cookie = require('cookie-parser'),
     server = http.createServer(app),
-    bcrypt = require('bcrypt'),
     io = require('socket.io').listen(server);
 
  
@@ -20,10 +19,6 @@ app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 //BASE DE DATOS [POSTGRES]
 var db = require('./db_components.js')('dbcred');
 
-
-//CONFIGURACION servidor y base de datosnodemon
-
-const config = require("./config.json");
 //integracion de middelware para bodyparser
 app.use(bodyParser.urlencoded({
     extended: true
@@ -59,7 +54,7 @@ var sessionChecker = (req, res, next) => {
 app.use('/estaticos', express.static('assets'))
 //Backups middleware
 
-app.use('/backups', express.static('backups'))
+app.use('/backups', express.static('Backups'))
 
 
 //ROUTER

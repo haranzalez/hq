@@ -23,13 +23,20 @@ module.exports = {
 				html = html+'</div>';
 				
 				
-			
-				html = html+'<h4 class="sub-title-basic text-to-the-12p left-10-pad-px">Entradas</h4>';
 
-				html = html+'<div class="zebra">';
+				html = html+'<table id="users-logs-tale" class="cell-border order-column hover">'+
+				'<thead class="">'+
+					'<tr>'+
+						'<td>Ip</td>'+
+						'<td>Fecha</td>'+
+						'<td>Hora</td>'+
+					'</tr>'+
+				'</thead>'+
+
+				'<tbody>';
 				
 				pk.obj.forEach((e) => {
-					html = html+'<div class="t-result-ctn zebra-stripe">';
+					
 					
 					var fecha = e.fecha.toString().slice(0, -14);
 
@@ -45,19 +52,19 @@ module.exports = {
 
 					e.fecha = fecha.slice(0, -9).substring(4);
 					e.hora = convertToStandardTime(hora);
-					
-					 for(var prop in e)
+					html = html+'<tr>';
+					for(var prop in e)
 				    {
-			            html = html+'<div class="ctn t-row-mobil-plane"><div class="ctn-col-5 t-heading-mobil text-to-the-8p">'+prop.replace('_', ' ')+'</div>'+  
-			            '<div class="ctn-col-5 text-to-the-8p">'+e[prop]+'</div></div>';
-				    }
-
-				    html = html+'</div>';
+			            html = html+'<td>'+e[prop]+'</td>';
+					}
+					html = html+'</tr>';
 				})
+
+				html = html+'</tbody>';
 			   
 		        
 
-		    	return html+'</div></div>';
+		    	return html+'</table>';
 			break;
 			
 			default:

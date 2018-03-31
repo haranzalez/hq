@@ -141,10 +141,15 @@
   background-color: black;
   color: white;
 }
+
 .registros-table td{
   padding:5px;
 }
 
+.standard-table-heads{
+  background-color: black;
+  color: white;
+}
 
 .registros-table-ctn{
   position: relative;
@@ -1551,7 +1556,7 @@ font-size:25pt !important;
   font-size: 23pt;
 }
 .sub-title-basic{
-     padding: 0px;
+     padding: 0px 10px;
     font-size: 15px;
     margin-bottom: 5px;
     border-bottom: 1px solid red !important;
@@ -1909,13 +1914,13 @@ font-size:25pt !important;
 .t-row-mobil{
   border-bottom:1px solid #888;
   font-size:10pt;
-  padding: 4px 0px;
+  padding: 4px 10px;
 }
 .t-row-mobil-plane{
   font-size:10pt;
 }
 .t-result-ctn{
-  padding:60px;
+  padding:0px;
 }
 .t-heading-mobil{
   color:#888;
@@ -1981,8 +1986,9 @@ font-size:25pt !important;
 
 
 
-
-
+#users-logs-tale{
+  font-size: 12px;
+}
 
 
 

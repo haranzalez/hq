@@ -140,6 +140,7 @@ module.exports = {
             break;
         }
 //------------------------------------------------------------------------------------------------
+        console.log(sql)
         return {
             mes: sql,
             dta: params.bd.any(sql),
@@ -499,7 +500,7 @@ delete: function(tabla, params, username) {
         "first as "+
         "(select * from areas where id_area = "+params.id_area+"), "+
         "second as "+
-        "(insert into roles (nombre_rol, id_area, poderes)values('"+params.nombre_rol+"', (select id_area from first), '{"+params.poderes+"}') returning id) "+
+        "(insert into roles (nombre_rol, id_area)values('"+params.nombre_rol+"', (select id_area from first)) returning id) "+
         "insert into rol_privilegios_relation (id_rol, privilegios) values((select id from second), '{"+params.privilegios+"}') ";
         params.db.any(sql);
         return {

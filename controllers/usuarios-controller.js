@@ -217,6 +217,7 @@ module.exports = {
 				pkg.funcion = 'select_users_with_access';
 				var d = crud.list('', pkg);
 					d.dta.then(dta => {
+						console.log(dta)
 					dta.type = 'usuarios';
 					var t = usersList(dta);
 					res.send(t);

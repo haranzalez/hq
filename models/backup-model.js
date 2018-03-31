@@ -11,8 +11,8 @@ module.exports = {
     
     backup: function(params){
      var fileName = params.fileName;
-     var user='haranzalez',file='/Users/haranzalez/Desktop/hqsis/backups/'+fileName;
-     exec('touch /Users/haranzalez/Desktop/hqsis/backups/'+fileName);
+     var user='haranzalez',file='/Users/haranzalez/Desktop/hqsis/Backups/'+fileName;
+     exec('touch /Users/haranzalez/Desktop/hqsis/Backups/'+fileName);
      exec('pg_dump -U '+user+' -F p hq > '+file);
      var fecha = new Date();
   

@@ -10,7 +10,8 @@ module.exports =function(module){
 			'<input type="text" placeholder="Rec ID" class="report-rec-id-input">'+
 			'<select class="report-add-to-table-select" name="add_to">'+
                 '<option value="">Agregar a...</option>'+
-            '</select>'+   
+			'</select>'+  
+			'<button class="reports-reset-btn">Reiniciar</button>'+ 
 			'</div>';
 		break;
 		case 'registros':
