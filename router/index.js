@@ -76,15 +76,14 @@ var id_cuenta = '';
   io.sockets.on('connection', function(socket){
   //add client to room once connected. Room name is the same as the rol name
     socket.join(room)
-  //Welcoming client ot platform
-    io.in('Admin').emit('user',notifications.users(user+' inicio session. '));
+  
 
     socket.on('noti', function(user){
       io.in('Admin').emit('noti', notifications.dbChanges(user+' genero cambios en los registros. '));
     })
 
     socket.on('report', function(user){
-      io.in('Admin').emit('noti', notifications.dbChanges(user+' genero reporte. '));
+      io.in('Admin').emit('noti', notifications.dbChanges(user+' genero reporte.'));
     })
 
     io.in('Admin').emit('username', user)

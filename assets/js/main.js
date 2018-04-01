@@ -584,17 +584,7 @@ function getSecModuleTools(module){
       socket.on('username', function(username){
          USER = username;
       })
-      socket.on('user', function(d){
-        var count = $('.notification-counter').text();
-        if(count == ''){
-          count = 1
-        }else{
-          count++;
-        }
-        $('.notification-counter').text(count).show()
-        $('.notification-status-table').append(d)
-        
-      })
+    
 
       socket.on('noti', function(d){
         var count = $('.notification-counter').text();
@@ -1441,12 +1431,12 @@ $('body').on('click','#module-reports .tbl-list-ctn .table-item', function(){
           success: function(res){
               redirect(res)
               $('body').find('.fields-list-ctn[data-table="'+table+'"]').append(res);
-              $('.fields-list-ctn[data-table="'+table+'"]').parent().css('max-height', '250px');
+              $('.fields-list-ctn[data-table="'+table+'"]').parent().css('max-height', '950px');
           }
 
         })
     }else{
-        $('.fields-list-ctn[data-table="'+table+'"]').parent().css('max-height', '250px');
+        $('.fields-list-ctn[data-table="'+table+'"]').parent().css('max-height', '950px');
     }
    
   }
