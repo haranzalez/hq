@@ -26,7 +26,7 @@ module.exports = {
         
     },
     getBackups: function(db,res){
-        fs.readdir('./backups', (err, files) => {
+        fs.readdir('./Backups', (err, files) => {
             var dta = [];
             console.log(files.length);
             if(files.length !== 0){
