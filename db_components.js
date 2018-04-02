@@ -7,11 +7,12 @@ module.exports = function(type){
 		case 'dbcred':
 		//CONFIGURACION servidor y base de datos
 		const config = {
-			user: 'haranzalez',
-			pass: '0926ara7',
-			host: '127.0.0.1:5432',
-			database: 'hq'
+			user: 'root',
+			pass: 'Hquintero*17',
+			host: '172.30.10.18:5432',
+			database: 'hqdb'
 		}
+
 		//coneccion a base de datos Postgres con modulo pg-promise 
 		var connectionString = 'postgres://'+config.user+':'+config.pass+'@'+config.host+'/'+config.database;
 		var db = pgp(connectionString);//callback se retiene en var db

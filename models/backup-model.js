@@ -10,14 +10,13 @@ const { exec } = require('child_process');
 module.exports = {
     
     backup: function(params){
-     var fileName = params.fileName;
-     var user='haranzalez',file='/Users/haranzalez/Desktop/hqsis/Backups/'+fileName;
-     exec('touch /Users/haranzalez/Desktop/hqsis/Backups/'+fileName);
-     exec('pg_dump -U '+user+' -F p hq > '+file);
-     var fecha = new Date();
-  
-    
-     return 'Backup <b>'+fileName+'</b> terminado.';
+    var fileName = params.fileName;
+    var user='haranzalez',file='/opt/hqapp/Backups/'+fileName;
+    exec('ssh root@172.30.10.18 "PGPASSWORD=Hquintero*17 pg_dump -U root -F p -h localhost -c hqdb" >> /opt/hqapp/Backups/'+fileName);
+    var fecha = new Date();
+
+
+    return 'Backup <b>'+fileName+'</b> terminado.';
     },
 
     lastBackup: function(db){
