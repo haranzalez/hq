@@ -2,7 +2,7 @@ module.exports = function(){
 
 	return '<div class="bg-image"></div><div class="login-bg">'+
 	'<div class="ctn-col-10 text-center top-50-px">'+
-	'<div class="logo-ctn"><img style="width:150px;" src="/estaticos/img/hqlogo2.png" ></div>'+
+	'<div class="logo-ctn"><img style="width:100px;" src="/estaticos/img/hqlogo2.png" ></div>'+
 	'</div>'+
 	'<div class="ctn-login"><div class="ctn-col-10 text-center top-10-per">'+
 	'</div>'+

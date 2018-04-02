@@ -10,11 +10,12 @@ class Users{
       url: '/users/comp/lista/usuarios',
       type: 'get',
       success: function(res){
-  
+        
         cls.redir(res)
         $('.list-result-ctn div').remove();
         $('body').find('.list-result-ctn').append(res);
         $('.loading-ctn').fadeOut();
+        cls.rsizeMobil();
       }
     })
   }
@@ -107,6 +108,7 @@ class Users{
         cls.redir(res)
         $('body').find('.users-filter-nav').empty().append(res);
         $('.loading-ctn').fadeOut();
+        
       }
     })
   }
@@ -188,6 +190,42 @@ class Users{
     $('.users-forms-ctn').css({
       'display': 'none'
     })
+  }
+
+  rsizeDesk(){
+    var addUserBtn = $('body').find('.module-tools-list li:nth-child(3)').html();
+    var reloadBtn = $('body').find('.module-tools-list li:nth-child(4)').html();
+    $('.user-module-tool-bar').find('.ctn-col-9').append(reloadBtn);
+    $('.user-module-tool-bar').find('.ctn-col-1').append(addUserBtn);
+    $('.module-tools-list').find('li:nth-child(3)').remove();
+    $('.module-tools-list').find('li:nth-child(3)').remove();
+    $('body').find('.module-tools-list .tool').css('width', '100%');
+  }
+  
+  rsizeMobil(){
+    if($(window).width() <= 768){
+      if(!this.isEmpty($('.user-module-tool-bar .ctn-col-1')) || !this.isEmpty($('.user-module-tool-bar .ctn-col-9'))){
+        var addUserBtn = $('.user-module-tool-bar').find('.ctn-col-1').html();
+        var reloadBtn = $('.user-module-tool-bar').find('.ctn-col-9').html();
+        if($('.module-tools-list li').length > 2){
+          $('.module-tools-list').find('li:nth-child(3)').remove();
+          $('.module-tools-list').find('li:nth-child(3)').remove();
+        }
+        
+        $('body').find('.module-tools-list').append('<li class="tool">'+addUserBtn+'</li><li class="tool">'+reloadBtn+'</li>');
+      }
+        $('.user-module-tool-bar').find('.ctn-col-9').empty();
+        $('.user-module-tool-bar').find('.ctn-col-1').empty();
+        $('body').find('.module-tools-list .tool').css('width', '25%');
+        $('.users-add-btn, .module-tools-list .back-btn').css({
+          'position': 'initial'
+        });
+    }
+    
+  }
+
+  isEmpty(el){
+    return !$.trim(el.html())
   }
 
 

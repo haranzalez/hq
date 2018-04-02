@@ -242,18 +242,20 @@
 
 /*SEARCH BOX*/
 .search-box-ctn{
- position: fixed;
-width: 80%;
-top: 3%;
-left: 50%;
-transform: translate(-50%, -50%);
-text-align: center;
-display:none;
+  position: fixed;
+  width: 95%;
+  top: 88%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  background-color: white;
+  padding: 10px;
+  z-index:15;
 }
 .search-box-ctn input[type="text"]{
     padding: 7px;
     font-size: 10pt;
-    border: none;
+ 
 }
 .search-box-ctn input::-webkit-input-placeholder {
   font-style: italic;
@@ -271,11 +273,11 @@ display:none;
   width:  100%;
 }
 .login-form button{
-  margin-top: 20px !important;
-    background-color: #000;
-    padding: 16px;
-    border: 1px solid black;
-    color: white;
+  margin-top: 46px !important;
+  background-color: #000;
+  padding: 8px;
+  border: 1px solid black;
+  color: white;
 
 }
 .login-form button:hover{
@@ -285,8 +287,8 @@ display:none;
            padding-left: 30%;
     background-color: rgba(255,255,255,.7);
     border: solid 1px black;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     box-shadow: #666 0px 0px 2px inset;
     border-bottom-right-radius: 10px;
     border-top-left-radius: 10px;
@@ -296,12 +298,12 @@ display:none;
 }
 .login-form .text-box-icon{
   position: absolute;
-    padding: 20px;
-    font-size: 18pt;
+    padding: 11px;
+    font-size: 10pt;
     display: block;
     border-right: 1px solid #000;
-    padding-right: 8%;
-    padding-left: 8%;
+    padding-right: 2%;
+    padding-left: 3%;
     background-color: black;
     color: white;
     border-top-left-radius: 10px;
@@ -328,17 +330,121 @@ display:none;
 
 
 
+.hamMenuBtn{
+  left: 14px;
+    top: 12px;
+}
+
+
+.notification-component{
+  top: 12px;
+  right: 5px;
+}
+
+
+
+
+.module-sec-tools{
+  width: 100% !important;
+  border-top:1px solid red;
+}
+.module-sec-tools .ctn .users-filter-nav{
+  width: 100%;
+}
+
+
+
+.t-result-ctn{
+  padding: 10px;
+    max-height: 250px;
+    overflow: auto;
+}
+
+
+.users-add-btn{
+  font-size: 18px;
+    position: absolute;
+    top: -34px;
+    right: 17px;
+}
+
+
+
+.sub-menu-ctn-mobil{
+  background-color: black;
+}
+
+.sub-menu-mobil li a{
+  color: white;
+}
+
+
+.message-box button{
+  font-size: 14px;
+}
+
+
+.users-forms-ctn{
+  width:95%;
+  background-color: white;
+  transform: translate(-50%, -11%);
+}
+.form-create-user .title, .form-create-rol .title{
+  padding: 0px 10px;
+}
+.users-close-forms-ctn-btn{
+  position: absolute;
+  right: 14px;
+  top: 14px;
+}
+.btn-ctr-form-user, .btn-ctr-form-rol{
+  padding: 16px;
+  margin: 5px 0px;
+  font-size: 15px;
+  width: 100%;
+  background-color:transparent;
+}
+.users-info-table-btns-ctn{
+  margin:auto;
+}
+
+.form-create-user .text-box{
+ margin: 1px 0px;
+}
+
+
+.registros-tools{
+  top:38px;
+}
+.registros-tools .ctn-col-thirds{
+  background-color: white;
+}
+.dataTables_filter label{
+  width: 100%;
+  margin-left: -100px;
+}
+.dataTables_filter input[type="search"]{
+  padding: 5px !important;
+    border: 1px solid #ddd;
+    width: 230px;
+}
 
 
 
 
 
-
-
-
-
-
-
-
-
-
+.backups-main-ctn {
+  width: 95%;
+  margin: auto;
+  padding: 30px 0px;
+  /* text-align: left; */
+  height: 400px;
+  overflow: auto;
+}
+.backups-main-ctn .ctn-col-7, .backups-main-ctn .ctn-col-3{
+  width: 100%;
+}
+.backups-programmer-ctn{
+  width: 100%;
+  margin-top: 10px;
+}

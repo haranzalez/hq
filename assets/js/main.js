@@ -1,3 +1,30 @@
+
+ var autoLogout = new AutoLogout();
+ var users = new Users();
+var updateFormCopy = '';
+var USER = '';
+
+
+
+
+
+$(window).resize(function(){
+
+  if($(window).width() > 768){
+    users.rsizeDesk()
+  }else{
+    users.rsizeMobil()
+  }
+
+  
+});
+
+
+
+
+
+
+
 /*BAKCUPS*/
 $('body').on('click','.backups-program-backup-btn', function(){
 
@@ -5,7 +32,7 @@ $('body').on('click','.backups-program-backup-btn', function(){
   
   var fecha = $(this).attr('data-fecha');
   fecha = fecha.split('-');
-   console.log(fecha);
+
    var day = fecha[0],
     month = fecha[1],
     year = fecha[2].split(' ')[0],
@@ -20,7 +47,7 @@ $('body').on('click','.backups-program-backup-btn', function(){
     type: 'get',
     success: function(d){
       redirect(d)
-      console.log(d)
+  
       $('body').append(d);
     }
   })
@@ -160,11 +187,13 @@ $('body').on('click','.registros-sync-table', function(){
 
 
 function getRegistros(){
+  
   $('.loading-ctn').show();
   $.ajax({
     url: '/registros',
     type: 'get',
     success: function(d){
+      
       redirect(d)
       $('#module-registros').empty().append(d);
       $('#module-registros').find('.registros-table').DataTable({
@@ -506,10 +535,6 @@ function redirect(b){
 }
 
 
- var autoLogout = new AutoLogout();
- var users = new Users();
-var updateFormCopy = '';
-var USER = '';
 
 
 
@@ -551,7 +576,9 @@ function getModuleTools(module){
       })
 }
 function getSecModuleTools(module){
+
   $('body').find('.module-sec-tools .ctn').empty()
+  
   if(module != ''){
     $.ajax({
       url: '/recursos/componentes/secModuleTools/'+module+'/none/none',
@@ -559,7 +586,8 @@ function getSecModuleTools(module){
       success: function(res){
         redirect(res)
          $('body').find('.module-sec-tools .ctn').append(res);
-         
+        
+        
          
       }
     })
@@ -574,7 +602,7 @@ function getSecModuleTools(module){
   //PREVENTS TO START AUTOLOGOUT FUNCTION AT LOGIN
   if(window.location.pathname != '/')
   {
-
+ 
       var socket = io();
     
       socket.on('hi', function(d){
@@ -623,12 +651,8 @@ function getSecModuleTools(module){
 
 
 
-        getSavedReports();
-       getModuleTools('users');
-       getSecModuleTools('users');
-       $('.user-module-tool-bar .title').text('Usuarios');
-       users.createUserForm();
-       users.listUsers();
+       getSavedReports();
+     
        autoLogout.construir();
       
   }
@@ -1802,6 +1826,7 @@ $('.menu-btn').on('click', function(){
   var d = $(this).attr('data-btn');
   switch (d) {
     case 'reports':
+    users.rsizeDesk()
     $('.loading-ctn').show();
       $.ajax({
           url: '/reports',
@@ -1811,6 +1836,7 @@ $('.menu-btn').on('click', function(){
            hideModules()
            getModuleTools('reports')
            getSecModuleTools('reports')
+           
            $('body').find('.tbl-list-ctn').empty();
            $('body').find('.tbl-list-ctn').append(res);
            $('#module-reports').removeClass('in-the-shadows');
@@ -1821,14 +1847,21 @@ $('.menu-btn').on('click', function(){
       })
     break;
     case 'users':
+      users.createUserForm();
+      users.listUsers();
+      
       hideModules();
       getModuleTools('users');
       getSecModuleTools('users')
+   
       $('#module-users').removeClass('in-the-shadows');
       $('.menu').removeClass('zero-out-absolute-spaces');
       $('.white-blur').removeClass('reveal');
+      
+    
     break;
     case 'registros':
+     users.rsizeDesk()
       hideModules();
       getSecModuleTools('');
       getRegistros();
@@ -1840,6 +1873,7 @@ $('.menu-btn').on('click', function(){
       $('.white-blur').removeClass('reveal');
     break;
     case 'backups':
+    users.rsizeDesk()
       hideModules();
       getBakcups();
       getModuleTools('backups');

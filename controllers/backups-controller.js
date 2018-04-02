@@ -34,7 +34,7 @@ module.exports = {
                 var f = file.split('-');
                 var date = f[1];
                 var time = f[2];
-                console.log(f);
+               
                 var date = date.charAt(0)+date.charAt(1)+'/'+date.charAt(2)+date.charAt(3)+'/20'+date.charAt(4)+date.charAt(5)+' '+
                 time.charAt(0)+time.charAt(1)+':'+time.charAt(2)+time.charAt(3)+':'+time.charAt(4)+time.charAt(5);
                 dta.push({fecha: date, archivo: file});
@@ -42,7 +42,7 @@ module.exports = {
                 });
 
             }else{
-                dta.push({mess: 'Aun no se han creado backup.'})
+                dta.push({mess: 'Aun no se han creado backups.'})
                 
             }
             

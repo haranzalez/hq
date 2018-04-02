@@ -15,7 +15,7 @@ var sortMenu = require('../componentes/menues.js');
 module.exports = function(){
 	return selRolWindow.container()+
 
-'<div id="module-users" class="ctn">'+
+'<div id="module-users" class="ctn in-the-shadows">'+
 
 	'<div class="ctn-col-10">'+
 
