@@ -730,7 +730,7 @@ $('.sign-out-btn').on('click', function(){
       success: function(res){
         if(res == 'done'){
           autoLogout.destroy();
-          window.location = 'http://localhost:8000/';
+          window.location = '/';
         }  
       }
   })
