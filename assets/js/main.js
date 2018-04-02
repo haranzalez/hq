@@ -1015,7 +1015,6 @@ $('body').on('click','.btn-ctr-form-user', function(){
               $('body').find('#create-user-form').find("input[name='"+prop+"']").val(res[prop]);
               $('.sel-rol-btn')
               .empty()
-              .append('<p>'+res[prop].charAt(0)+'</p>')
               .append('<p style="line-height: 1.5 !important;font-size:unset;color:initial;">'+res[prop]+'</p>');
               
               $('.users-rol-input').val(res[prop]);

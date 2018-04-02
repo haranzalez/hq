@@ -11,7 +11,7 @@ module.exports =function(module){
 			'<select class="report-add-to-table-select" name="add_to">'+
                 '<option value="">Agregar a...</option>'+
 			'</select>'+  
-			'<button class="reports-reset-btn">Reiniciar</button>'+ 
+			'<button class="reports-reset-btn">Nuevo</button>'+ 
 			'</div>';
 		break;
 		case 'registros':
