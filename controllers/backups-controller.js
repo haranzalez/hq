@@ -70,31 +70,28 @@ month	1-12 (or names)
 day of week	0-7 (or names, 0 or 7 are sunday)*/
     scheduleBackup: function(params){
       
-       var minute,hour,day,period,month,year;
+       var hour,period;
        period = params.data.period;
-       minute = (params.data.minute.charAt(0) == 0)?params.data.minute.charAt(1):params.data.minute;
-       second = (params.data.second.charAt(0) == 0)?params.data.second.charAt(1):params.data.second;
        hour = (params.data.hour.charAt(0) == 0)?params.data.hour.charAt(1):params.data.hour;
-       day = (params.data.day == undefined)?'*':params.data.day;
-       month = (params.data.month.charAt(0) == 0)?params.data.month.charAt(1):params.data.month
-       year = (params.data.year == undefined)?'*':params.data.year;
-       var date = '<b>'+day+'/'+month+'/'+year+'</b> a las <b>'+hour+':'+minute+'</b> horas.';
-       
-       
-      console.log(day+' '+month+' '+year+' '+hour+' '+minute+' '+second);
       
-      params.fileName = genFileName(fechaV3(day+'/'+month+'/'+year+'-'+hour+':'+minute+':'+second));
-        var c = cron.schedule('0 '+minute+' '+hour+' '+day+'/'+period+' '+month+' *', function(){
-
+      
+       
+     
+     
+        
+    
+       
+      
+        var c = cron.schedule('0 0 '+hour+' */'+period+' * * *', function(){
+            params.fileName = genFileName();
             var mess = bmodel.backup(params)
             params.io.in('Admin').emit('noti', notifications.dbChanges(mess))
         });
-       
-        var sql = "SET timezone = 'America/Bogota';insert into backups_programmer(fecha,archivo)values(NOW(),'"+params.fileName+"')";
-        params.db.any(sql).catch(e => {console.log(e)})
+        c.start();
        
        
-        params.res.send(messBox.success('BackUp programado para el '+date))
+       
+        params.res.send(messBox.success('BackUp programado para realizarse cada '+period+' dias'))
 
        
     }
@@ -103,8 +100,8 @@ day of week	0-7 (or names, 0 or 7 are sunday)*/
 }
 
 
-var genFileName = function(date){
-    console.log(date)
+var genFileName = function(){
+    var date = new Date();
     return 'BU-'+fecha('#DD##MM##YY#-#hhh##mm##ss#', date).toString();
 }
 

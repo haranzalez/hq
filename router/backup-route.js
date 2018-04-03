@@ -21,7 +21,7 @@ module.exports = function(app, db, io, sessionChecker){
 
         controller.getBackups(db,res);
     })
-    app.get('/programBackUp/:second/:minute/:hour/:day/:period/:month/:year',sessionChecker, function(req, res){
+    app.get('/programBackUp/:hour/:period',sessionChecker, function(req, res){
         var params = {
             db: db,
             res: res,

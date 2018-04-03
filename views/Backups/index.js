@@ -27,7 +27,7 @@ module.exports = {
         if(ultimo == undefined){
             var ultimo = 'NA';
         }
-        console.log(html)
+     
         html = html+'</tbody>'+
         '</table></div><div class="ctn-col-3">'+
         '<div class="ctn backups-programmer-ctn">'+
@@ -39,27 +39,33 @@ module.exports = {
 
             '<div class="ctn">'+
            
-            '<div class="ctn-col-10">'+
+            '<div class="ctn-col-7">'+
+
+            '<select class="backups-select-period" size="5">'+
+            '<option value="1">Todos los dias</option>'+
+            '<option value="2">Cada 2 dias</option>'+
+            '<option value="3">Cada 3 dias</option>'+
+            '<option value="4">Cada 4 dias</option>'+
+            '<option value="5">Cada 5 dias</option>'+
+            '<option value="6">Cada 6 dias</option>'+
+            '<option value="7">Cada semana</option>'+
+            '<option value="14">Cada 2 semanas</option>'+
+            '<option value="21">Cada 3 semanas</option>'+
+            '<option value="30">Cada mes</option>'+
+            '</select>'+ 
+            '</div>'+
+            '<div class="ctn-col-3">'+
             '<input type="text" id="backups-programmer">'+
             '</div>'+
             '</div>'+
+            
+           
+            '</div>'+
+       
         
         
-        '</div>'+
-        '<div class="ctn-col-10">'+
-            '<select class="backups-select-period" size="5">'+
-                '<option value="1">Todos los dias</option>'+
-                '<option value="2">Cada 2 dias</option>'+
-                '<option value="3">Cada 3 dias</option>'+
-                '<option value="4">Cada 4 dias</option>'+
-                '<option value="5">Cada 5 dias</option>'+
-                '<option value="6">Cada 6 dias</option>'+
-                '<option value="7">Cada semana</option>'+
-                '<option value="14">Cada 2 semanas</option>'+
-                '<option value="21">Cada 3 semanas</option>'+
-                '<option value="30">Cada mes</option>'+
-            '</select>'+ 
-        '</div>'+
+
+       
         '<div class="ctn-col-10">'+
         
         '<button type="button" class="backups-program-backup-btn">Programar BackUp</button>'+

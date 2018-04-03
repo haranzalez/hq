@@ -31,19 +31,16 @@ $('body').on('click','.backups-program-backup-btn', function(){
   
   
   var fecha = $(this).attr('data-fecha');
-  fecha = fecha.split('-');
+  
+  fecha = fecha.split(' ');
 
-   var day = fecha[0],
-    month = fecha[1],
-    year = fecha[2].split(' ')[0],
-    hour = fecha[2].split(' ')[1].split(':')[0],
-    minute = fecha[2].split(' ')[1].split(':')[1],
-    second = fecha[2].split(' ')[1].split(':')[2],
+   var hour = fecha[1].split(':')[0],
+    
     period = $('.backups-select-period').val();
-
+  
   
   $.ajax({
-    url: '/programBackUp/'+second+'/'+minute+'/'+hour+'/'+day+'/'+period+'/'+month+'/'+year,
+    url: '/programBackUp/'+hour+'/'+period,
     type: 'get',
     success: function(d){
       redirect(d)
@@ -111,8 +108,11 @@ function getBakcups(){
 
     jQuery.datetimepicker.setLocale('es');
     $('#backups-programmer').datetimepicker({
-      allowTimes:quarterHours(),
-      format: 'd-m-Y h:i:s',
+      allowTimes:['00:00','01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00'
+      , '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00'
+      , '21:00', '22:00', '23:00'],
+      datepicker:false,
+      timeFormat: 'h:i:s',
       inline: true,
       lang: 'es',
       i18n:{
