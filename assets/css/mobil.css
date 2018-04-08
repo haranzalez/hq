@@ -33,7 +33,7 @@
     font-size: 13pt;
 }
 .module-tools-list li button::after{
-  display: none;
+  display: none !important;
 }
 .module-tools-list li {
     padding: 0px;
