@@ -6,7 +6,7 @@ module.exports = function(user){
 
 return '<div id="module-reports" class="ctn in-the-shadows">'+
 
-'<div class="ctn-col-1"></div>'+
+'<div class="ctn-col-1" style="width:5%;"></div>'+
 
 '<div class="ctn-col-7 preview-ctn">'+
     '<div class="reports-tools-ctn">'+

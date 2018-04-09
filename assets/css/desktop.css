@@ -444,14 +444,14 @@ background-color: #f1f1f1;
 }
 .preview-sheet{
     
-    position: relative;
-   background-color: white;
-    white-space: nowrap;
-    box-shadow: 0px 3px 2px #ccc;
-    margin: auto;
-    padding: 25px;
-    min-height: 586px;
-    width: 90%;
+  position: relative;
+  background-color: white;
+  white-space: nowrap;
+  box-shadow: 0px 3px 2px #ccc;
+  margin: auto;
+  padding: 15px;
+  min-height: 586px;
+  width: 95%;
 
 
 }
