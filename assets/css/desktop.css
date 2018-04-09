@@ -174,7 +174,7 @@ body{
   margin: 0px auto;
   /* margin-left: 66px; */
   padding: 0px;
-  max-width: 1296px;
+ 
   top: 60px;
 }
 
@@ -461,10 +461,10 @@ background-color: #f1f1f1;
     position:absolute;
     z-index:-1;
 }
-#module-reports{
-   margin:auto;
-
-   padding: 24px 0px;
+#module-reports,#module-registros{
+  margin: auto;
+  padding: 24px 0px;
+  max-width: 1300px;
 }
 
 #module-reports .fields-list-ctn{
