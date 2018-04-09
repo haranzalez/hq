@@ -462,9 +462,8 @@ background-color: #f1f1f1;
     z-index:-1;
 }
 #module-reports,#module-registros{
-  margin: auto;
+  margin-left: 80px;
   padding: 24px 0px;
-  max-width: 1300px;
 }
 
 #module-reports .fields-list-ctn{
