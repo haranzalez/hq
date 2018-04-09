@@ -1499,6 +1499,7 @@ font-size:25pt !important;
 .back-btn{
   position: absolute;
   top:6px;
+  z-index:22;
 }
 .close-up-btn{
   position: absolute;
