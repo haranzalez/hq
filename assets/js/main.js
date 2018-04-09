@@ -742,7 +742,12 @@ $('.sign-out-btn').on('click', function(){
 $('.login-btn-ctr').on('click', function(){
   login($('.login-form'));
 })
-
+//ON ENTER
+$('.text-box-login').on('keyup', function(event){
+  if (event.keyCode === 13) {
+    login($('.login-form'));
+  }
+});
 
 
 
