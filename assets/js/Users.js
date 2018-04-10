@@ -77,7 +77,7 @@ class Users{
         cls.redir(res)
         $('body').find('.mobile-window-ctn .back-btn').hide();
         $('body').find('.mobile-window-ctn .ctn').empty().append(res);
-        $('.loading-ctn').fadeOUt();
+        $('.loading-ctn').fadeOut();
       }
     })
   }
