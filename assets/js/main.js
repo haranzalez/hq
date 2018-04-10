@@ -15,8 +15,6 @@ $(window).resize(function(){
   }else{
     users.rsizeMobil()
   }
-
-  
 });
 
 
@@ -27,9 +25,6 @@ $(window).resize(function(){
 
 /*BAKCUPS*/
 $('body').on('click','.backups-program-backup-btn', function(){
-
-  
-  
   var fecha = $(this).attr('data-fecha');
   
   fecha = fecha.split(' ');

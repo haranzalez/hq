@@ -117,7 +117,8 @@ module.exports = function(app,db, sessionChecker){
             var pkg = {
             	db: db,
                 id: req.params.id,
-                res:res
+				res:res,
+				user:req.session.user
 			};
             reportsCtr.delReport(pkg);
 		});

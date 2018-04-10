@@ -73,7 +73,7 @@ module.exports = {
             return res;
         },
         delReport: function(params){
-          var sql = "delete from reportes_guardados where id = "+params.id;
+          var sql = "set hq.usuario='"+params.user+"';delete from reportes_guardados where id = "+params.id;
           var res = params.db.any(sql).catch(e => {
             console.log(e)
           });
