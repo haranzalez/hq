@@ -167,7 +167,7 @@
   padding: 18px 0px;
 }
 .registros-table-ctn .preview-sheet{
-  width: 100%;
+  min-width: 700px;
 }
 .registros-table-ctn  .reporte-titulo-principal{
   padding-left:30px;
