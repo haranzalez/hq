@@ -7,7 +7,7 @@ var USER = '';
 
 function reportPreviewRegistrosTable(){
   var html = $('.registros-table-ctn').find('.preview-sheet').html();
-  $('.registros-table-ctn').find('.preview-sheet').replace('<i class="">VER</i>');
+  $('.registros-table-ctn').find('.preview-sheet').parent().empty().append('<i class="">VER</i>');
 }
 
 
