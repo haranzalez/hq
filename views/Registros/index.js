@@ -57,8 +57,7 @@ function buildRecordsTbl(pkg){
                 }else if(prop2 == 'campo' && pkg[prop][prop2] == 'html'){
                     if(pkg[prop]['valor_nuevo'] != 'NA'){
                         html = html+'<td><div class="registros-report-preview-box">'+pkg[prop]['valor_nuevo']+'</div>';
-                    }
-                    if(pkg[prop]['valor_anterior'] != 'NA'){
+                    }else if(pkg[prop]['valor_anterior'] != 'NA'){
                         html = html+'<td><div class="registros-report-preview-box">'+pkg[prop]['valor_anterior']+'</div>';
                     }
                 }else{
