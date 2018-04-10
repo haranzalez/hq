@@ -90,7 +90,8 @@ module.exports = function(app,db, sessionChecker){
             	db: db,
                 html: req.body.html,
                 nombre: req.body.nombre,
-                id_cuenta: req.session.id_cuenta,
+				id_cuenta: req.session.id_cuenta,
+				user:req.session.user,
                 res:res
 			};
             reportsCtr.saveReport(pkg);
