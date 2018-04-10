@@ -825,6 +825,7 @@ $('body').on('click','.mess-box-btn', function(){
     break;
     case 'ok':
       $(this).parent().parent().parent().remove();
+      $('.users-forms-ctn').hide();
     break;
     case 'confirm-delete':
     $('.loading-ctn').show();

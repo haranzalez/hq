@@ -406,7 +406,7 @@ update: function(tabla, params, username) {
            params.bd.any(sql).catch(e => {return e})
 
             return {
-                mes: 'El usuario '+username+' se ah actualizado exitosamente.',
+                mes: 'El usuario se ah actualizado exitosamente.',
                 type: 'success'
             };
 
