@@ -166,11 +166,17 @@
   width: 100%;
   padding: 18px 0px;
 }
-
+.registros-table-ctn .preview-sheet{
+  width: 100%;
+}
+.registros-table-ctn  .reporte-titulo-principal{
+  padding-left:30px;
+}
 .registros-table-ctn .preview-sheet .reports-talbe-remove-col-btn, 
 .registros-table-ctn .preview-sheet .reports-table-tools-title-input,
 .registros-table-ctn .preview-sheet .reports-tools-title-input,
-.registros-table-ctn .preview-sheet .reports-tools-addTbl-btn{
+.registros-table-ctn .preview-sheet .reports-tools-addTbl-btn,
+.registros-table-ctn .preview-sheet .reports-table-tools-main-ctn{
   display: none;
 }
 .registros-table-ctn .preview-sheet .reports-table-title{
