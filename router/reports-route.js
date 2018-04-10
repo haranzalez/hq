@@ -99,7 +99,8 @@ module.exports = function(app,db, sessionChecker){
             var pkg = {
             	db: db,
                 id_cuenta: req.session.id_cuenta,
-                res:res
+				res:res,
+				user:req.session.user
 			};
             reportsCtr.savedReportsList(pkg);
         });

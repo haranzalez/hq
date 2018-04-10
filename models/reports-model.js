@@ -58,7 +58,7 @@ module.exports = {
         },
 
         saveReport: function(params){
-            var sql = "insert into reportes_guardados(id_cuenta, html, nombre, fecha)values("+params.id_cuenta+", '"+params.html+"', '"+params.nombre+"', '"+fecha('#DDD# #D# #MMM# #YY#')+"')";
+            var sql = "set hq.usuario='"+params.user+"';insert into reportes_guardados(id_cuenta, html, nombre, fecha)values("+params.id_cuenta+", '"+params.html+"', '"+params.nombre+"', '"+fecha('#DDD# #D# #MMM# #YY#')+"')";
             var res = params.db.any(sql).catch(e => {console.log(e)});
             return 'Reporte guardado exitosamente';
         },
