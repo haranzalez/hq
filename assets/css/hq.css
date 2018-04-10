@@ -166,6 +166,23 @@
   width: 100%;
   padding: 18px 0px;
 }
+
+.registros-table-ctn .preview-sheet .reports-talbe-remove-col-btn, 
+.registros-table-ctn .preview-sheet .reports-table-tools-title-input,
+.registros-table-ctn .preview-sheet .reports-tools-title-input,
+.registros-table-ctn .preview-sheet .reports-tools-addTbl-btn{
+  display: none;
+}
+.registros-table-ctn .preview-sheet .reports-table-title{
+  display: block;
+}
+
+
+
+
+
+
+
 .dataTables_wrapper{
   height: 100%;
   width: 100%;
@@ -248,6 +265,9 @@
 }
 
 
+.preview-sheet{
+  text-align: left !important;
+}
 
 
 
