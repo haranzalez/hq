@@ -5,6 +5,12 @@ var updateFormCopy = '';
 var USER = '';
 
 
+function reportPreviewRegistrosTable(){
+  var html = $('.registros-table-ctn').find('.preview-sheet').html();
+  $('.registros-table-ctn').find('.preview-sheet').replace('<i class="">VER</i>');
+}
+
+
 
 
 
@@ -1869,6 +1875,7 @@ $('.menu-btn').on('click', function(){
       getSecModuleTools('');
       getRegistros();
       getModuleTools('registros');
+      reportPreviewRegistrosTable();
       
       
       $('#module-registros').removeClass('in-the-shadows');
