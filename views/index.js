@@ -59,6 +59,7 @@ exports.build = function(obj) {
     '<script src="/estaticos/js/parsley.js"></script>'+
     '<script src="/estaticos/js/autoLogout.js"></script>'+
     '<script src="/estaticos/js/Users.js"></script>'+
+    '<script src="/estaticos/js/mobil-menues.js"></script>'+
     
     '<script src="/estaticos/js/main.js"></script>'+
     '</body>' +
