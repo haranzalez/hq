@@ -625,7 +625,7 @@
   border: none;
   right: 24px;
   top: 91%;
-  z-index: 20;
+  z-index: 10;
   padding: 7px 0px;
   font-size: 12px;
   background-color: red;

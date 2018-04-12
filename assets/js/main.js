@@ -1771,15 +1771,15 @@ $('.report-add-to-table-select').on('change', function(){
 })
 
 
-$('body').on('click','.reports-tools-addTbl-btn', function(){
+$('body').on('click','#module-reports .reports-tools-addTbl-btn', function(){
     
-    var pkgs = $('.reports-table-section-ctn').find('.reports-table-pkg');
+    var pkgs = $('#module-reports .reports-table-section-ctn').find('.reports-table-pkg');
     var numOfTbls = pkgs.length;
     if(numOfTbls >= 0){
        numOfTbls++;
         //add select items to report-add-to-table-select usinf title value
-        var titleVal = $('.reporte-titulo-principal').text();
-        $('.report-add-to-table-select').append('<option value="'+numOfTbls+'">Tabla '+numOfTbls+'</option>');
+        var titleVal = $('#module-reports .reporte-titulo-principal').text();
+        $('#module-reports .report-add-to-table-select').append('<option value="'+numOfTbls+'">Tabla '+numOfTbls+'</option>');
         
         $.ajax({
            url: '/reportes/herramientas/tblTools/'+numOfTbls,
@@ -1795,8 +1795,8 @@ $('body').on('click','.reports-tools-addTbl-btn', function(){
                 '</div>'+
                 res+
                 '</div>';
-                $('.reports-table-section-ctn').append(html);
-                $('.reports-table-section-ctn-copy').append(html);
+                $('#module-reports .reports-table-section-ctn').append(html);
+                $('#module-reports .reports-table-section-ctn-copy').append(html);
            }
         });
         
