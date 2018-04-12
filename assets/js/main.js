@@ -1,6 +1,7 @@
 
  var autoLogout = new AutoLogout();
  var users = new Users();
+ var mobilMenu = new MobilMenu();
 var updateFormCopy = '';
 var USER = '';
 
@@ -14,14 +15,7 @@ function reportPreviewRegistrosTable(){
 
 
 
-$(window).resize(function(){
 
-  if($(window).width() > 768){
-    users.rsizeDesk()
-  }else{
-    users.rsizeMobil()
-  }
-});
 
 
 
@@ -1837,7 +1831,7 @@ $('.menu-btn').on('click', function(){
   var d = $(this).attr('data-btn');
   switch (d) {
     case 'reports':
-    users.rsizeDesk()
+    mobilMenu.getMenu('reports');
     $('.loading-ctn').show();
       $.ajax({
           url: '/reports',
@@ -1858,6 +1852,7 @@ $('.menu-btn').on('click', function(){
       })
     break;
     case 'users':
+    mobilMenu.getMenu('users');
       users.createUserForm();
       users.listUsers();
       
@@ -1872,7 +1867,7 @@ $('.menu-btn').on('click', function(){
     
     break;
     case 'registros':
-     users.rsizeDesk()
+    mobilMenu.getMenu('registros');
       hideModules();
       getSecModuleTools('');
       getRegistros();
@@ -1885,7 +1880,7 @@ $('.menu-btn').on('click', function(){
       $('.white-blur').removeClass('reveal');
     break;
     case 'backups':
-    users.rsizeDesk()
+    mobilMenu.getMenu('backups');
       hideModules();
       getBakcups();
       getModuleTools('backups');
