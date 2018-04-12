@@ -14,17 +14,19 @@
   bottom: 0;
   z-index: 12;
   display: block !important;
-  height: 50px;
+  height: 45px !important;
   background-color: white;
   box-shadow: 0px -2px 4px #aaa;
   border-top: 1px solid red;
 }
 .mobil-bottom-menu button{
   width: 100% !important;
-  height: 45px !important;
-  font-size: 16px !important;
-  position: initial !important;
-  border-radius: 0 !important;
+    height: 45px !important;
+    font-size: 16px !important;
+    position: initial !important;
+    background-color: white;
+    border-radius: 0 !important;
+    border: none;
 }
 .mobil-bottom-menu button::after{
   display:none !important;
