@@ -13,6 +13,9 @@
   max-height: 480px;
   width: 100%;
 }
+.user-module-tool-bar{
+  display:none !important;
+}
 
 .mobil-bottom-menu{
   width: 100%;
