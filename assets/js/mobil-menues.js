@@ -17,7 +17,7 @@ class MobilMenu{
                         '</div>'+
 
                         '<div class="ctn-col-25">'+
-                            '<button class="back-btn" onclick="users.listUsers(); $(this).find("svg").removeClass().addClass("fas fa-sync-alt")" type="button"><i class="fas fa-sync-alt"></i></button>'+
+                            '<button class="back-btn" onclick="users.listUsers()" type="button"><i class="fas fa-sync-alt"></i></button>'+
                         '</div>'+
 
                         '<div class="ctn-col-25">'+
