@@ -1831,7 +1831,7 @@ $('.menu-btn').on('click', function(){
   var d = $(this).attr('data-btn');
   switch (d) {
     case 'reports':
-    mobilMenu.getMenu('reports');
+    $('body').append(mobilMenu.getMenu('reports'));
     $('.loading-ctn').show();
       $.ajax({
           url: '/reports',
@@ -1852,7 +1852,7 @@ $('.menu-btn').on('click', function(){
       })
     break;
     case 'users':
-    mobilMenu.getMenu('users');
+      $('body').append(mobilMenu.getMenu('users'));
       users.createUserForm();
       users.listUsers();
       
@@ -1867,7 +1867,7 @@ $('.menu-btn').on('click', function(){
     
     break;
     case 'registros':
-    mobilMenu.getMenu('registros');
+    $('body').append(mobilMenu.getMenu('registros'));
       hideModules();
       getSecModuleTools('');
       getRegistros();
@@ -1880,7 +1880,7 @@ $('.menu-btn').on('click', function(){
       $('.white-blur').removeClass('reveal');
     break;
     case 'backups':
-    mobilMenu.getMenu('backups');
+      $('body').append(mobilMenu.getMenu('backups'));
       hideModules();
       getBakcups();
       getModuleTools('backups');
