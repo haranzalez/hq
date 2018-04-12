@@ -4,8 +4,8 @@
 }
 
 .xdsoft_timepicker{
-  width: 100%;
-  margin: 0;
+  width: 100% !important;
+  margin: 0 !important;
 }
 
 .mobil-bottom-menu{
@@ -23,13 +23,18 @@
   width: 100% !important;
   height: 45px !important;
   font-size: 16px !important;
+  position: initial !important;
+  border-radius: 0 !important;
 }
 .mobil-bottom-menu button::after{
-  display:none;
+  display:none !important;
 }
 .mobil-bottom-menu button:hover{
   background-color: white !important;
   color:black !important;
+}
+.mobil-bottom-menu button:hover::after{
+  display: none !important;
 }
 
 .module-tools {
@@ -274,13 +279,13 @@
 .search-box-ctn{
   position: fixed;
   width: 95%;
-  top: 88%;
+  top: 87%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  background-color: white;
+  /* background-color: white; */
   padding: 10px;
-  z-index:15;
+  z-index: 15;
 }
 .search-box-ctn input[type="text"]{
     padding: 7px;
