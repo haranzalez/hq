@@ -1773,7 +1773,7 @@ $('body').on('click','#module-reports .reports-tools-addTbl-btn', function(){
        numOfTbls++;
         //add select items to report-add-to-table-select usinf title value
         var titleVal = $('#module-reports .reporte-titulo-principal').text();
-        $('#module-reports .report-add-to-table-select').append('<option value="'+numOfTbls+'">Tabla '+numOfTbls+'</option>');
+        $('.report-add-to-table-select').append('<option value="'+numOfTbls+'">Tabla '+numOfTbls+'</option>');
         
         $.ajax({
            url: '/reportes/herramientas/tblTools/'+numOfTbls,
