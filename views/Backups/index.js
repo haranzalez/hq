@@ -163,4 +163,4 @@ var fechaV2 = function(date,formatString){
     timer.start();
   }
 
-  
+  timer();
