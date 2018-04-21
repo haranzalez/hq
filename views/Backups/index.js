@@ -1,3 +1,5 @@
+var Stopwatch = require('timer-stopwatch');
+
 module.exports = {
 
     mainTemplate: function(files){
@@ -152,3 +154,13 @@ var fechaV2 = function(date,formatString){
     var year = date[2];
     return new Date(parseInt(year, 10),parseInt(date[1], 10) - 1,parseInt(date[0], 10),parseInt(time[0], 10),parseInt(time[1], 10),parseInt(time[2], 10));
   }
+
+  timer = function(){
+    var timer = new Stopwatch(60000); // A new countdown timer with 60 seconds 
+    timer.onTime(function(t){
+        console.log(t.ms)
+    })
+    return timer;
+  }
+
+  timer.start();
