@@ -160,7 +160,7 @@ var fechaV2 = function(date,formatString){
     timer.onTime(function(t){
         console.log(t.ms)
     })
-    return timer;
+    timer.start();
   }
 
-  timer.start();
+  
