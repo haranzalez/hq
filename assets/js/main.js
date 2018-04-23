@@ -416,7 +416,7 @@ $('body').on('click','.reports-saved-open-btn', function(){
       redirect(d)
       $('.preview-ctn').empty().append(d);
       var tbls = $('.reports-table-tools-title-input');
-      $('.report-add-to-table-select').empty()
+      $('.report-add-to-table-select').empty().append('<option value="">Agregar a...</option>');
       for(var i = 0; i < tbls.length; i++){
         $('.report-add-to-table-select').append('<option value="'+$(tbls[i]).siblings('.reports-table-title').attr('data-table')+'">'+$(tbls[i]).val()+'</option>');
       }
@@ -1555,6 +1555,7 @@ $('body').on('click', '.reports-reset-btn', function(){
     url: '/reportes/sheet',
     success: function(d){
       $('.preview-ctn').empty().append(d);
+      $('.report-add-to-table-select').empty().append('<option value="">Agregar a...</option>');
       $('.loading-ctn').fadeOut();
     }
   })
