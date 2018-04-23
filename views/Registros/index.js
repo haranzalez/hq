@@ -73,7 +73,6 @@ function buildRecordsTbl(pkg){
 }
 
 function fecha(date){
-    var date = new Date();
     var dd = date.getDate();
     var mm = date.getMonth()+1; //January is 0!
 
